@@ -1,0 +1,42 @@
+{
+  "name": "wink-nlp",
+  "version": "0.0.0",
+  "description": "Natural Language Processing",
+  "keywords": [
+    "Natural Language Processing",
+    "NLP",
+    "wink"
+  ],
+  "main": "src/wink-nlp.js",
+  "scripts": {
+    "pretest": "npm run lint && npm run docs",
+    "test": "istanbul cover _mocha ./test/",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "sourcedocs": "docker -i src -o ./sourcedocs --sidebar no",
+    "docs": "jsdoc src/*.js -c .jsdoc.json",
+    "lint": "eslint ./src/*.js ./test/*.js ./runkit/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/winkjs/wink-nlp.git"
+  },
+  "author": "Sanjaya Kumar Saxena",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/winkjs/wink-nlp/issues"
+  },
+  "homepage": "http://winkjs.org/",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "docdash": "^1.0.1",
+    "docker": "^1.0.0",
+    "eslint": "^5.10.0",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0"
+  },
+  "runkitExampleFilename": "./runkit/example.js",
+  "dependencies": {}
+}
