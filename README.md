@@ -21,9 +21,9 @@ It will begin to take shape post version 0.0.1. Till then, consider using our [e
 4. Useful [functions for common NLP tasks](https://www.npmjs.com/package/wink-nlp-utils) and [many more](https://winkjs.org/packages).
 
 
-### Need Help?
+### Have a feature request?
 
-If you spot a bug and the same has not yet been reported, raise a new [issue](https://github.com/winkjs/wink-nlp/issues) or consider fixing it and sending a pull request.
+Raise a new [issue](https://github.com/winkjs/wink-nlp/issues)  with `feature` label or consider [contributing](https://github.com/winkjs/wink-nlp/blob/master/CONTRIBUTING.md).
 
 ### About wink
 [Wink](http://winkjs.org/) is a family of open source packages for **Statistical Analysis**, **Natural Language Processing** and **Machine Learning** in NodeJS. The code is **thoroughly documented** for easy human comprehension and has a **test coverage of ~100%** for reliability to build production grade solutions.
