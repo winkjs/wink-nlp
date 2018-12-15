@@ -1,0 +1,21 @@
+{
+  "opts": {
+    "encoding": "utf8",
+    "readme": "README.md",
+    "template": "./node_modules/docdash/",
+    "destination": "docs"
+  },
+  "plugins": ["plugins/markdown"],
+  "docdash": {
+    "menu":{
+            "Wink JS":{
+                "href":"http://winkjs.org",
+                "target":"_blank"
+            },
+            "Github":{
+                "href":"https://github.com/winkjs/wink-ner",
+                "target":"_blank"
+            }
+        }
+    }
+}
