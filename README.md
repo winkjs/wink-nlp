@@ -6,30 +6,34 @@
 
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
-We have begun our modest attempt to deliver a mature NLP based on the state-of-the-art. Watch out `wink-nlp` unfold over next several weeks.
+Wink NLP is an advance NLP package with zero dependecies outside winkjs. It supports a variety of NLP tasks such as tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, named entity extraction and more with ease.
+
+We deliver developer friendly API along with a balance of performance and accuracy to the entire spectrum of users. In addition, we are working towards building a number of pre-trained models for different languages and domains.
+
+It packs a rich feature set into a small foot print codebase of under 100 kilobytes and model sizes starting under 1 megabyte:
+
+1. Lossless tokenizer
+2. Built-in API to aid text visualization
+3. Pre-trained models with word vectors
+4. Easy information exrtaction from raw text
+5. Extensive text pre-processing features
+6. Simple token to Unique Id mapping
 
 ### Installation
 
-It will be as simple as:
+Use npm install:
 
     npm install wink-nlp --save
 
-It will begin to take shape post version 0.0.1. Till then, consider using our [existing NLP packages](https://winkjs.org/packages) such as:
-1. [Multilingual tokenizer](https://www.npmjs.com/package/wink-tokenizer) that tags each token with its type such as word, number, email, mention, etc.
-2. English [Part-of-speech (POS) tagger](https://www.npmjs.com/package/wink-pos-tagger),
-3. Language agnostic [named entity recognizer](https://www.npmjs.com/package/wink-ner),
-4. Useful [functions for common NLP tasks](https://www.npmjs.com/package/wink-nlp-utils) and [many more](https://winkjs.org/packages).
+You will also need the English lite model, to install that use:
 
-
-### Have a feature request?
-
-Raise a new [issue](https://github.com/winkjs/wink-nlp/issues)  with `feature` label or consider [contributing](https://github.com/winkjs/wink-nlp/blob/master/CONTRIBUTING.md).
+    npm install https://github.com/winkjs/wink-eng-lite-model/releases/download/0.0.0/wink-eng-lite-model-0.0.0.tgz --save
 
 ### About wink
 [Wink](http://winkjs.org/) is a family of open source packages for **Statistical Analysis**, **Natural Language Processing** and **Machine Learning** in NodeJS. The code is **thoroughly documented** for easy human comprehension and has a **test coverage of ~100%** for reliability to build production grade solutions.
 
 ### Copyright & License
 
-**wink-nlp** is copyright 2017-18 [GRAYPE Systems Private Limited](http://graype.in/).
+**wink-nlp** is copyright 2017-20 [GRAYPE Systems Private Limited](http://graype.in/).
 
 It is licensed under the terms of the MIT License.
