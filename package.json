@@ -1,20 +1,19 @@
 {
   "name": "wink-nlp",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Natural Language Processing",
   "keywords": [
-    "Natural Language Processing",
     "NLP",
     "wink"
   ],
   "main": "src/wink-nlp.js",
   "scripts": {
-    "pretest": "npm run lint && npm run docs",
-    "test": "istanbul cover _mocha ./test/",
-    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
-    "sourcedocs": "docker -i src -o ./sourcedocs --sidebar no",
-    "docs": "jsdoc src/*.js -c .jsdoc.json",
-    "lint": "eslint ./src/*.js ./test/*.js ./runkit/*.js"
+    "pretest": "npm run lint",
+    "test": "nyc --reporter=html --reporter=text mocha ./test/",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "sourcedocs": "docker -i src -o ./sourcedocs --sidebar yes",
+    "lint": "eslint ./src/*.js ./test/*.js ./runkit/*.js",
+    "bench": "node benchmark/run.js"
   },
   "repository": {
     "type": "git",
@@ -27,15 +26,14 @@
   },
   "homepage": "http://winkjs.org/",
   "devDependencies": {
+    "benchmark": "^2.1.4",
     "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
-    "docdash": "^1.0.1",
+    "coveralls": "^3.1.0",
     "docker": "^1.0.0",
-    "eslint": "^5.10.0",
-    "istanbul": "^0.4.5",
-    "jsdoc": "^3.5.5",
-    "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "^1.3.0"
+    "eslint": "^7.0.0",
+    "nyc": "^15.0.1",
+    "jsdoc": "^3.6.4",
+    "mocha": "^7.1.2"
   },
   "runkitExampleFilename": "./runkit/example.js",
   "dependencies": {}

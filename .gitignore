@@ -38,3 +38,6 @@ sourcedocs
 
 # Mac stuff
 .DS_Store
+
+# Docs not needed
+docs
