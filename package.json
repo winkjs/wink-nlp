@@ -1,9 +1,19 @@
 {
   "name": "wink-nlp",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "Natural Language Processing",
   "keywords": [
     "NLP",
+    "tokenize",
+    "SBD",
+    "sentence boundary detection",
+    "negation handling",
+    "sentiment analysis",
+    "POS Tagging",
+    "NER",
+    "named entity extraction",
+    "word vectors",
+    "visualization",
     "wink"
   ],
   "main": "src/wink-nlp.js",
@@ -35,6 +45,5 @@
     "jsdoc": "^3.6.4",
     "mocha": "^7.1.2"
   },
-  "runkitExampleFilename": "./runkit/example.js",
   "dependencies": {}
 }
