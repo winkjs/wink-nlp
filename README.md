@@ -6,7 +6,7 @@
 
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
-Wink NLP is an advance NLP package with zero dependecies outside winkjs. It supports a variety of NLP tasks such as tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, named entity extraction and more with ease.
+Wink NLP is an advance NLP package with zero external dependecies. It supports a variety of NLP tasks such as tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, named entity extraction and more with ease.
 
 We deliver developer friendly API along with a balance of performance and accuracy to the entire spectrum of users. In addition, we are working towards building a number of pre-trained models for different languages and domains.
 
