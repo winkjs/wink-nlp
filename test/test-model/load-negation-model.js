@@ -1,0 +1,1 @@
+var fs=require("fs"),setter=require("./negation-setter.js"),loadNERModel=function(){var a=fs.readFileSync(require.resolve("./languages/cur/models/eng-negation-model.json"),"utf8");return a=JSON.parse(a),{machines:a,setter:setter}};module.exports=loadNERModel;

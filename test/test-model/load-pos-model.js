@@ -1,0 +1,1 @@
+var fs=require("fs"),transformers=require("./pos-transformers.js"),setter=require("./pos-setter.js"),updater=require("./pos-updater.js"),loadNERModel=function(){var a=fs.readFileSync(require.resolve("./languages/cur/models/eng-pos-model.json"),"utf8");return a=JSON.parse(a),{machines:a,setter:setter,updater:updater,transformers:transformers}};module.exports=loadNERModel;

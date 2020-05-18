@@ -1,0 +1,1 @@
+var setter=function(a,b,c,d){const e=c.tkSize;let f=0,g=0;for(;g<a.length;){const h=Math.ceil(d(a[g][0],b.sentences)),j=Math.floor(d(b.sentences[h][1],a));let k=0;for(let d=g;d<=j;d+=1)a[d][2]=+a[d][2]/1e3,b.tokens[a[d][0]*e+3]>=c.negationFlag?k-=a[d][2]:k+=a[d][2];b.sentences[h][3]=k/(j-g+1),f+=b.sentences[h][3],g=j+1}b.document[3]=f/b.numOfSentences};module.exports=setter;

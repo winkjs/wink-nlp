@@ -1,0 +1,1 @@
+var setter=function(a,b){var c=b.numOfTokens,d=[0,c-1,0,0];for(let e=0;e<a.length;e+=1)d[1]=a[e][0],e<a.length-1&&(b.sentences.push(d),d=[a[e][0]+1,c-1,0,0]);b.sentences.push(d),d[1]<c-1&&b.sentences.push([d[1]+1,c-1,0,0])};module.exports=setter;

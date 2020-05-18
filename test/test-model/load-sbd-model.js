@@ -1,0 +1,1 @@
+var fs=require("fs"),transformers=require("./sbd-transformers.js"),setter=require("./sbd-setter.js"),loadNERModel=function(){var a=fs.readFileSync(require.resolve("./languages/cur/models/eng-sbd-model.json"),"utf8");return a=JSON.parse(a),{machines:a,setter:setter,transformers:transformers}};module.exports=loadNERModel;
