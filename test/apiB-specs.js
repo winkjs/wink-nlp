@@ -244,9 +244,9 @@ describe( 'APIs — B', function () {
     } ); // Collection of Sentence Level Methods
 
     describe( 'Single Sentence Level Methods', function () {
-      it( '.document() method along with .out()', function () {
+      it( '.parentDocument() method along with .out()', function () {
         sItems.forEach( ( s, k ) => {
-          expect( s.document().sentences().itemAt( 0 ).out() ).to.deep.equal( sentences[ Math.floor( k / 2 ) ][ 0 ] );
+          expect( s.parentDocument().sentences().itemAt( 0 ).out() ).to.deep.equal( sentences[ Math.floor( k / 2 ) ][ 0 ] );
         } );
       } );
 
@@ -378,8 +378,8 @@ describe( 'APIs — B', function () {
       // The actual entity as extracted via doc0 entities data.
       const d0se0 = [].concat( [], ...entities[ 0 ] )[ eat0 ];
 
-      it( '.document() method', function () {
-        expect( se.document().entities().itemAt( 0 ).out() ).to.equal( d0se0 );
+      it( '.parentDocument() method', function () {
+        expect( se.parentDocument().entities().itemAt( 0 ).out() ).to.equal( d0se0 );
       } ); // .length() method
 
       it( '.markup() method', function () {
@@ -493,8 +493,8 @@ describe( 'APIs — B', function () {
       // The actual entity as extracted via doc0 entities data.
       const d0se0 = [].concat( [], ...customEntities[ 0 ] )[ eat0 ];
 
-      it( '.document() method', function () {
-        expect( se.document().customEntities().itemAt( 0 ).out() ).to.equal( d0se0 );
+      it( '.parentDocument() method', function () {
+        expect( se.parentDocument().customEntities().itemAt( 0 ).out() ).to.equal( d0se0 );
       } ); // .length() method
 
       it( '.markup() method', function () {
@@ -619,8 +619,8 @@ describe( 'APIs — B', function () {
       // The actual entity as extracted via doc0 entities data.
       const d0te0 = [].concat( [], ...tokens[ 0 ] )[ tat0 ];
 
-      it( '.document() method', function () {
-        expect( te.document().tokens().itemAt( 0 ).out() ).to.equal( d0te0 );
+      it( '.parentDocument() method', function () {
+        expect( te.parentDocument().tokens().itemAt( 0 ).out() ).to.equal( d0te0 );
       } ); // .length() method
 
       it( '.parentEntity() method', function () {

@@ -151,7 +151,7 @@ var doc = function ( docData, wordVectors ) {
   itemToken = function ( index ) {
     var api = Object.create( null );
     // Access the parent document.
-    api.document = () => methods;
+    api.parentDocument = () => methods;
     // Access the parent entity, **if any.**
     api.parentEntity = () => getParentItem( index, entities, itemEntity );
     // Markup this token.
@@ -241,7 +241,7 @@ var doc = function ( docData, wordVectors ) {
   itemEntity = function ( index ) {
     var api = Object.create( null );
     // Access the parent document.
-    api.document = () => methods;
+    api.parentDocument = () => methods;
     // Markup this entity.
     api.markup = ( beginMarker, endMarker ) => markings.push( [ entities[ index ][ 0 ], entities[ index ][ 1 ], beginMarker, endMarker ] );
     // Output this entity or its properties using mapper function — `f`.
@@ -323,7 +323,7 @@ var doc = function ( docData, wordVectors ) {
   itemCustomEntity = function ( index ) {
     var api = Object.create( null );
     // Access the parent document.
-    api.document = () => methods;
+    api.parentDocument = () => methods;
     // Markup this entity.
     api.markup = ( beginMarker, endMarker ) => markings.push( [ customEntities[ index ][ 0 ], customEntities[ index ][ 1 ], beginMarker, endMarker ] );
     // Output this entity or its properties using mapper function — `f`.
@@ -404,7 +404,7 @@ var doc = function ( docData, wordVectors ) {
   itemSentence = function ( index ) {
     var api = Object.create( null );
     // Access the parent document.
-    api.document = () => methods;
+    api.parentDocument = () => methods;
     // Markup this sentence.
     api.markup = ( beginMarker, endMarker ) => markings.push( [ sentences[ index ][ 0 ], sentences[ index ][ 1 ], beginMarker, endMarker ] );
     // Output this sentence as text.

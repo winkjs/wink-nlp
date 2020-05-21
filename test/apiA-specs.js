@@ -162,7 +162,7 @@ describe( 'APIs — A', function () {
         doc1.sentences().each( ( s, k ) => {
           expect( s.out() ).to.deep.equal( as1[ k ] );
           if ( k === 0 ) s.markup();
-          parentDoc1 = s.document();
+          parentDoc1 = s.parentDocument();
         } );
 
         expect( parentDoc1.out( its.markedUpText ) ).to.equal( markedupSentencet1 );
@@ -246,7 +246,7 @@ describe( 'APIs — A', function () {
         // Within range item test.
         expect( fe1.itemAt( 1 ).out( its.detail ) ).to.deep.equal( fae1[ 1 ] );
         // Also check the parent document!
-        expect( fe1.itemAt( 1 ).document() ).to.deep.equal( doc1 );
+        expect( fe1.itemAt( 1 ).parentDocument() ).to.deep.equal( doc1 );
         // Out of range item test
         expect( fe1.itemAt( 2 ) ).to.deep.equal( undefined );
         // itemAt() api.
@@ -260,7 +260,7 @@ describe( 'APIs — A', function () {
         expect( fe2.length() ).to.equal( 2 );
         expect( fe2.out( its.detail ) ).to.deep.equal( fae2 );
         expect( fe2.itemAt( 1 ).out( its.detail ) ).to.deep.equal( fae2[ 1 ] );
-        expect( fe2.itemAt( 1 ).document() ).to.deep.equal( doc2 );
+        expect( fe2.itemAt( 1 ).parentDocument() ).to.deep.equal( doc2 );
         expect( fe2.itemAt( 3 ) ).to.deep.equal( undefined );
         fe2.each( ( e, k ) => {
           expect( e.out() ).to.deep.equal( fe2.itemAt( k ).out() );
@@ -294,7 +294,7 @@ describe( 'APIs — A', function () {
         expect( doc2.tokens().out( its.value ) ).to.deep.equal( tokens2 );
       } );
 
-      it( '.each() iterator should go through each token & its .markup(), .document() APIs', function () {
+      it( '.each() iterator should go through each token & its .markup(), .parentDocument() APIs', function () {
         // Parent documented extracted from tokens.
         var parentDoc1, parentDoc2;
         doc1.tokens().each( ( t, k ) => {
@@ -302,7 +302,7 @@ describe( 'APIs — A', function () {
           expect( t.out() ).to.deep.equal( tokens1[ k ] );
           // Prepare for markup test.
           if ( t.out( its.type ) === 'number' ) t.markup();
-          parentDoc1 = t.document();
+          parentDoc1 = t.parentDocument();
         } );
 
         doc2.tokens().each( ( t, k ) => {
@@ -310,7 +310,7 @@ describe( 'APIs — A', function () {
           expect( t.out() ).to.deep.equal( tokens2[ k ] );
           // Prepare for markup test.
           if ( t.out( its.type ) === 'number' ) t.markup( '<mark class="number">', '</mark>' );
-          parentDoc2 = t.document();
+          parentDoc2 = t.parentDocument();
         } );
 
         // Test parent document extractionalong with markup text!

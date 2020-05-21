@@ -36,18 +36,18 @@
 
 var recTokenizer = require( './recursive-tokenizer.js' );
 
-// This is inspired by `wink-tokenizer`, which is regex driven and
-// used recursion. While this still driven by regexes, it does not use recursion.
-// The algorithm is outlined below:
-// 1. First split on a **single space** character to obtain all the tokens including
-//    extra spaces between the tokens (if any). Remember, the extra spaces will
-//    appear as empty strings in the array.
-// 2. Test each token with `categoryRgxs` and tag its category accordingly. Each regex in
-//    this array tests one unique token category, viz. **word**, **number**, or
-//    **email**. This array is sorted in the decreasing order of the probability
-//    of occurence of token type that it tests — this ensures higher
-//    execution speed.
-
+/**
+ * Creates an instance of tokenizer.
+ *
+ * @param  {object}   trex        language specific regular expressions needed for
+ *                                tokenization. This includes helper, linear and
+ *                                recursive.
+ * @param  {object}   categories  tokens categories and their map to numeric code.
+ * @param  {object}   preserve    language specific suffixes and prefixes to be preserved.
+ * @return {function}             that performs the tokenization based on the
+ *                                above configuration.
+ * @private
+ */
 var tokenizer = function ( trex, categories, preserve ) {
   // Maximum number of preceding spaces allowed.
   var maxPrecedingSpaces = 65535;
