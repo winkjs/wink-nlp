@@ -105,7 +105,7 @@ describe( 'its functions for .out()', function () {
   it( 'its.uniqueId', function () {
     expect( nlp.readDoc( '$%^oov^%$' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 0 );
     expect( nlp.readDoc( '\n' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 1 );
-    expect( nlp.readDoc( 'The' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 72535 );
+    expect( nlp.readDoc( 'The' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 72773 );
   } );
 
   it( 'its.negationFlag', function () {

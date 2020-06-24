@@ -1,1 +1,1 @@
-var fs=require("fs"),setter=require("./sa-setter.js"),loadSAModel=function(){var a=fs.readFileSync(require.resolve("./languages/cur/models/eng-sa-model.json"),"utf8");return a=JSON.parse(a),{machines:a,setter:setter}};module.exports=loadSAModel;
+var fs=require("fs"),setter=require("./sa-setter.js"),loadSAModel=function(){var machines=fs.readFileSync(require.resolve("./languages/cur/models/eng-sa-model.json"),"utf8");return{machines:machines=JSON.parse(machines),setter:setter}};module.exports=loadSAModel;

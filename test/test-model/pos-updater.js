@@ -1,1 +1,1 @@
-var updater=function(a,b,c){var d=b.cache;for(let e=0;e<a.length;e+=1){const f=a[e][2],g=a[e][0];0>f?c[g]=Math.abs(f):d.isMemberPOS(b.tokens[4*g],f)&&(c[g]=f)}};module.exports=updater;
+var updater=function(px,cache,posTags,normalizedTokens){for(let j=0;j<px.length;j+=1){const targetPOS=px[j][2],tokenIdx=px[j][0];targetPOS<0?posTags[tokenIdx]=Math.abs(targetPOS):cache.isMemberPOS(normalizedTokens[tokenIdx],targetPOS)&&(posTags[tokenIdx]=targetPOS)}};module.exports=updater;

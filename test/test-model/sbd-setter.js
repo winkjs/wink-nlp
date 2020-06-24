@@ -1,1 +1,1 @@
-var setter=function(a,b){var c=b.numOfTokens,d=[0,c-1,0,0];for(let e=0;e<a.length;e+=1)d[1]=a[e][0],e<a.length-1&&(b.sentences.push(d),d=[a[e][0]+1,c-1,0,0]);b.sentences.push(d),d[1]<c-1&&b.sentences.push([d[1]+1,c-1,0,0])};module.exports=setter;
+var setter=function(px,rdd){var numOfTokens=rdd.numOfTokens,si=[0,numOfTokens-1,0,0];for(let i=0;i<px.length;i+=1)si[1]=px[i][0],i<px.length-1&&(rdd.sentences.push(si),si=[px[i][0]+1,numOfTokens-1,0,0]);rdd.sentences.push(si),si[1]<numOfTokens-1&&rdd.sentences.push([si[1]+1,numOfTokens-1,0,0])};module.exports=setter;

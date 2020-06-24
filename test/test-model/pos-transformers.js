@@ -1,1 +1,1 @@
-const hintDelta=108e4,transformers=[,,];transformers[0]=function(a,b,c,d){var e=b.property(c[4*d],"posHint");return e?e+hintDelta:a},transformers[1]=transformers[0],module.exports=transformers;
+const hintDelta=108e4,transformers=new Array(2);transformers[0]=function(pos,cache,rawTokens,i){var mapped=cache.property(rawTokens[4*i],"posHint");return mapped?mapped+108e4:pos},transformers[1]=transformers[0],module.exports=transformers;

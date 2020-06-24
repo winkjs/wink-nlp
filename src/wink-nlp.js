@@ -269,7 +269,7 @@ var nlp = function ( theModel ) {
     px = null;
     for ( let i = 0; i < posAutomata.length; i += 1 ) {
       px = posAutomata[ i ].recognize( posTags, posTransformers[ 0 ], rdd.tokens );
-      posUpdater( px, rdd, posTags );
+      posUpdater( px, cache, posTags, tokens4Automata );
     }
     posSetter( rdd, posTags, tkSize, constants.bits4lemma );
 

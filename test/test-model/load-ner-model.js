@@ -1,1 +1,1 @@
-var fs=require("fs"),transformers=require("./ner-transformers.js"),loadNERModel=function(){var a=fs.readFileSync(require.resolve("./languages/cur/models/eng-ner-model.json"),"utf8");return a=JSON.parse(a),{machines:a,transformers:transformers}};module.exports=loadNERModel;
+var fs=require("fs"),transformers=require("./ner-transformers.js"),loadNERModel=function(){var machines=fs.readFileSync(require.resolve("./languages/cur/models/eng-ner-model.json"),"utf8");return{machines:machines=JSON.parse(machines),transformers:transformers}};module.exports=loadNERModel;
