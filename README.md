@@ -27,7 +27,7 @@ Use npm install:
 
 You will also need the English lite model, to install that use:
 
-    npm install https://github.com/winkjs/wink-eng-lite-model/releases/download/0.0.0/wink-eng-lite-model-0.0.0.tgz --save
+    npm install https://github.com/winkjs/wink-eng-lite-model/releases/download/0.1.0/wink-eng-lite-model-0.1.0.tgz --save
 
 ### About wink
 [Wink](http://winkjs.org/) is a family of open source packages for **Statistical Analysis**, **Natural Language Processing** and **Machine Learning** in NodeJS. The code is **thoroughly documented** for easy human comprehension and has a **test coverage of ~100%** for reliability to build production grade solutions.
