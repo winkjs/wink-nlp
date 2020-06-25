@@ -21,7 +21,7 @@ It packs a rich feature set into a small foot print codebase of under 100 kiloby
 
 ### Installation
 
-Use npm install:
+Use [npm](https://www.npmjs.com/package/wink-nlp) install:
 
     npm install wink-nlp --save
 
