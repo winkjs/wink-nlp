@@ -111,7 +111,7 @@ describe( 'APIs — A', function () {
 
   describe( 'doc API', function () {
     it( '.isLexeme() should detect lexemes correctly', function () {
-      expect( doc1.isLexeme( 'recognise' ) ).to.deep.equal( [ 59499 ] );
+      expect( doc1.isLexeme( 'recognise' ) ).to.deep.equal( [ 59571 ] );
 
       expect( doc2.isLexeme( 'zxcvbnm' ) ).to.deep.equal( null );
     } );
