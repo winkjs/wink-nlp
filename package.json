@@ -22,8 +22,8 @@
     "test": "nyc --reporter=html --reporter=text mocha ./test/",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "sourcedocs": "docker -i src -o ./sourcedocs --sidebar yes",
-    "lint": "eslint ./src/*.js ./test/*.js ./runkit/*.js",
-    "bench": "node benchmark/run.js"
+    "lint": "eslint ./src/*.js ./test/*.js",
+    "perf": "node benchmark/run.js"
   },
   "repository": {
     "type": "git",
