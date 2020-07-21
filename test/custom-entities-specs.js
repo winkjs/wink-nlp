@@ -205,4 +205,21 @@ describe( 'Detect from learned examples', function () {
     var d1 = nlp0.readDoc( 'I am a literal!' );
     expect( d1.customEntities().out( its.detail ) ).to.deep.equal( [] );
   } );
+
+  it( '.parentCustomEntity() must work correctly', function () {
+    const config = { matchValue: false, usePOS: false, useEntity: true };
+    const expectedEntities = [
+      { value: 'one@two.com:-)', type: 'email-emoticon' },
+      { value: '^', type: 'caret' },
+      { value: 'thin', type: 'crust-type' },
+      { value: 'ADJ Parrot', type: 'escaped-adj-parrot' },
+      { value: '$5', type: 'entity-money' },
+      { value: '^ carrot', type: 'caret-carrot' }
+    ];
+    nlp.learnCustomEntities( examples, config );
+    var d1 = nlp.readDoc( s1 );
+    expect( d1.tokens().itemAt( 0 ).parentCustomEntity().out( its.detail ) ).to.deep.equal( expectedEntities[ 0 ] );
+    expect( d1.tokens().itemAt( 2 ).parentCustomEntity() ).to.deep.equal( undefined );
+    expect( d1.tokens().itemAt( 22 ).parentCustomEntity().out( its.detail ) ).to.deep.equal( expectedEntities[ 5 ] );
+  } );
 } );

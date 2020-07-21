@@ -154,6 +154,8 @@ var doc = function ( docData, wordVectors ) {
     api.parentDocument = () => methods;
     // Access the parent entity, **if any.**
     api.parentEntity = () => getParentItem( index, entities, itemEntity );
+    // Access the parent cuustom entity, **if any.**
+    api.parentCustomEntity = () => getParentItem( index, customEntities, itemCustomEntity );
     // Markup this token.
     api.markup = ( beginMarker, endMarker ) => markings.push( [ index, index, beginMarker, endMarker ] );
     // Output this token or its properties using mapper function — `f`.
