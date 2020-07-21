@@ -199,4 +199,10 @@ describe( 'Detect from learned examples', function () {
     var d1 = nlp.readDoc( 'I am a literal!' );
     expect( d1.customEntities().out( its.detail ) ).to.deep.equal( expectedEntities );
   } );
+
+  it( 'with 0-custom entities, .out() should produce an empty array', function () {
+    const nlp0 = winkNLP( model );
+    var d1 = nlp0.readDoc( 'I am a literal!' );
+    expect( d1.customEntities().out( its.detail ) ).to.deep.equal( [] );
+  } );
 } );

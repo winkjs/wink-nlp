@@ -282,7 +282,9 @@ var nlp = function ( theModel ) {
       if ( cerConfig.useEntity ) cerAutomata.setPatternSwap( rdd.entities );
       px = cerAutomata.recognize( tokens4Automata, cerTransformer, cerConfig );
     }
-    rdd.customEntities = px;
+    // If there are no custom entities, then `px` will be `null`; in such a case
+    // set `customEntities` to an empty array.
+    rdd.customEntities = px || [];
 
 
     // Word Vector
