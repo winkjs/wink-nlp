@@ -1,4 +1,4 @@
-# wink-nlp
+# winkNLP
 
 ✨ Natural Language Processing
 
@@ -8,6 +8,7 @@
 
 winkNLP is a JavaScript library for Natural Language Processing (NLP). Designed specifically to make development of NLP solutions **easier** and **faster**, winkNLP is optimized for the right balance of performance and accuracy.  The package can handle large amount of raw text at speeds over **500,000 tokens/second**. And with a test coverage of ~100%, winkNLP is a tool for building production grade systems with confidence.
 
+#### Features
 It packs a rich feature set into a small foot print codebase of [under 1500 lines](https://coveralls.io/github/winkjs/wink-nlp?branch=master):
 
 1. Lossless tokenizer
@@ -26,14 +27,14 @@ Use [npm](https://www.npmjs.com/package/wink-nlp) install:
 
     npm install wink-nlp --save
 
-You will also need the English lite model, to install that use:
+You will also need the English lite model:
 
     npm install https://github.com/winkjs/wink-eng-lite-model/releases/download/0.2.0/wink-eng-lite-model-0.2.0.tgz --save
 
 ### Documentation
 - [Concepts](https://winkjs.org/wink-nlp/getting-started.html) — everything you need to know to get started.
-- [API Reference](https://winkjs.org/wink-nlp/read-doc.html) — details of every winkNLP's API.
-- [Change log](https://github.com/winkjs/wink-nlp/blob/master/CHANGELOG.md) — version history along with details of breaking changes.
+- [API Reference](https://winkjs.org/wink-nlp/read-doc.html) — explains usage of APIs with examples.
+- [Change log](https://github.com/winkjs/wink-nlp/blob/master/CHANGELOG.md) — version history along with the details of breaking changes, if any.
 
 ### Need Help?
 If you spot a bug and the same has not yet been reported, raise a new [issue](https://github.com/winkjs/wink-nlp/issues) or consider fixing it and sending a pull request.

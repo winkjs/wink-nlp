@@ -12,8 +12,11 @@
     "POS Tagging",
     "NER",
     "named entity extraction",
+    "custome entity detection",
     "word vectors",
     "visualization",
+    "pattern matching",
+    "winkNLP",
     "wink"
   ],
   "main": "src/wink-nlp.js",
