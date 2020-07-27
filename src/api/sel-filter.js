@@ -1,6 +1,6 @@
 
 //     wink-nlp
-//     Production-ready Natural Language Processing
+//     A new way of doing NLP
 //
 //     Copyright (C) 2017-20  GRAYPE Systems Private Limited
 //
