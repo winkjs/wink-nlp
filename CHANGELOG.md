@@ -1,3 +1,10 @@
+# [Simplified language model installation](https://github.com/winkjs/wink-nlp/releases/tag/0.3.0)
+## Version 0.3.0 July 29, 2020
+
+### ✨ Features
+- No need to remember or copy/paste long Github url for language model installation. The new script installs the latest version for you automatically. 🎉
+
+
 # [Improved custom entities](https://github.com/winkjs/wink-nlp/releases/tag/0.2.0)
 ## Version 0.2.0 July 21, 2020
 
