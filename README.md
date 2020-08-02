@@ -1,9 +1,8 @@
 # winkNLP
 
-#### A new way of doing NLP ✨
-
 ### [![Stability](https://img.shields.io/badge/stability-1--experimental-orange.svg)](https://nodejs.org/api/documentation.html#documentation_stability_index) [![Build Status](https://api.travis-ci.org/winkjs/wink-nlp.svg?branch=master)](https://travis-ci.org/winkjs/wink-nlp) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-nlp/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-nlp?branch=master) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby)
 
+## A new way of doing NLP ✨
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](http://winkjs.org/)
 
 winkNLP is a JavaScript library for Natural Language Processing (NLP). Designed specifically to make development of NLP solutions **easier** and **faster**, winkNLP is optimized for the right balance of performance and accuracy.  The package can handle large amount of raw text at speeds over **500,000 tokens/second**. And with a test coverage of ~100%, winkNLP is a tool for building production grade systems with confidence.
@@ -18,7 +17,8 @@ It packs a rich feature set into a small foot print codebase of [under 1500 line
 5. Extensive text pre-processing features
 6. Pre-trained models with sizes starting from <3MB onwards
 7. Word vector integration
-8. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, named entity extraction, custom entities detection and pattern matching.
+8. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, named entity extraction, custom entities detection and pattern matching
+9. No external dependencies.
 
 
 ## Installation
