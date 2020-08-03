@@ -1,3 +1,10 @@
+# [Operational updates](https://github.com/winkjs/wink-nlp/releases/tag/0.4.0)
+## Version 0.4.0 August 3, 2020
+
+### ⚙️ Updates
+- Some behind the scene updates to test cases. 😎
+- Update the version of English light language model to the latest — 0.3.0. 🙌
+
 # [Simplified language model installation](https://github.com/winkjs/wink-nlp/releases/tag/0.3.0)
 ## Version 0.3.0 July 29, 2020
 
