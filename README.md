@@ -29,7 +29,7 @@ Use [npm](https://www.npmjs.com/package/wink-nlp) install:
 npm install wink-nlp --save
 ```
 
-In order to use winkNLP after its installation, you also need to install a language model. The following command installs the latest version of default language model — the light weight English language model called `wink-eng-lite-model`.
+In order to use winkNLP after its installation, you also need to install a language model. The following command installs the latest version of default language model — the light weight English language model called [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model).
 
 ```shell
 node -e "require( 'wink-nlp/models/install' )"
