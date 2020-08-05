@@ -43,27 +43,35 @@ node -e "require( 'wink-nlp/models/install' )" wink-eng-lite-model
 The "Hello World!" in winkNLP is given below. As the next step, we recommend a dive into [winkNLP's concepts](https://winkjs.org/wink-nlp/getting-started.html).
 
 ```javascript
-// Boilerplate Code.
-// Load wink-nlp package.
-var winkNLP = require( 'wink-nlp' );
+// Load wink-nlp package  & helpers.
+const winkNLP = require( 'wink-nlp' );
 // Load "its" helper to extract item properties.
 const its = require( 'wink-nlp/src/its.js' );
+// Load "as" reducer helper to reduce a collection.
+const as = require( 'wink-nlp/src/as.js' );
 // Load english language model — light version.
-var model = require( 'wink-eng-lite-model' );
+const model = require( 'wink-eng-lite-model' );
 // Instantiate winkNLP.
-var nlp = winkNLP( model );
+const nlp = winkNLP( model );
 
 // NLP Code.
-var text = 'Hello   World🌎! How are you?';
-var doc = nlp.readDoc( text );
+const text = 'Hello   World🌎! How are you?';
+const doc = nlp.readDoc( text );
+
 console.log( doc.out() );
 // -> Hello   World🌎! How are you?
+
 console.log( doc.sentences().out() );
 // -> [ 'Hello   World🌎!', 'How are you?' ]
+
 console.log( doc.entities().out( its.detail ) );
 // -> [ { value: '🌎', type: 'EMOJI' } ]
+
 console.log( doc.tokens().out() );
 // -> [ 'Hello', 'World', '🌎', '!', 'How', 'are', 'you', '?' ]
+
+console.log( doc.tokens().out( its.type, as.freqTable ) );
+// -> [ [ 'word', 5 ], [ 'punctuation', 2 ], [ 'emoji', 1 ] ]
 ```
 
 
