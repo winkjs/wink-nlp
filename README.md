@@ -1,6 +1,6 @@
 # winkNLP
 
-### [![Stability](https://img.shields.io/badge/stability-1--experimental-orange.svg)](https://nodejs.org/api/documentation.html#documentation_stability_index) [![Build Status](https://api.travis-ci.org/winkjs/wink-nlp.svg?branch=master)](https://travis-ci.org/winkjs/wink-nlp) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-nlp/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-nlp?branch=master) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby)
+### [![Build Status](https://api.travis-ci.org/winkjs/wink-nlp.svg?branch=master)](https://travis-ci.org/winkjs/wink-nlp) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-nlp/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-nlp?branch=master) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby)
 
 ## Developer friendly NLP ✨
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](https://winkjs.org/)
@@ -10,7 +10,7 @@ winkNLP is a JavaScript library for Natural Language Processing (NLP). Designed 
 ## Features
 It packs a rich feature set into a small foot print codebase of [under 1500 lines](https://coveralls.io/github/winkjs/wink-nlp?branch=master):
 
-1. Lossless tokenizer
+1. Lossless & multilingual tokenizer
 2. Developer friendly and intuitive API
 3. Built-in API to aid text visualization
 4. Easy information extraction from raw text
