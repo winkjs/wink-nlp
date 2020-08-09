@@ -1,3 +1,9 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/0.4.0)
+## Version 0.4.0 August 9, 2020
+
+### ⚙️ Updates
+- Getting ready to move to version 1.0.0 — almost there! 💫
+
 # [Operational updates](https://github.com/winkjs/wink-nlp/releases/tag/0.3.1)
 ## Version 0.3.1 August 3, 2020
 
