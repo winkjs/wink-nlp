@@ -8,14 +8,18 @@ var nlp = winkNLP( model );
 
 var s1 = fs.readFileSync( './benchmark/jj-ch13.txt', 'utf8' ); // eslint-disable-line no-sync
 
-var examples = [
-  { name: 'ADJ-NOUN', patterns: [ 'ADJ NOUN' ] }
-];
+if ( process.argv[ 2 ] ) {
+  var examples = [
+    { name: 'ADJ-NOUN', patterns: [ 'ADJ NOUN' ] }
+  ];
 
-nlp.learnCustomEntities( examples );
+  nlp.learnCustomEntities( examples );
+
+  console.log( '\nAdding custom entities detection to the pipe.\n' );
+}
 
 var suite = new Benchmark.Suite();
-console.log( '\nNLP Pipe in use: Tokenizer, SBD, Negation, NER, Sentiment, POS, Custom Entities' ); // eslint-disable-line no-console
+console.log( '\nNLP Pipe in use: Tokenizer, SBD, Negation, NER, Sentiment, POS' ); // eslint-disable-line no-console
 console.log( 'Processing Ch 13 of Ulysses by James Joyce:\n' ); // eslint-disable-line no-console
 // add tests
 suite.add('\n\t(i) James Joyce (20467 tokens)\t', function ( ) {
