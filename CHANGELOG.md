@@ -1,3 +1,10 @@
+# [Announcing the stable version 1.0.0](https://github.com/winkjs/wink-nlp/releases/tag/1.0.0)
+## Version 1.0.0 August 21, 2020
+
+### ⚙️ Updates
+- Happy to release version 1.0.0 for you! 💫👏
+- You can optionally include custom entity detection while running speed benchmark. 😇
+
 # [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/0.4.0)
 ## Version 0.4.0 August 9, 2020
 
