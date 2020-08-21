@@ -50,7 +50,7 @@ describe( 'cache', function () {
   } );
 
   it( 'currentSize() should current size of the lexicon', function () {
-    expect( cache.currentSize() ).to.equal( 83397 );
+    expect( cache.currentSize() ).to.equal( 84921 );
   } );
 
   it( 'should compute oov number\'s pos as NUM', function () {
