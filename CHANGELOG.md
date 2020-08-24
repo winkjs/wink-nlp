@@ -1,3 +1,9 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.0.1)
+## Version 1.0.1 August 24, 2020
+
+### ⚙️ Updates
+- Benchmarked on Node.js v12 & v14 also and updated the speed to minimum observed. 🏃‍♀️
+
 # [Announcing the stable version 1.0.0](https://github.com/winkjs/wink-nlp/releases/tag/1.0.0)
 ## Version 1.0.0 August 21, 2020
 
