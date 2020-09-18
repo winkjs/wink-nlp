@@ -130,6 +130,14 @@ describe( 'its functions for .out()', function () {
     expect( nlp.readDoc( 'I am sick' ).out( its.sentiment ) ).to.deep.equal( -0.4 );
   } );
 
+  it( 'its.stem', function () {
+    const doc = nlp.readDoc( 'decisively wanted ate' );
+    expect( doc.out( its.stem ) ).to.deep.equal( 'decis want ate' );
+    expect( doc.sentences().itemAt( 0 ).out( its.stem ) ).to.deep.equal( 'decis want ate' );
+    expect( doc.tokens().out( its.stem ) ).to.deep.equal( [ 'decis', 'want', 'ate' ] );
+    expect( doc.tokens().itemAt( 1 ).out( its.stem ) ).to.deep.equal( 'want' );
+  } );
+
   it( 'slected entity with its.detail, its.span as.?', function () {
     const s = 'Conut downn starts from ten, nine, eight...';
     const se = nlp.readDoc( s ).entities().filter( ( e ) => ( e.out( its.type ) === 'CARDINAL' ) );

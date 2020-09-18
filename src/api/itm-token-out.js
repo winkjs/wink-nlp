@@ -40,18 +40,18 @@ var allowed = require( '../allowed.js' );
  * @param  {number}   index       The index of desired token.
  * @param  {Object}   rdd         Raw Document Data-structure.
  * @param  {function} itsf        Desired `its` mapper.
- * @param  {object}   wordVectors The word vectors.
+ * @param  {object}   addons      The model's addons.
  * @return {*}                    Mapped value.
  * @private
  */
-var itmTokenOut = function ( index, rdd, itsf, wordVectors ) {
+var itmTokenOut = function ( index, rdd, itsf, addons ) {
   // Vectors require completely different handling.
   if ( itsf === its.vector ) {
-    return its.vector( index, rdd, wordVectors );
+    return its.vector( index, rdd, addons );
   }
   // Not a vector request, map using `itsf`.
   var f = ( allowed.its4token.has( itsf ) ) ? itsf : its.value;
-  return f( index, rdd.tokens, rdd.cache );
+  return f( index, rdd.tokens, rdd.cache, addons );
 }; // itmTokenOut()
 
 module.exports = itmTokenOut;

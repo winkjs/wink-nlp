@@ -48,7 +48,8 @@ allowed.its4token = new Set( [
   its.abbrevFlag,
   its.suffix,
   its.type,
-  its.value
+  its.value,
+  its.stem
 ] );
 
 allowed.its4tokens = allowed.its4token;
@@ -91,7 +92,8 @@ allowed.its4sentence = new Set( [
   its.span,
   its.markedUpText,
   its.negationFlag,
-  its.sentiment
+  its.sentiment,
+  its.stem
 ] );
 
 allowed.its4document = allowed.its4sentence;

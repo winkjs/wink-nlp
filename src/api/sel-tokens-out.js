@@ -47,14 +47,14 @@ var psMask = constants.psMask;
  * @param  {obejct}   rdd         Raw document data structure.
  * @param  {function} itsf        Desired `its` mapper.
  * @param  {function} asf         Desired `as` reducer.
- * @param  {object}   wordVectors The word vectors.
+ * @param  {object}   addons      The addons from the model.
  * @return {*}                    Reduced value.
  * @private
  */
-var selTokensOut = function ( selTokens, rdd, itsf, asf, wordVectors ) {
+var selTokensOut = function ( selTokens, rdd, itsf, asf, addons ) {
   // Vectors require completely different handling.
   if ( itsf === its.vector ) {
-    return its.vector( selTokens, rdd.tokens, wordVectors );
+    return its.vector( selTokens, rdd.tokens, addons );
   }
 
   // Not a vector request, perform map-reduce.
@@ -66,11 +66,11 @@ var selTokensOut = function ( selTokens, rdd, itsf, asf, wordVectors ) {
   // No `markedUpText` allowed here.
   if ( asfn === as.text ) {
     for ( let i = 0; i < selTokens.length; i += 1 ) {
-      mappedTkns.push( ''.padEnd( rdd.tokens[ ( selTokens[ i ] * tkSize ) + 1 ] & psMask ), itsf( selTokens[ i ], rdd.tokens, rdd.cache ) );  // eslint-disable-line no-bitwise
+      mappedTkns.push( ''.padEnd( rdd.tokens[ ( selTokens[ i ] * tkSize ) + 1 ] & psMask ), itsf( selTokens[ i ], rdd.tokens, rdd.cache, addons ) );  // eslint-disable-line no-bitwise
     }
   } else {
     for ( let i = 0; i < selTokens.length; i += 1 ) {
-      mappedTkns.push( itsfn( selTokens[ i ], rdd.tokens, rdd.cache ) );
+      mappedTkns.push( itsfn( selTokens[ i ], rdd.tokens, rdd.cache, addons ) );
     }
   }
 

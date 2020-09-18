@@ -117,7 +117,7 @@ var nlp = function ( theModel ) {
    * @returns {void} nothing!.
    * @private
   */
-  var load = function (  ) {
+  var load = function () {
     // Load language model.
     model = theModel.core();
     // With `intrinsicSize` captured, instantiate cache etc.
@@ -292,7 +292,7 @@ var nlp = function ( theModel ) {
     // }
 
     // Now create the document!
-    var doc = Doc( rdd, theModel.wordVectors ); // eslint-disable-line new-cap
+    var doc = Doc( rdd, theModel.addons ); // eslint-disable-line new-cap
 
     // All done — cleanup document's data.
     wrappedDocData.clean();
@@ -361,7 +361,7 @@ var nlp = function ( theModel ) {
   }
 
   // Load the model.
-  load( theModel );
+  load();
   // Setup default configuration.
   // definePipeConfig();
   // Methods.

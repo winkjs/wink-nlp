@@ -38,14 +38,14 @@ var itmSentenceOut = require( './itm-sentence-out.js' );
  * data type or data structure.
  * @param  {object}   rdd          Raw Document Data-structure.
  * @param  {function} itsf         Desired `its` mapper.
- * @param  {object}   wordVectors  The word vectors.
+ * @param  {object}   addons       The model's addons.
  * @return {*}                     Mapped sentences.
  * @private
  */
-var colSentencesOut = function ( rdd, itsf, wordVectors ) {
+var colSentencesOut = function ( rdd, itsf, addons ) {
   var sents = [];
   for ( let i = 0; i < rdd.sentences.length; i += 1 ) {
-    sents.push( itmSentenceOut( i, rdd, itsf, wordVectors ) );
+    sents.push( itmSentenceOut( i, rdd, itsf, addons ) );
   }
   return sents;
 }; // colSentencesOut()

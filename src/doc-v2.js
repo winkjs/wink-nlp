@@ -79,11 +79,11 @@ var printTokens = require( './api/print-tokens.js' );
  * developer APIs.
  *
  * @param  {object} docData     It encapsulates the document data.
- * @param  {object} wordVectors Word vector, optional.
+ * @param  {object} addons      The model's addon, may contain word vectors, stemmer etc.
  * @return {object}             conatining APIs.
  * @private
  */
-var doc = function ( docData, wordVectors ) {
+var doc = function ( docData, addons ) {
   // Extract `cache` as it is frequently accessed.
   var cache = docData.cache;
 
@@ -158,7 +158,7 @@ var doc = function ( docData, wordVectors ) {
     // Markup this token.
     api.markup = ( beginMarker, endMarker ) => markings.push( [ index, index, beginMarker, endMarker ] );
     // Output this token or its properties using mapper function — `f`.
-    api.out = ( f ) => itmTokenOut( index, docData, f, wordVectors );
+    api.out = ( f ) => itmTokenOut( index, docData, f, addons );
     // Access the parent sentence.
     api.parentSentence = () => getParentItem( index, sentences, itemSentence );
     // Index within the document.
@@ -188,7 +188,7 @@ var doc = function ( docData, wordVectors ) {
     api.length = () => ( selectedTokens.length );
     // Output this collection of selected tokens as a reduced values or properties
     // using map/reduce functions — `f/g`.
-    api.out = ( f, g ) => selTokensOut( selectedTokens, docData, f, g, wordVectors );
+    api.out = ( f, g ) => selTokensOut( selectedTokens, docData, f, g, addons );
     return api;
   }; // colTokens()
 
@@ -217,7 +217,7 @@ var doc = function ( docData, wordVectors ) {
         api.length = () => ( end - start + 1 );
         // Output this token collection as a reduced values or properties using
         // map/reduce functions — `f/g`.
-        api.out = ( f, g ) => colTokensOut( start, end, docData, f, g, wordVectors );
+        api.out = ( f, g ) => colTokensOut( start, end, docData, f, g, addons );
 
         return api;
       }
@@ -409,7 +409,7 @@ var doc = function ( docData, wordVectors ) {
     // Markup this sentence.
     api.markup = ( beginMarker, endMarker ) => markings.push( [ sentences[ index ][ 0 ], sentences[ index ][ 1 ], beginMarker, endMarker ] );
     // Output this sentence as text.
-    api.out = ( f ) => itmSentenceOut( index, docData, f, wordVectors );
+    api.out = ( f ) => itmSentenceOut( index, docData, f, addons );
     // Outputs the collection of entities, if any, contained in this sentence.
     api.entities = () => colSelectedEntities( containedEntities( entities, sentences[ index ][ 0 ], sentences[ index ][ 1 ] ) );
     // Outputs the collection of custom entities, if any, contained in this sentence.
@@ -438,7 +438,7 @@ var doc = function ( docData, wordVectors ) {
     // Length of this collection.
     api.length = () => ( sentences.length );
     // Output this collection of sentences as an array of strings.
-    api.out = ( f ) => colSentencesOut( docData, f, wordVectors );
+    api.out = ( f ) => colSentencesOut( docData, f, addons );
     return api;
   }; // colSentences()
 
@@ -450,7 +450,7 @@ var doc = function ( docData, wordVectors ) {
   methods.customEntities = colCustomEntities;
   methods.isLexeme = isLexeme;
   methods.isOOV = cache.isOOV;
-  methods.out = ( f ) => itmDocumentOut( docData, f, wordVectors );
+  methods.out = ( f ) => itmDocumentOut( docData, f, addons );
   methods.sentences = colSentences;
   methods.tokens = colTokens( 0, docData.numOfTokens - 1 );
 

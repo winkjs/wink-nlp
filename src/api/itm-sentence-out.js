@@ -42,15 +42,15 @@ var colTokensOut = require( './col-tokens-out.js' );
  * @param  {number}   index       The index of desired sentence.
  * @param  {Object}   rdd         Raw Document Data-structure.
  * @param  {function} itsf        Desired `its` mapper.
- * @param  {object}   wordVectors The word vectors.
+ * @param  {object}   addons      The model's addons.
  * @return {*}                    Mapped value.
  * @private
  */
-var itmSentenceOut = function ( index, rdd, itsf, wordVectors ) {
+var itmSentenceOut = function ( index, rdd, itsf, addons ) {
   var sentence = rdd.sentences[ index ];
   // Vectors require completely different handling.
   if ( itsf === its.vector ) {
-    return its.vector( sentence, rdd, wordVectors );
+    return its.vector( sentence, rdd, addons );
   }
 
   var itsfn = ( itsf && allowed.its4sentence.has( itsf ) ) ? itsf : its.value;
@@ -68,7 +68,7 @@ var itmSentenceOut = function ( index, rdd, itsf, wordVectors ) {
   // returned the `value`. Refer to `its.markedUpText`.
   var asfn = ( itsfn === its.markedUpText ) ? as.markedUpText : as.text;
 
-  return colTokensOut( sentence[ 0 ], sentence[ 1 ], rdd, itsfn, asfn );
+  return colTokensOut( sentence[ 0 ], sentence[ 1 ], rdd, itsfn, asfn, addons );
 }; // itmSentenceOut()
 
 module.exports = itmSentenceOut;

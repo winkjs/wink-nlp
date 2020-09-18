@@ -111,6 +111,10 @@ its.value = function ( index, tokens, cache ) {
   return cache.value( tokens[ index * tkSize ] );
 }; // value()
 
+its.stem = function ( index, tokens, cache, addons ) {
+  return addons.stem( cache.value( tokens[ index * tkSize ] ) );
+}; // value()
+
 its.vector = function ( ) {
   return ( new Array( 100 ).fill( 0 ) );
 }; // vector()

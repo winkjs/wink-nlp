@@ -41,15 +41,15 @@ var colTokensOut = require( './col-tokens-out.js' );
  * data type or data structure.
  * @param  {Object}   rdd         Raw Document Data-structure.
  * @param  {function} itsf        Desired `its` mapper.
- * @param  {Object}   wordVectors The word vectors.
+ * @param  {Object}   addons      The model's addons.
  * @return {*}                    Mapped value.
  * @private
  */
-var itmDocumentOut = function ( rdd, itsf, wordVectors ) {
+var itmDocumentOut = function ( rdd, itsf, addons ) {
   var document = rdd.document;
   // Vectors require completely different handling.
   if ( itsf === its.vector ) {
-    return its.vector( document, rdd, wordVectors );
+    return its.vector( document, rdd, addons );
   }
 
   var itsfn = ( itsf && allowed.its4document.has( itsf ) ) ? itsf : its.value;
@@ -67,7 +67,7 @@ var itmDocumentOut = function ( rdd, itsf, wordVectors ) {
   // returned the `value`. Refer to `its.markedUpText`.
   var asfn = ( itsfn === its.markedUpText ) ? as.markedUpText : as.text;
 
-  return colTokensOut( document[ 0 ], document[ 1 ], rdd, itsfn, asfn );
+  return colTokensOut( document[ 0 ], document[ 1 ], rdd, itsfn, asfn, addons );
 }; // itmDocumentOut()
 
 module.exports = itmDocumentOut;
