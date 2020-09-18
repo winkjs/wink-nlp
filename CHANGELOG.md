@@ -1,3 +1,10 @@
+# [Enabling add-ons to support new language model ](https://github.com/winkjs/wink-nlp/releases/tag/1.1.0)
+## Version 1.1.0 September 18, 2020
+
+### ✨ Features
+- We have enabled add-ons to support enhanced language models, paving way for new `its` helpers. 🎉
+- Now use [`its.stem`](https://winkjs.org/wink-nlp/its-as-helper.html) helper to obtain stems of the words using Porter Stemmer Algorithm V2. 👏
+
 # [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.0.1)
 ## Version 1.0.1 August 24, 2020
 
