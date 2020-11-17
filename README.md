@@ -19,6 +19,7 @@ It packs a rich feature set into a small foot print codebase of [under 1500 line
 7. Word vector integration
 8. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech (pos) tagging, named entity extraction, custom entities detection and pattern matching
 9. No external dependencies.
+10. Runs on web browsers
 
 
 ## Installation
@@ -38,6 +39,9 @@ Any required model can be installed by specifying its name as the last parameter
 ```shell
 node -e "require( 'wink-nlp/models/install' )" wink-eng-lite-model
 ```
+
+#### How to install for Web Browser
+If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model) instead. Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/how-to-run-wink-nlp-in-browser.html).
 
 ## Getting Started
 The "Hello World!" in winkNLP is given below. As the next step, we recommend a dive into [winkNLP's concepts](https://winkjs.org/wink-nlp/getting-started.html).
