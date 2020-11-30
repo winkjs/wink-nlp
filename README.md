@@ -7,6 +7,9 @@
 
 winkNLP is a JavaScript library for Natural Language Processing (NLP). Designed specifically to make development of NLP solutions **easier** and **faster**, winkNLP is optimized for the right balance of performance and accuracy.  The package can handle large amount of raw text at speeds over **525,000 tokens/second**. And with a test coverage of ~100%, winkNLP is a tool for building production grade systems with confidence.
 
+[<img src="https://user-images.githubusercontent.com/9491/100614781-ad17bb00-333c-11eb-87ab-2ae41aa21285.png" alt="Wink Wizard Showcase">](https://winkjs.org/showcase-wiz/)
+
+
 ## Features
 It packs a rich feature set into a small foot print codebase of [under 1500 lines](https://coveralls.io/github/winkjs/wink-nlp?branch=master):
 
