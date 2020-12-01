@@ -44,9 +44,9 @@
     "chai": "^4.2.0",
     "coveralls": "^3.1.0",
     "docker": "^1.0.0",
-    "eslint": "^7.5.0",
+    "eslint": "^7.14.0",
     "nyc": "^15.1.0",
-    "mocha": "^8.0.1"
+    "mocha": "^8.2.1"
   },
   "dependencies": {}
 }
