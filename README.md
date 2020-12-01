@@ -81,6 +81,8 @@ console.log( doc.tokens().out( its.type, as.freqTable ) );
 // -> [ [ 'word', 5 ], [ 'punctuation', 2 ], [ 'emoji', 1 ] ]
 ```
 
+> Try a sample code at [RunKit](https://npm.runkit.com/wink-nlp) or head to [showcases](https://winkjs.org/showcase.html) for live examples.
+
 ## Speed & Accuracy
 The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~525,000 tokens per second** with its default language model — [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), when [benchmarked](https://github.com/bestiejs/benchmark.js) using "Ch 13 of Ulysses by James Joyce" on a 2.2 GHz Intel Core i7 machine with 16GB RAM. The processing included the entire NLP pipeline — tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, and named entity extraction. This speed is way ahead of the prevailing speed benchmarks.
 
@@ -97,6 +99,7 @@ Wink NLP delivers this performance with the minimal load on RAM. For example, it
 - [Concepts](https://winkjs.org/wink-nlp/getting-started.html) — everything you need to know to get started.
 - [API Reference](https://winkjs.org/wink-nlp/read-doc.html) — explains usage of APIs with examples.
 - [Change log](https://github.com/winkjs/wink-nlp/blob/master/CHANGELOG.md) — version history along with the details of breaking changes, if any.
+- [Showcases](https://winkjs.org/showcase.html) — live examples with code to give you a head start.
 
 ## Need Help?
 
