@@ -14,15 +14,26 @@ winkNLP is a JavaScript library for Natural Language Processing (NLP). Designed 
 It packs a rich feature set into a small foot print codebase of [under 1500 lines](https://coveralls.io/github/winkjs/wink-nlp?branch=master):
 
 1. Lossless & multilingual tokenizer
+
 2. Developer friendly and intuitive API
+
 3. Built-in API to aid text visualization
+
 4. Easy information extraction from raw text
+
 5. Extensive text pre-processing features
+
 6. Pre-trained models with sizes starting from <3MB onwards
-7. Word vector integration
-8. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech (pos) tagging, named entity extraction, custom entities detection and pattern matching
-9. No external dependencies.
-10. Runs on web browsers
+
+7. BM25-based vectorizer
+
+8. Word vector integration
+
+9. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech (pos) tagging, named entity extraction, custom entities detection and pattern matching
+
+10. No external dependencies.
+
+11. Runs on web browsers
 
 
 ## Installation
