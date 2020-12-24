@@ -30,6 +30,7 @@
 
 //
 
+var sort4FT = require( './sort4FT.js' );
 var constants = require( './constants.js' );
 var caseMap = [ 'other', 'lowerCase', 'upperCase', 'titleCase' ];
 
@@ -138,5 +139,51 @@ its.sentiment = function ( spanItem ) {
   return spanItem[ 3 ];
 }; // span()
 
+/* ------ utilities ------ */
+
+its.terms = function ( tf, idf, terms ) {
+  return terms;
+}; // terms()
+
+its.docTermMatrix = function ( tf, idf, terms ) {
+  const dtm = new Array( tf.length );
+  for ( let id = 0; id < tf.length; id += 1 ) {
+    dtm[ id ] = [];
+    for ( let i = 0; i < terms.length; i += 1 ) {
+      dtm[ id ].push( tf[ id ][ terms[ i ] ] || 0 );
+    }
+  }
+  return dtm;
+}; // getDocTermMatrix()
+
+its.docBOWArray = function ( tf ) {
+  return tf;
+}; // docBOWArray()
+
+its.bow = function ( tf ) {
+  return tf;
+}; // bow()
+
+its.idf = function ( tf, idf ) {
+  var arr = [];
+  for ( const t in idf ) { // eslint-disable-line guard-for-in
+    arr.push( [ t, idf[ t ] ] );
+  }
+  // Sort on frequency followed by the term.
+  return arr.sort( sort4FT );
+}; // idf()
+
+its.tf = function ( tf ) {
+  const arr = [];
+  for ( const t in tf ) {  // eslint-disable-line guard-for-in
+    arr.push( [ t, tf[ t ] ] );
+  }
+  // Sort on frequency followed by the term.
+  return arr.sort( sort4FT );
+}; // tf()
+
+its.modelJSON = function ( tf, idf ) {
+  return JSON.stringify( { tf: tf, idf: idf } );
+}; // model()
 
 module.exports = its;

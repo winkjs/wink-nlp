@@ -30,6 +30,7 @@
 
 //
 
+var sort4FT = require( './sort4FT.js' );
 var containedMarkings = require( './contained-markings.js' );
 var as = Object.create( null );
 
@@ -88,7 +89,7 @@ as.freqTable = function ( tokens ) {
     table[ i ] = [ keys[ i ], bow[ keys[ i ] ] ];
   }
 
-  return table.sort( ( a, b ) => ( b[ 1 ] - a[ 1 ] ) );
+  return table.sort( sort4FT );
 }; // freqTable()
 
 // ### bigrams
