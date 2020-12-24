@@ -17,6 +17,8 @@
     "visualization",
     "pattern matching",
     "stemmer",
+    "bm25",
+    "vectorizer",
     "winkNLP",
     "wink"
   ],
