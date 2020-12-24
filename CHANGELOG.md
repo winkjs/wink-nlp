@@ -1,3 +1,14 @@
+# [Introducing support for browser ready language model](https://github.com/winkjs/wink-nlp/releases/tag/1.2.0)
+## Version 1.2.0 December 24, 2020
+
+### ✨ Features
+- We have added support for browser ready language model. 🤩 🎉
+- Now easily vectorize text using bm25-based vectroizer. 🤓 👏
+
+#
+### ⚙️ Updates
+- Examples in README now runs on [RunKit](https://npm.runkit.com/wink-nlp) using web model! ✅
+
 # [Enabling add-ons to support new language model ](https://github.com/winkjs/wink-nlp/releases/tag/1.1.0)
 ## Version 1.1.0 September 18, 2020
 
