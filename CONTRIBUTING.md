@@ -58,15 +58,15 @@ The header is **mandatory** and the scope of the header is optional. Any line of
 
 **Type** should be one of the following:
 
-- `feat:` A new feature
-- `fix:` A bug fix
-- `docs:` Documentation only changes
-- `style:` Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-- `refactor:` A code change that neither fixes a bug nor adds a feature
-- `perf:` A code change that improves performance
-- `test:` Adding missing or correcting existing tests
-- `chore:` Changes to the build process or auxiliary tools and libraries such as documentation generation
-- `revert:` when you have to revert to an older commit. Ths subject should be the header of old  commit and body should contain `This reverts commit <hash>.` Use `git revert` command to accomplish this.
+- `build`: Changes that affect the build system or external dependencies
+- `ci`: Changes to our CI configuration files and scripts
+- `docs`: Documentation only changes
+- `feat`: A new feature
+- `fix`: A bug fix
+- `perf`: A code change that improves performance
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `test`: Adding missing tests or correcting existing tests
+- `revert:` When you have to revert to an older commit. Ths subject should be the header of old  commit and body should contain `This reverts commit <hash>.` Use `git revert` command to accomplish this.
 
 **Scope** specifies the  place of the commit change. You can use `*` when the change affects more than a single scope.
 
