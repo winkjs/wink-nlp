@@ -43,12 +43,12 @@
   "homepage": "http://winkjs.org/",
   "devDependencies": {
     "benchmark": "^2.1.4",
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "coveralls": "^3.1.0",
     "docker": "^1.0.0",
-    "eslint": "^7.14.0",
+    "eslint": "^7.25.0",
     "nyc": "^15.1.0",
-    "mocha": "^8.2.1"
+    "mocha": "^8.3.2"
   },
   "runkitExampleFilename": "./runkit-example.js",
   "dependencies": {}
