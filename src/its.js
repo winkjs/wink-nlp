@@ -42,6 +42,8 @@ var bits4lemma = constants.bits4lemma;
 var posMask = constants.posMask;
 // Mask for preceding spaces.
 var psMask = constants.psMask;
+// Mask for lemma in case of contraction.
+var lemmaMask = constants.lemmaMask;
 
 var its = Object.create( null );
 
@@ -114,7 +116,24 @@ its.value = function ( index, tokens, cache ) {
 
 its.stem = function ( index, tokens, cache, addons ) {
   return addons.stem( cache.value( tokens[ index * tkSize ] ) );
-}; // value()
+}; // stem()
+
+its.lemma = function ( index, tokens, cache, addons ) {
+  // If it is a contraction that lemma is already available in the token's data structure.
+  if ( tokens[ ( index * tkSize ) + 1 ] > 65535 ) {
+    return cache.value( tokens[ ( index * tkSize ) + 2 ] & lemmaMask ); // eslint-disable-line no-bitwise
+  }
+  // Handle mapped spelling if any.
+  const mappedIdx = cache.mappedSpelling( tokens[ index * tkSize ] );
+  // If the token has single lemma then no further processing is needed.
+  if ( cache.property( mappedIdx, 'isSLemma' ) === 1 ) {
+    return cache.value( cache.property( mappedIdx, 'lemma' ) );
+  }
+  // Exhausted all possibilities to avoid processing! Now lemmatize!
+  const pos = its.pos( index, tokens, cache );
+  const value = cache.value( cache.normal( tokens[ index * tkSize ] ) );
+  return addons.lemmatize( value, pos, cache );
+}; // lemmas()
 
 its.vector = function ( ) {
   return ( new Array( 100 ).fill( 0 ) );

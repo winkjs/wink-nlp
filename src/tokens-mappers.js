@@ -80,13 +80,15 @@ var mapRawTokens2UIdOfNormal = function ( rdd ) {
 var mapRawTokens2UIdOfValue = function ( rdd ) {
   // Extract tokens.
   var tokens = rdd.tokens;
+  var cache = rdd.cache;
   // Will contain only the hash of value of tokenized lexemes.
   var mappedTokens = new Array( rdd.numOfTokens );
   var i;
   for ( i = 0; i < tokens.length; i += tkSize ) {
-    mappedTokens[ i / tkSize ] = tokens[ i ];
+    // Use mapped spelling — this ensure correct pos tagging & lemmatization etc.
+    // as mapped spelling is the gold spelling.
+    mappedTokens[ i / tkSize ] = cache.mappedSpelling( tokens[ i ] );
   } // for ( i = 0; i < tokens.length...
-
   return mappedTokens;
 }; // mapRawTokens2UIdOfValue()
 
@@ -108,7 +110,9 @@ var mapRawTokens2UIdOfDefaultPOS = function ( rdd ) {
   for ( let i = 0; i < tokens.length; i += tkSize, pk += 1 ) {
     posTags[ pk ] = ( tokens[ ( i ) + 2 ] === 0 ) ?
                       // Make UNK to NOUN to handle the remote possibility of ML POS being undefined!
-                      ( cache.posOf( tokens[ i ] ) || 8 ) :
+                      // Also use mapped spelling — this ensure correct pos tagging & lemmatization etc.
+                      // as mapped spelling is the gold spelling.
+                      ( cache.posOf( cache.mappedSpelling( tokens[ i ] ) ) || 8 ) :
                       ( ( tokens[ ( i ) + 2 ] & posMask ) >>> bits4lemma ); // eslint-disable-line no-bitwise
   }
   return posTags;

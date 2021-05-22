@@ -49,7 +49,8 @@ allowed.its4token = new Set( [
   its.suffix,
   its.type,
   its.value,
-  its.stem
+  its.stem,
+  its.lemma
 ] );
 
 allowed.its4tokens = allowed.its4token;

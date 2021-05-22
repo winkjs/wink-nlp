@@ -43,6 +43,8 @@ consts.posMask = 0x3F00000;
 consts.psMask = 0xFFFF;
 // Mask for pointer to normal in `xpansions`.
 consts.xnMask = 0x3FFF0000;
+// Mask for lemma extraction in case of contractions.
+consts.lemmaMask = 0xFFFFF;
 // Size of a single token.
 consts.tkSize = 4;
 // Size of a single expansion.

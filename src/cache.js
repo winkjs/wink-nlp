@@ -344,6 +344,38 @@ var cache = function ( model, featureFn ) {
     return normIndex;
   }; // normal()
 
+  // ## mappedSpelling
+  /**
+   *
+   * Returns the index of mapped spelling's of the input `index` of required lexeme.
+   *
+   * @param {number} index of the required lexeme.
+   * @return {string} index to the normal.
+   * @private
+  */
+  var mappedSpelling = function ( index ) {
+    // Temps for `layout.isSpellingMapped`, etc.
+    var layout4mapped = layout.isSpellingMapped;
+    var layout4lemma =  layout.lemma;
+    // Used to remap if its value is `1`. In this case lemma becomes the `normIndex`.
+    var isSpellingMapped;
+    // Returned: normal's index.
+    var mappedIndex = index;
+
+    // Only applicable to lexems that are inside the vocabulary as there can not
+    // be mapped spelling for OOV words!
+    if ( index < lexemeIntrinsicSize ) {
+      isSpellingMapped = ( lexicon[ layout4mapped[ 0 ] + ( index * pkSize ) ] & layout4mapped[ 1 ] ) >>> layout4mapped[ 2 ]; // eslint-disable-line no-bitwise
+      if ( isSpellingMapped ) {
+        // Mapped, pick up the lemma portion as this points to normal in case of
+        // mapped spellings.
+        mappedIndex = ( lexicon[ layout4lemma[ 0 ] + ( index * pkSize ) ] & layout4lemma[ 1 ] ) >>> layout4lemma[ 2 ]; // eslint-disable-line no-bitwise
+      }
+    }
+
+    return mappedIndex;
+  }; // mappedSpelling()
+
   // ## nox
   /**
    *
@@ -483,6 +515,33 @@ var cache = function ( model, featureFn ) {
     return lexemeIntrinsicSize;
   };
 
+  /**
+   * Finds if the text can have `pos` as valid part of speech, provided it is a
+   * base form. Used in **lemmatization** to see if the lemma shares the same pos
+   * with the original word.
+   *
+   * @param  {string} text  the incoming word.
+   * @param  {string} pos   the pos that needs to be checked as one of the valid pos for text.
+   * @return {boolean}       True if it does, otherwise false.
+   */
+  var hasSamePOS = function ( text, pos ) {
+    // Get the word's index
+    var textIndex = lookup( text );
+    // If not found i.e. OOV means that it did not have a pre-defined POS set.
+    if ( !textIndex ) return false;
+    // More then one means it is a contraction.
+    if ( textIndex.length > 1 ) return false;
+    // Outside intrinsic vocab means OOV again.
+    if ( textIndex[ 0 ] >= lexemeIntrinsicSize ) return false;
+    // If it is not a base form so point in checking same POS — basics of
+    // lemmatization. For example, `hiding` becomes `hid` on removal of `-ing`,
+    // which is not in base form (i.e. hid is the past tense of hide); so it should
+    // not take that as the lemma and instead try adding `-e`.
+    if ( property( textIndex, 'isBaseForm' ) === 0 ) return false;
+    // Finally if it is in base form then check for pos membership.
+    return isMemberPOS( textIndex[ 0 ], model.pos.hash[ pos ] );
+  }; // hasSamePOS()
+
   // ## isOOV
   /**
    *
@@ -512,6 +571,8 @@ var cache = function ( model, featureFn ) {
   methods.intrinsicSize = intrinsicSize;
   methods.isOOV = isOOV;
   methods.isMemberPOS = isMemberPOS;
+  methods.hasSamePOS = hasSamePOS;
+  methods.mappedSpelling = mappedSpelling;
 
   return methods;
 }; // cache()
