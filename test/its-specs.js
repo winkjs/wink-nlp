@@ -104,7 +104,7 @@ describe( 'its functions for .out()', function () {
   it( 'its.uniqueId', function () {
     expect( nlp.readDoc( '$%^oov^%$' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 0 );
     expect( nlp.readDoc( '\n' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 1 );
-    expect( nlp.readDoc( 'The' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 74830 );
+    expect( nlp.readDoc( 'The' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 74867 );
   } );
 
   it( 'its.negationFlag', function () {
@@ -130,6 +130,13 @@ describe( 'its functions for .out()', function () {
     expect( nlp.readDoc( 'I am sick' ).out( its.sentiment ) ).to.deep.equal( -0.4 );
   } );
 
+  it( 'its.lemma', function () {
+    expect( nlp.readDoc( 'He is hiding' ).tokens().out( its.lemma ) ).to.deep.equal( [ 'he', 'be', 'hide' ] );
+    expect( nlp.readDoc( 'I organised' ).tokens().out( its.lemma ) ).to.deep.equal( [ 'i', 'organize' ] );
+    expect( nlp.readDoc( 'how abt eating' ).tokens().out( its.lemma ) ).to.deep.equal( [ 'how', 'about', 'eat' ] );
+    expect( nlp.readDoc( 'I can\'t be going.' ).tokens().out( its.lemma ) ).to.deep.equal( [ 'i', 'can', 'not', 'be', 'go', '.' ] );
+  } );
+
   it( 'its.stem', function () {
     const doc = nlp.readDoc( 'decisively wanted ate' );
     expect( doc.out( its.stem ) ).to.deep.equal( 'decis want ate' );
@@ -138,7 +145,7 @@ describe( 'its functions for .out()', function () {
     expect( doc.tokens().itemAt( 1 ).out( its.stem ) ).to.deep.equal( 'want' );
   } );
 
-  it( 'slected entity with its.detail, its.span as.?', function () {
+  it( 'selected entity with its.detail, its.span as.?', function () {
     const s = 'Conut downn starts from ten, nine, eight...';
     const se = nlp.readDoc( s ).entities().filter( ( e ) => ( e.out( its.type ) === 'CARDINAL' ) );
     expect( se.out( its.span, as.freqTable ) ).to.deep.equal( [ [ 4, 4 ], [ 6, 6 ], [ 8, 8 ] ] );

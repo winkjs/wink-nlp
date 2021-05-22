@@ -50,11 +50,25 @@ describe( 'cache', function () {
   } );
 
   it( 'currentSize() should current size of the lexicon', function () {
-    expect( cache.currentSize() ).to.equal( 84921 );
+    expect( cache.currentSize() ).to.equal( 84962 );
   } );
 
   it( 'should compute oov number\'s pos as NUM', function () {
     cache.add( '333666999', 2 );
     expect( cache.posOf( cache.lookup( '333666999' )[ 0 ], 'pos' ) ).to.equal( 9 );
+  } );
+
+  it( 'should map spelling correctly', function () {
+    cache.add( 'somejunking', 1 );
+    expect( cache.value( cache.mappedSpelling( cache.lookup( 'organised' )[ 0 ] ) ) ).to.equal( 'organized' );
+    expect( cache.value( cache.mappedSpelling( cache.lookup( 'somejunking' )[ 0 ] ) ) ).to.equal( 'somejunking' );
+  } );
+
+  it( 'should falg same pos correctly', function () {
+    expect( cache.hasSamePOS( 'organized', 'ADJ' ) ).to.equal( true );
+    expect( cache.hasSamePOS( 'organized', 'VERB' ) ).to.equal( true );
+    expect( cache.hasSamePOS( 'somejunking', 'ADJ' ) ).to.equal( false );
+    expect( cache.hasSamePOS( 'superjunking', 'ADJ' ) ).to.equal( false );
+    expect( cache.hasSamePOS( 'can\'t', 'ADJ' ) ).to.equal( false );
   } );
 } );
