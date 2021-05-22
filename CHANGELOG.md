@@ -1,3 +1,10 @@
+# [Adding long pending lemmatizer support](https://github.com/winkjs/wink-nlp/releases/tag/1.3.0)
+## Version 1.3.0 May 22, 2021
+
+### ✨ Features
+- Now use `its.lemma` helper to obtain lemma of words. 👏 🎉
+
+
 # [Introducing support for browser ready language model](https://github.com/winkjs/wink-nlp/releases/tag/1.2.0)
 ## Version 1.2.0 December 24, 2020
 
