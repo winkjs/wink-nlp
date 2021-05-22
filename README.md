@@ -92,7 +92,16 @@ console.log( doc.tokens().out( its.type, as.freqTable ) );
 // -> [ [ 'word', 5 ], [ 'punctuation', 2 ], [ 'emoji', 1 ] ]
 ```
 
-> Try a sample code at [RunKit](https://npm.runkit.com/wink-nlp) or head to [showcases](https://winkjs.org/showcase.html) for live examples.
+Try a sample code at [RunKit](https://npm.runkit.com/wink-nlp) or head to [showcases](https://winkjs.org/showcase.html) to learn from live examples:
+
+#### [Wikipedia Timeline](https://winkjs.org/showcase-timeline/) ⏳
+Reads any wikipedia article and generates a visual timeline of all its events.
+
+#### [NLP Wizard](https://winkjs.org/showcase-wiz/) 🧙
+Performs tokenization, sentence boundary detection, pos tagging, named entity detection and sentiment analysis of user input text in real time.
+
+#### [Hashtag Sentiment](https://winkjs.org/showcase-hashtag/) 🎭
+Analyzes sentiments of recent tweets containing the given hashtag.
 
 ## Speed & Accuracy
 The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~525,000 tokens per second** with its default language model — [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), when [benchmarked](https://github.com/bestiejs/benchmark.js) using "Ch 13 of Ulysses by James Joyce" on a 2.2 GHz Intel Core i7 machine with 16GB RAM. The processing included the entire NLP pipeline — tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, and named entity extraction. This speed is way ahead of the prevailing speed benchmarks.
