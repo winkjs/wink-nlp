@@ -29,7 +29,7 @@ It packs a rich feature set into a small foot print codebase of [under 1500 line
 
 8. Word vector integration
 
-9. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech (pos) tagging, named entity extraction, custom entities detection and pattern matching
+9. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech (pos) tagging, lemmatization, named entity extraction, custom entities detection and pattern matching
 
 10. No external dependencies.
 
@@ -97,7 +97,7 @@ console.log( doc.tokens().out( its.type, as.freqTable ) );
 ## Speed & Accuracy
 The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~525,000 tokens per second** with its default language model — [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), when [benchmarked](https://github.com/bestiejs/benchmark.js) using "Ch 13 of Ulysses by James Joyce" on a 2.2 GHz Intel Core i7 machine with 16GB RAM. The processing included the entire NLP pipeline — tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, and named entity extraction. This speed is way ahead of the prevailing speed benchmarks.
 
-The benchmark was conducted on [Node.js versions 14.8.0, 12.18.3 and 10.22.0](https://nodejs.org/en/about/releases/).
+The benchmark was conducted on [Node.js versions 14.8.0, and 12.18.3](https://nodejs.org/en/about/releases/).
 
 It pos tags a subset of WSJ corpus with an accuracy of **~94.7%** — this includes *tokenization of raw text prior to pos tagging*. The current state-of-the-art is at ~97% accuracy but at lower speeds and is generally computed using gold standard pre-tokenized corpus.
 
