@@ -21,19 +21,21 @@ It packs a rich feature set into a small foot print codebase of [under 1500 line
 
 4. Easy information extraction from raw text
 
-5. Extensive text pre-processing features
+5. Extensive text processing features such as bag-of-words, frequency table, stop word removal, readability statistics computation and many more.
 
 6. Pre-trained models with sizes starting from <3MB onwards
 
 7. BM25-based vectorizer
 
-8. Word vector integration
+8. Cosine similarity
 
-9. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech (pos) tagging, lemmatization, named entity extraction, custom entities detection and pattern matching
+9. Word vector integration
 
-10. No external dependencies.
+10. Comprehensive NLP pipeline covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech (pos) tagging, lemmatization, named entity extraction, custom entities detection and pattern matching
 
-11. Runs on web browsers
+11. No external dependencies.
+
+12. Runs on web browsers
 
 
 ## Installation
