@@ -63,6 +63,10 @@ var itmDocumentOut = function ( rdd, itsf, addons ) {
     return ( document[ 2 ] === 1 );
   }
 
+  if ( itsfn === its.readabilityStats ) {
+    return itsfn( rdd, addons );
+  }
+
   // Setup the correct `as.fn` becuase the current markedup text would have
   // returned the `value`. Refer to `its.markedUpText`.
   var asfn = ( itsfn === its.markedUpText ) ? as.markedUpText : as.text;

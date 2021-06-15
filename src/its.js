@@ -158,6 +158,10 @@ its.sentiment = function ( spanItem ) {
   return spanItem[ 3 ];
 }; // span()
 
+its.readabilityStats = function ( rdd, addons ) {
+  return addons.readabilityStats( rdd, its );
+}; // readabilityStats()
+
 /* ------ utilities ------ */
 
 its.terms = function ( tf, idf, terms ) {

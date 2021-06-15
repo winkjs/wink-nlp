@@ -97,7 +97,16 @@ allowed.its4sentence = new Set( [
   its.stem
 ] );
 
-allowed.its4document = allowed.its4sentence;
+allowed.its4document = new Set( [
+  its.value,
+  its.normal,
+  its.span,
+  its.markedUpText,
+  its.negationFlag,
+  its.sentiment,
+  its.stem,
+  its.readabilityStats
+] );
 
 
 module.exports = allowed;
