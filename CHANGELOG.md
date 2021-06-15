@@ -1,3 +1,11 @@
+# [Introducing cosine similarity & readability stats helper](https://github.com/winkjs/wink-nlp/releases/tag/1.4.0)
+## Version 1.4.0 June 15, 2021
+
+### ✨ Features
+- Cosine similarity is available on Bag of Words. 🛍🔡🎉
+- You can now use `its.readabilityStats` helper to obtain document's readability statistics, if it is supported by language model. 📚📊🤓
+
+
 # [Adding long pending lemmatizer support](https://github.com/winkjs/wink-nlp/releases/tag/1.3.0)
 ## Version 1.3.0 May 22, 2021
 
