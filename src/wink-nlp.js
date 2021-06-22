@@ -36,6 +36,8 @@ var Cache = require( './cache.js' );
 var tokenizer = require( './tokenizer.js' );
 var compileTRex = require( './compile-trex.js' );
 var mappers = require( './tokens-mappers.js' );
+var itsHelpers = require( './its.js' );
+var asHelpers = require( './as.js' );
 var mapRawTokens2UIdOfNormal = mappers.mapRawTokens2UIdOfNormal;
 var mapRawTokens2UIdOfDefaultPOS = mappers.mapRawTokens2UIdOfDefaultPOS;
 
@@ -367,6 +369,9 @@ var nlp = function ( theModel ) {
   // Methods.
   methods.readDoc = readDoc;
   methods.learnCustomEntities = learnCustomEntities;
+  // Expose `its` and `as` helpers.
+  methods.its = itsHelpers;
+  methods.as = asHelpers;
 
   return methods;
 }; // wink
