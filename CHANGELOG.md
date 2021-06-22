@@ -1,3 +1,10 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.5.0)
+## Version 1.5.0 June 22, 2021
+
+### ⚙️ Updates
+- Exposed `its` and `as` helpers via the instance of winkNLP as well. 🤓
+
+
 # [Introducing cosine similarity & readability stats helper](https://github.com/winkjs/wink-nlp/releases/tag/1.4.0)
 ## Version 1.4.0 June 15, 2021
 
