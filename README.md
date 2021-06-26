@@ -56,11 +56,11 @@ Any required model can be installed by specifying its name as the last parameter
 node -e "require( 'wink-nlp/models/install' )" wink-eng-lite-model
 ```
 
-#### How to install for Web Browser
+### How to install for Web Browser
 If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model) instead. Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/how-to-run-wink-nlp-in-browser.html).
 
 ## Getting Started
-The "Hello World!" in winkNLP is given below. As the next step, we recommend a dive into [winkNLP's concepts](https://winkjs.org/wink-nlp/getting-started.html).
+The "Hello World!" in winkNLP is given below:
 
 ```javascript
 // Load wink-nlp package  & helpers.
@@ -93,8 +93,8 @@ console.log( doc.tokens().out() );
 console.log( doc.tokens().out( its.type, as.freqTable ) );
 // -> [ [ 'word', 5 ], [ 'punctuation', 2 ], [ 'emoji', 1 ] ]
 ```
-
-Try a sample code at [RunKit](https://npm.runkit.com/wink-nlp) or head to [showcases](https://winkjs.org/showcase.html) to learn from live examples:
+<sub>[Try the above code on RunKit](https://npm.runkit.com/wink-nlp)</sub>
+<br/>Dive into [winkNLP's concepts](https://winkjs.org/wink-nlp/getting-started.html)  or head to **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** for common NLP tasks or just explore live [showcases](https://winkjs.org/showcase.html) to learn:
 
 #### [Wikipedia Timeline](https://winkjs.org/showcase-timeline/) ⏳
 Reads any wikipedia article and generates a visual timeline of all its events.
@@ -104,6 +104,8 @@ Performs tokenization, sentence boundary detection, pos tagging, named entity de
 
 #### [Hashtag Sentiment](https://winkjs.org/showcase-hashtag/) 🎭
 Analyzes sentiments of recent tweets containing the given hashtag.
+
+
 
 ## Speed & Accuracy
 The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~525,000 tokens per second** with its default language model — [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), when [benchmarked](https://github.com/bestiejs/benchmark.js) using "Ch 13 of Ulysses by James Joyce" on a 2.2 GHz Intel Core i7 machine with 16GB RAM. The processing included the entire NLP pipeline — tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, and named entity extraction. This speed is way ahead of the prevailing speed benchmarks.
