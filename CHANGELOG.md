@@ -1,3 +1,10 @@
+# [Enabling configurable annotation pipeline](https://github.com/winkjs/wink-nlp/releases/tag/1.6.0)
+## Version 1.6.0 June 27, 2021
+
+### ✨ Features
+- No need to run the entire annotation pipeline, now you can select whatever you want or just even run tokenization by specifying an empty pipe. 🤩🎉
+
+
 # [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.5.0)
 ## Version 1.5.0 June 22, 2021
 
