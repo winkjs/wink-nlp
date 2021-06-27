@@ -213,6 +213,55 @@ describe( 'Language model validity checks', function () {
   } );
 } );
 
+describe( 'Annotation pipe validity checks', function () {
+  it( 'should throw error when incorrect pipe datatype is passed', function () {
+    expect( winkNLP.bind( null, model, 3 ) ).to.throw( /^wink-nlp: invalid pipe, it must be an array instead found a "number"./ );
+  } );
+
+  it( 'should throw error when incorrect annotation type is passed', function () {
+    expect( winkNLP.bind( null, model, [ 'wrong' ] ) ).to.throw( /^wink-nlp: invalid pipe annotation "wrong" found./ );
+  } );
+} );
+
+describe( 'Empty Annotation pipe should not detect any of the existing annotations', function () {
+  const nlpNoAnno = winkNLP( model, [] );
+  it( 'should still learn from patterns', function () {
+    const patterns = [
+      { name: 'adjectiveNounPair', patterns: [ 'ADJ' ] }
+    ];
+    expect( nlpNoAnno.learnCustomEntities( patterns ) ).to.equal( 1 );
+  } );
+
+  const doc = nlpNoAnno.readDoc( 'Hello World! Not happy! :-)' );
+  it( 'should return single sentence', function () {
+    expect( doc.sentences().length() ).to.equal( 1 );
+    expect( doc.sentences().out()[ 0 ] ).to.equal( doc.out() );
+  } );
+
+  it( 'should not return any negated token', function () {
+    // "happy" would be negated otherwise!
+    expect( doc.tokens().itemAt( 4 ).out( its.negationFlag ) ).to.equal( false );
+  } );
+
+  it( 'should return overall sentiment as "0"', function () {
+    expect( doc.out( its.sentiment ) ).to.equal( 0 );
+  } );
+
+  it( 'should return all pos as "UNK"', function () {
+    expect( doc.tokens().out( its.pos ) ).to.deep.equal( [ 'UNK', 'UNK', 'UNK', 'UNK', 'UNK', 'UNK', 'UNK' ] );
+  } );
+
+  it( 'should return empty entity array', function () {
+    expect( doc.entities().out() ).to.deep.equal( [] );
+    expect( doc.entities().length() ).to.deep.equal( 0 );
+  } );
+
+  it( 'should return empty custom entity array', function () {
+    expect( doc.entities().out() ).to.deep.equal( [] );
+    expect( doc.entities().length() ).to.deep.equal( 0 );
+  } );
+} );
+
 // describe( 'Limits handling', function () {
 //   it( 'should throw error', function () {
 //     expect( nlp.readDoc.bind( null, lslSentence ) ).to.throw( /^wink-nlp: memory/ );
