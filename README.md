@@ -93,8 +93,9 @@ console.log( doc.tokens().out() );
 console.log( doc.tokens().out( its.type, as.freqTable ) );
 // -> [ [ 'word', 5 ], [ 'punctuation', 2 ], [ 'emoji', 1 ] ]
 ```
-<sub>[Try the above code on RunKit](https://npm.runkit.com/wink-nlp)</sub><br/>
+Experiment with the above code on [RunKit](https://npm.runkit.com/wink-nlp).
 
+### Explore Further
 Dive into [winkNLP's concepts](https://winkjs.org/wink-nlp/getting-started.html)  or head to **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** for common NLP tasks or just explore live [showcases](https://winkjs.org/showcase.html) to learn:
 
 #### [Wikipedia Timeline](https://winkjs.org/showcase-timeline/) ⏳
