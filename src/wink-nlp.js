@@ -60,12 +60,13 @@ var tkSize = constants.tkSize;
  * @private
  *
  * @param {object} theModel language model.
+ * @param {string[]} pipe of nlp annotations.
  * @returns {object} conatining set of API methods for natural language processing.
  * @example
  * const nlp = require( 'wink-nlp' );
  * var myNLP = nlp();
 */
-var nlp = function ( theModel ) {
+var nlp = function ( theModel, pipe ) {
 
   var methods = Object.create( null );
   // Token Regex; compiled from `model`
@@ -107,6 +108,18 @@ var nlp = function ( theModel ) {
   var compiler;
   // Used to innstantiate the compiler.
   var cerMetaModel;
+
+  // Annotation stuff.
+  var validAnnotations = Object.create( null );
+  validAnnotations.sbd = true;
+  validAnnotations.negation = true;
+  validAnnotations.sentiment = true;
+  validAnnotations.pos = true;
+  validAnnotations.ner = true;
+  validAnnotations.cer = true;
+  // Current pipe.
+  var currPipe = Object.create( null );
+  var onlyTokenization = true;
 
   // Private methods.
 
@@ -229,63 +242,83 @@ var nlp = function ( theModel ) {
     // The structure is `[ start, end, negationFlag, sentimentScore ]`.
     rdd.document = [ 0, ( rdd.numOfTokens - 1 ), 0, 0 ];
 
-    // Map tokens for automata.
-    var tokens4Automata = mapRawTokens2UIdOfNormal( rdd );
-    // Sentence Boundary Detection.
-    // Set first `Pattern Swap (x)` as `null`.
-    var px = null;
-    for ( let i = 0; i < sbdAutomata.length; i += 1 ) {
-      sbdAutomata[ i ].setPatternSwap( px );
-      // For SBD, all tokens are required to extract preceeding spaces.
-      px = sbdAutomata[ i ].recognize( tokens4Automata, sbdTransformers[ i ], rdd.tokens );
+    // Map tokens for automata if there are other annotations to be performed.
+    var tokens4Automata = ( onlyTokenization ) ? null : mapRawTokens2UIdOfNormal( rdd );
+
+    var px;
+    if ( currPipe.sbd ) {
+      // Sentence Boundary Detection.
+      // Set first `Pattern Swap (x)` as `null`.
+      px = null;
+      for ( let i = 0; i < sbdAutomata.length; i += 1 ) {
+        sbdAutomata[ i ].setPatternSwap( px );
+        // For SBD, all tokens are required to extract preceeding spaces.
+        px = sbdAutomata[ i ].recognize( tokens4Automata, sbdTransformers[ i ], rdd.tokens );
+      }
+      // The structure of sentence is:<br/>
+      // `[ start, end, negationFlag, sentimentScore ]`
+      sbdSetter( px, rdd );
+      // Compute number of sentences!
+      rdd.numOfSentences = rdd.sentences.length;
+    } else {
+      // Setup default sentence as entire document!
+      rdd.numOfSentences = 1;
+      rdd.sentences = [ [ 0, ( rdd.numOfTokens - 1 ), 0, 0 ] ];
     }
-    // The structure of sentence is:<br/>
-    // `[ start, end, negationFlag, sentimentScore ]`
-    sbdSetter( px, rdd );
-    // Compute number of sentences!
-    rdd.numOfSentences = rdd.sentences.length;
 
-    // Named entity detection.
-    px = null;
-    for ( let i = 0; i < nerAutomata.length; i += 1 ) {
-      nerAutomata[ i ].setPatternSwap( px );
-      px = nerAutomata[ i ].recognize( tokens4Automata, nerTransformers[ i ] );
+    if ( currPipe.ner ) {
+      // Named entity detection.
+      px = null;
+      for ( let i = 0; i < nerAutomata.length; i += 1 ) {
+        nerAutomata[ i ].setPatternSwap( px );
+        px = nerAutomata[ i ].recognize( tokens4Automata, nerTransformers[ i ] );
+      }
+      // Entities — storted as array of `[ start, end, entity type ].`
+      // There are no setter for entities as no transformation is needed.
+      rdd.entities = px;
+    } else {
+      rdd.entities = [];
     }
-    // Entities — storted as array of `[ start, end, entity type ].`
-    // There are no setter for entities as no transformation is needed.
-    rdd.entities = px;
 
-    // Negation
-    px = null;
-    px = negAutomata.recognize( tokens4Automata );
-    negSetter( px, rdd, constants, search );
-
-    // Sentiment Analysis
-    px = null;
-    px = saAutomata.recognize( tokens4Automata );
-    saSetter( px, rdd, constants, locate );
-
-    // PoS Tagging
-    const posTags = mapRawTokens2UIdOfDefaultPOS( rdd );
-    px = null;
-    for ( let i = 0; i < posAutomata.length; i += 1 ) {
-      px = posAutomata[ i ].recognize( posTags, posTransformers[ 0 ], rdd.tokens );
-      posUpdater( px, cache, posTags, tokens4Automata );
+    if ( currPipe.negation ) {
+      // Negation
+      px = null;
+      px = negAutomata.recognize( tokens4Automata );
+      negSetter( px, rdd, constants, search );
     }
-    posSetter( rdd, posTags, tkSize, constants.bits4lemma );
 
-    // Patterns
-    px = null;
-    if ( cerAutomata !== undefined && cerLearnings > 0 ) {
-      cerConfig.rdd = rdd;
-      cerConfig.preserve = cerPreserve;
-      cerConfig.constants = constants;
-      if ( cerConfig.useEntity ) cerAutomata.setPatternSwap( rdd.entities );
-      px = cerAutomata.recognize( tokens4Automata, cerTransformer, cerConfig );
+    if ( currPipe.sentiment ) {
+      // Sentiment Analysis
+      px = null;
+      px = saAutomata.recognize( tokens4Automata );
+      saSetter( px, rdd, constants, locate );
     }
-    // If there are no custom entities, then `px` will be `null`; in such a case
-    // set `customEntities` to an empty array.
-    rdd.customEntities = px || [];
+
+    if ( currPipe.pos ) {
+      // PoS Tagging
+      const posTags = mapRawTokens2UIdOfDefaultPOS( rdd );
+      px = null;
+      for ( let i = 0; i < posAutomata.length; i += 1 ) {
+        px = posAutomata[ i ].recognize( posTags, posTransformers[ 0 ], rdd.tokens );
+        posUpdater( px, cache, posTags, tokens4Automata );
+      }
+      posSetter( rdd, posTags, tkSize, constants.bits4lemma );
+    }
+
+    if ( currPipe.cer ) {
+      // Patterns
+      px = null;
+      if ( cerAutomata !== undefined && cerLearnings > 0 ) {
+        cerConfig.rdd = rdd;
+        cerConfig.preserve = cerPreserve;
+        cerConfig.constants = constants;
+        if ( cerConfig.useEntity ) cerAutomata.setPatternSwap( rdd.entities );
+        px = cerAutomata.recognize( tokens4Automata, cerTransformer, cerConfig );
+      }
+      // If there are no custom entities, then `px` will be `null`; in such a case
+      // set `customEntities` to an empty array.
+      rdd.customEntities = px || [];
+    } else rdd.customEntities = [];
 
 
     // Word Vector
@@ -361,6 +394,15 @@ var nlp = function ( theModel ) {
   } else {
     throw Error( 'wink-nlp: invalid model used.' );
   }
+
+  const tempPipe = ( pipe === undefined ) ? Object.keys( validAnnotations ) : pipe;
+  if ( helper.isArray( tempPipe ) ) {
+    tempPipe.forEach( ( at ) => {
+      if ( !validAnnotations[ at ] ) throw Error( `wink-nlp: invalid pipe annotation "${at}" found.` );
+      currPipe[ at ] = true;
+      onlyTokenization = false;
+    } );
+  } else throw Error( `wink-nlp: invalid pipe, it must be an array instead found a "${typeof pipe}".` );
 
   // Load the model.
   load();
