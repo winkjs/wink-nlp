@@ -27,7 +27,7 @@ It packs a rich feature set into a small foot print codebase of [under 1500 line
 
 7. BM25-based vectorizer
 
-8. Cosine similarity
+8. Multiple similarity methods
 
 9. Word vector integration
 
