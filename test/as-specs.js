@@ -50,6 +50,10 @@ describe( 'its functions for .out()', function () {
     expect( nlp.readDoc( 'to be or not to be' ).tokens().out( its.value, as.bow ) ).to.deep.equal( { to: 2, be: 2, or: 1, not: 1 } );
   } );
 
+  it( 'as.set', function () {
+    expect( nlp.readDoc( 'to be or not to be' ).tokens().out( its.value, as.set ) ).to.deep.equal( new Set( [ 'to', 'be', 'or', 'not', 'to', 'be' ] ) );
+  } );
+
   it( 'as.freqTable', function () {
     expect( nlp.readDoc( 'three two three two three one' ).tokens().out( its.value, as.freqTable ) ).to.deep.equal( [ [ 'three', 3 ], [ 'two', 2 ], [ 'one', 1 ] ] );
   } );

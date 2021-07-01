@@ -59,6 +59,7 @@ allowed.its4selTokens = allowed.its4token;
 
 allowed.as4tokens = new Set( [
   as.array,
+  as.set,
   as.text,
   as.bow,
   as.freqTable,
@@ -68,7 +69,15 @@ allowed.as4tokens = new Set( [
 ] );
 
 // NOTE: it should exclude `as.markedUpText`, whenever this is included in the above.
-allowed.as4selTokens = allowed.as4tokens;
+allowed.as4selTokens = new Set( [
+  as.array,
+  as.set,
+  as.text,
+  as.bow,
+  as.freqTable,
+  as.bigrams,
+  as.unique
+] );
 
 allowed.its4entity = new Set( [
   its.value,
@@ -80,6 +89,7 @@ allowed.its4entity = new Set( [
 
 allowed.as4entities = new Set( [
   as.array,
+  as.set,
   as.bow,
   as.freqTable,
   as.unique

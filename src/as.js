@@ -47,6 +47,19 @@ as.array = function ( tokens ) {
   return tokens;
 }; // array()
 
+// ### set
+/**
+ * Constructs set from the `tokens`.
+ *
+ * @param  {string[]} tokens The input tokens.
+ * @return {set}      the set of `tokens`.
+ * @private
+ */
+as.set = function ( tokens ) {
+  // Create set & return.
+  return new Set( tokens );
+}; // set()
+
 // ### bow
 /**
  *
