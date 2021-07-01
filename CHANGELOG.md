@@ -1,3 +1,11 @@
+# [Adding more similarity methods & an as helper](https://github.com/winkjs/wink-nlp/releases/tag/1.7.0)
+## Version 1.7.0 July 01, 2021
+
+### ✨ Features
+- Now supported similarity methods are cosine for bag of words, tversky & Otsuka-Ochiai (oo) for set. 🙌
+- Obtain JS set via `as.set` helper. 😇
+
+
 # [Enabling configurable annotation pipeline](https://github.com/winkjs/wink-nlp/releases/tag/1.6.0)
 ## Version 1.6.0 June 27, 2021
 
