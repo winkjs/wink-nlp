@@ -1,3 +1,10 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.7.1)
+## Version 1.7.1 July 09, 2021
+
+### ⚙️ Updates
+- Improved documentation. 📚🤓
+
+
 # [Adding more similarity methods & an as helper](https://github.com/winkjs/wink-nlp/releases/tag/1.7.0)
 ## Version 1.7.0 July 01, 2021
 
