@@ -1,3 +1,10 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.7.2)
+## Version 1.7.2 July 15, 2021
+
+### ⚙️ Updates
+- Some behind the scene updates & fixes. 😎🤓
+
+
 # [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.7.1)
 ## Version 1.7.1 July 09, 2021
 
