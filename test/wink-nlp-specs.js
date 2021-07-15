@@ -103,7 +103,9 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     'S.K.Saxena.Server-less computing is awesome. ',
     'Mr.S.K. Saxena ',
     // aaa.-bbb causes `[ 'aaa', '.', '', '-', 'bbb' ]`
-    'aaa.-bbb'
+    'aaa.-bbb ',
+    // To text buggy regex for numerals
+    '138375720109463900845220131105025504431resources094639008452'
   ].join( '' );
 
   var moreThanMaxSpaces = [
