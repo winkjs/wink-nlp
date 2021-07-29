@@ -29,7 +29,8 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "sourcedocs": "docker -i src -o ./sourcedocs --sidebar yes",
     "lint": "eslint ./src/*.js ./test/*.js",
-    "perf": "node benchmark/run.js"
+    "perf": "node benchmark/run.js",
+    "dtslint": "dtslint types"
   },
   "repository": {
     "type": "git",
@@ -46,9 +47,11 @@
     "chai": "^4.3.4",
     "coveralls": "^3.1.0",
     "docker": "^1.0.0",
+    "dtslint": "^4.1.2",
     "eslint": "^7.27.0",
     "mocha": "^8.4.0",
     "nyc": "^15.1.0"
   },
-  "runkitExampleFilename": "./runkit-example.js"
+  "runkitExampleFilename": "./runkit-example.js",
+  "types": "types"
 }
