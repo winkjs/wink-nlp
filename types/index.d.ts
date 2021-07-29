@@ -1,0 +1,307 @@
+// Minimum TypeScript Version: 4.0
+
+declare module 'wink-eng-lite-web-model' {
+  // turn off exporting by default since we don't want to expose internal details
+  export {};
+
+  export type ModelAddons = unknown;
+
+  export interface Model {
+    addons: ModelAddons;
+  }
+
+  const model: Model;
+  export default model;
+}
+
+declare module 'wink-nlp' {
+  // turn off exporting by default since we don't want to expose internal details
+  export {};
+
+  import { Model, ModelAddons } from 'wink-eng-lite-web-model';
+
+  // its helpers
+
+  export type Case =
+    "other" |
+    "lowerCase" |
+    "upperCase" |
+    "titleCase";
+
+  export type PartOfSpeech =
+    "ADJ" |
+    "ADP" |
+    "ADV" |
+    "AUX" |
+    "CCONJ" |
+    "DET" |
+    "INTJ" |
+    "NOUN" |
+    "NUM" |
+    "PART" |
+    "PRON" |
+    "PROPN" |
+    "PUNCT" |
+    "SCONJ" |
+    "SYM" |
+    "VERB" |
+    "X" |
+    "SPACE";
+
+  // Bag of words
+  export interface Bow {
+    [index: string]: number;
+  }
+
+  export interface ReadabilityStats {
+    fres: number;
+    sentiment: number;
+    numOfTokens: number;
+    numOfWords: number;
+    numOfComplexWords: number;
+    complexWords: Bow;
+    numOfSentences: number;
+    readingTimeMins: number;
+    readingTimeSecs: number;
+  }
+
+  export interface Detail {
+    value: string;
+    type: string;
+  }
+
+  export type ModelTermFrequencies = Bow;
+  export type ModelInverseDocumentFrequencies = Bow;
+
+  // internal types that will never be exposed directly to the user
+  type Cache = unknown;
+  type Token = unknown;
+  type RawDocumentData = unknown;
+
+  // Its
+  export interface ItsHelpers {
+    case(index: number, token: Token, cache: Cache): Case;
+    uniqueId(index: number, token: Token): number;
+    negationFlag(index: number, token: Token): boolean;
+    normal(index: number, token: Token, cache: Cache): string;
+    contractionFlag(index: number, token: Token): boolean;
+    pos(index: number, token: Token, cache: Cache): PartOfSpeech;
+    precedingSpaces(index: number, token: Token): string;
+    prefix(index: number, token: Token, cache: Cache): string;
+    shape(index: number, token: Token, cache: Cache): string;
+    stopWordFlag(index: number, token: Token, cache: Cache): boolean;
+    abbrevFlag(index: number, token: Token, cache: Cache): boolean;
+    suffix(index: number, token: Token, cache: Cache): string;
+    type(index: number, token: Token, cache: Cache): string;
+    value(index: number, token: Token, cache: Cache): string;
+    stem(index: number, token: Token, cache: Cache, addons: ModelAddons): string;
+    lemma(index: number, token: Token, cache: Cache, addons: ModelAddons): string;
+    vector(): number[];
+    detail(): Detail;
+    markedUpText(index: number, token: Token, cache: Cache): string;
+    span(spanItem: number[]): number[];
+    sentiment(spanItem: number[]): number;
+    readabilityStats(rdd: RawDocumentData, addons: ModelAddons): ReadabilityStats;
+    terms(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies, terms: string[]): string[];
+    docTermMatrix(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies, terms: string[]): number[][];
+    docBOWArray(tf: ModelTermFrequencies): Bow;
+    bow(tf: ModelTermFrequencies): Bow;
+    idf(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies): Array<[term: string, frequency: number]>;
+    tf(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies): Array<[term: string, frequency: number]>;
+    modelJson(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies): string;
+  }
+
+  // As
+  export interface AsHelpers {
+    array<T>(tokens: T[]): T[];
+    set<T>(tokens: T[]): Set<T>;
+    bow(tokens: any[]): Bow;
+    freqTable<T>(tokens: T[]): Array<[token: T, freq: number]>;
+    bigrams<T>(tokens: T[]): Array<[T, T]>;
+    unique<T>(tokens: T[]): T[];
+    markedUpText(tokens: any[]): string;
+  }
+
+  // functions for use with document
+  export type TokenItsFunction<OutType> = (index: number, token: Token, cache?: Cache, addons?: ModelAddons) => OutType;
+  export type SpanItsFunction<OutType> = (spanItem?: number[]) => OutType;
+  export type VectorizerItsFunction<OutType> = (tf?: ModelTermFrequencies, idf?: ModelInverseDocumentFrequencies) => OutType;
+  export type ItsFunction<OutType> = TokenItsFunction<OutType> | SpanItsFunction<OutType> | VectorizerItsFunction<OutType>;
+  export type AsFunction<InType, OutType> = (tokens: InType[]) => OutType;
+
+  export interface ItemToken {
+    parentDocument(): Document;
+    parentEntity(): ItemEntity | undefined;
+    parentCustomEntity(): ItemCustomEntity | undefined;
+    markup(beginMarker: string, endMarker: string): void;
+    out<T>(itsf: ItsFunction<T>): T;
+    parentSentence(): ItemSentence;
+    index(): number;
+  }
+
+  export interface SelectedTokens {
+    each(f: (token: ItemToken) => void): void;
+    filter(f: (token: ItemToken) => boolean): SelectedTokens;
+    itemAt(k: number): ItemToken | undefined;
+    length(): number;
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+  }
+
+  export interface Tokens {
+    each(f: (token: ItemToken) => void): void;
+    filter(f: (token: ItemToken) => boolean): SelectedTokens;
+    itemAt(k: number): ItemToken | undefined;
+    length(): number;
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+  }
+
+  export interface ItemEntity {
+    parentDocument(): Document;
+    markup(beginMarker: string, endMarker: string): void;
+    out<T>(itsf: ItsFunction<T>): T;
+    parentSentence(): ItemSentence;
+    tokens(): Tokens;
+    index(): number;
+  }
+
+  export interface SelectedEntities {
+    each(f: (entity: ItemEntity) => void): void;
+    filter(f: (entity: ItemEntity) => boolean): SelectedEntities;
+    itemAt(k: number): ItemEntity | undefined;
+    length(): number;
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+  }
+
+  export interface Entities {
+    each(f: (entity: ItemEntity) => void): void;
+    filter(f: (entity: ItemEntity) => boolean): SelectedEntities;
+    itemAt(k: number): ItemEntity | undefined;
+    length(): number;
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+  }
+
+  export interface ItemCustomEntity {
+    parentDocument(): Document;
+    markup(beginMarker: string, endMarker: string): void;
+    out<T>(itsf: ItsFunction<T>): T;
+    parentSentence(): ItemSentence;
+    tokens(): Tokens;
+    index(): number;
+  }
+
+  export interface SelectedCustomEntities {
+    each(f: (entity: ItemCustomEntity) => void): void;
+    filter(f: (entity: ItemCustomEntity) => boolean): SelectedCustomEntities;
+    itemAt(k: number): ItemCustomEntity | undefined;
+    length(): number;
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+  }
+
+  export interface CustomEntities {
+    each(f: (entity: ItemCustomEntity) => void): void;
+    filter(f: (entity: ItemCustomEntity) => boolean): SelectedCustomEntities;
+    itemAt(k: number): ItemCustomEntity | undefined;
+    length(): number;
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+  }
+
+  export interface ItemSentence {
+    parentDocument(): Document;
+    markup(beginMarker: string, endMarker: string): void;
+    out<T>(itsf: ItsFunction<T>): T;
+    entities(): Entities;
+    customEntities(): CustomEntities;
+    tokens(): Tokens;
+    index(): number;
+  }
+
+  export interface Sentences {
+    each(f: (entity: ItemSentence) => void): void;
+    itemAt(k: number): ItemSentence | undefined;
+    length(): number;
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+  }
+
+  export interface Document {
+    entities(): Entities;
+    customEntities(): CustomEntities;
+    isLexeme(text: string): boolean;
+    isOOV(text: string): boolean;
+    out<T>(itsf: ItsFunction<T>): T;
+    sentences(): Sentences;
+    tokens(): Tokens;
+    printTokens(): void;
+  }
+
+  export interface CerExample {
+    name: string;
+    patterns: string[];
+  }
+
+  export interface CerConfig {
+    matchValue?: boolean;
+    usePOS?: boolean;
+    useEntity?: boolean;
+  }
+
+  export interface CustomEntityExample {
+    name: string;
+    patterns: string[];
+  }
+
+  export interface WinkMethods {
+    readDoc(text: string): Document;
+    // returns number of learned entities
+    learnCustomEntities(examples: CustomEntityExample[], config?: CerConfig): number;
+    its: ItsHelpers;
+    as: AsHelpers;
+  }
+
+  export default function WinkFn(theModel: Model, pipe?: string[]): WinkMethods;
+}
+
+declare module 'wink-nlp/utilities/bm25-vectorizer' {
+  // turn off exporting by default since we don't want to expose internal details
+  export {};
+
+  import { Tokens, Document, ItsFunction } from 'wink-nlp';
+
+  export type Norm = "l2" | "NONE";
+
+  export interface BM25VectorizerConfig {
+    k: number;
+    k1: number;
+    b: number;
+    norm: Norm;
+  }
+
+  export interface BM25Vectorizer {
+    learn(tokens: Tokens): void;
+    doc(n: number): Document;
+    out<T>(f: ItsFunction<T>): T;
+    vectorOf(tokens: Tokens): number[];
+    config(): BM25VectorizerConfig;
+  }
+
+  export default function bm25Vectorizer(config?: BM25VectorizerConfig): BM25Vectorizer;
+}
+
+declare module 'wink-nlp/utilities/similarity' {
+  // turn off exporting by default since we don't want to expose internal details
+  export {};
+
+  import { Bow } from 'wink-nlp';
+
+  export interface SimilarityHelper {
+    bow: {
+      cosine(bowA: Bow, bowB: Bow): number;
+    };
+    set: {
+      tversky<T>(setA: Set<T>, setB: Set<T>, alpha?: number, beta?: number): number;
+      oo<T>(setA: Set<T>, setB: Set<T>): number;
+    };
+  }
+
+  const similarity: SimilarityHelper;
+  export default similarity;
+}
