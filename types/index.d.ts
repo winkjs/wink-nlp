@@ -119,15 +119,14 @@ declare module 'wink-nlp' {
     freqTable<T>(tokens: T[]): Array<[token: T, freq: number]>;
     bigrams<T>(tokens: T[]): Array<[T, T]>;
     unique<T>(tokens: T[]): T[];
-    text(tokens: any[]): string;
-    markedUpText(tokens: any[]): string;
   }
 
   // functions for use with document
-  export type TokenItsFunction<OutType> = (index: number, token: Token, cache?: Cache, addons?: ModelAddons) => OutType;
-  export type SpanItsFunction<OutType> = (spanItem?: number[]) => OutType;
-  export type VectorizerItsFunction<OutType> = (tf?: ModelTermFrequencies, idf?: ModelInverseDocumentFrequencies) => OutType;
+  export type TokenItsFunction<OutType> = (index: number, token: Token, cache: Cache, addons: ModelAddons) => OutType;
+  export type SpanItsFunction<OutType> = (spanItem: number[]) => OutType;
+  export type VectorizerItsFunction<OutType> = (tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies) => OutType;
   export type ItsFunction<OutType> = TokenItsFunction<OutType> | SpanItsFunction<OutType> | VectorizerItsFunction<OutType>;
+
   export type AsFunction<InType, OutType> = (tokens: InType[]) => OutType;
 
   export interface ItemToken {
@@ -225,7 +224,7 @@ declare module 'wink-nlp' {
     parentDocument(): Document;
     markup(beginMarker: string, endMarker: string): void;
     out(): string;
-    out<T>(itsf: ItsFunction<T>): T[] | string;
+    out<T>(itsf: ItsFunction<T>): T | string;
     entities(): Entities;
     customEntities(): CustomEntities;
     tokens(): Tokens;
@@ -247,7 +246,7 @@ declare module 'wink-nlp' {
     isLexeme(text: string): boolean;
     isOOV(text: string): boolean;
     out(): string;
-    out<T>(itsf: ItsFunction<T>): T[] | string;
+    out<T>(itsf: ItsFunction<T>): T | string;
     sentences(): Sentences;
     tokens(): Tokens;
     printTokens(): void;

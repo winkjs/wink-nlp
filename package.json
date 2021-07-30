@@ -53,5 +53,5 @@
     "nyc": "^15.1.0"
   },
   "runkitExampleFilename": "./runkit-example.js",
-  "types": "types"
+  "types": "types/index.d.ts"
 }

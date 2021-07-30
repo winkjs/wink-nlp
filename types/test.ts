@@ -1,13 +1,18 @@
 import winkNlp, {
-    Sentences,
-    CustomEntities,
-    SelectedCustomEntities,
-    Entities,
-    SelectedEntities,
-    Tokens,
-    SelectedTokens,
-    ItsFunction,
-    AsFunction,
+  Sentences,
+  CustomEntities,
+  SelectedCustomEntities,
+  Entities,
+  SelectedEntities,
+  Tokens,
+  SelectedTokens,
+  ItemCustomEntity,
+  ItemEntity,
+  ItemSentence,
+  ItemToken,
+  Document,
+  ItsFunction,
+  AsFunction,
 } from 'wink-nlp';
 import model from 'wink-eng-lite-web-model';
 
@@ -35,9 +40,37 @@ customEntities.out(its.value, as.array);
 // $ExpectType string[]
 customEntities.out(its.value, as.array);
 
-type OutApplicable = Sentences | CustomEntities | SelectedCustomEntities | Entities | SelectedEntities | Tokens | SelectedTokens;
+type ColOutApplicable = Sentences | CustomEntities | SelectedCustomEntities | Entities | SelectedEntities | Tokens | SelectedTokens;
 
-// $ExpectType <T, U>(toOut: OutApplicable, itsf: ItsFunction<T>, asf: AsFunction<T, U>) => U
-function myOut<T, U>(toOut: OutApplicable, itsf: ItsFunction<T>, asf: AsFunction<T, U>): U {
+// collection out
+// $ExpectType <T, U>(toOut: ColOutApplicable, itsf: ItsFunction<T>, asf: AsFunction<T, U>) => U
+function myColOut<T, U>(toOut: ColOutApplicable, itsf: ItsFunction<T>, asf: AsFunction<T, U>): U {
   return (toOut.out(itsf, asf) as any) as U;
 }
+
+// $ExpectType string[] | boolean[] | [token: boolean, freq: number][]
+customEntities.out(its.contractionFlag, as.freqTable);
+
+// $ExpectType [token: boolean, freq: number][]
+myColOut(customEntities, its.contractionFlag, as.freqTable);
+
+// $ExpectType string[]
+doc.tokens().out();
+
+// $ExpectType string[] | boolean[]
+doc.tokens().out(its.abbrevFlag);
+
+// run out on item types
+type ItemOutApplicable = ItemCustomEntity | ItemEntity | ItemSentence | ItemToken | Document;
+
+// item out
+// $ExpectType <T>(toOut: ItemOutApplicable, itsf: ItsFunction<T>) => T
+function myItemOut<T>(toOut: ItemOutApplicable, itsf: ItsFunction<T>): T {
+  return (toOut.out(itsf) as any) as T;
+}
+
+// $ExpectType string | number[]
+doc.out(its.span);
+
+// $ExpectType number[]
+myItemOut(doc, its.span);
