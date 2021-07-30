@@ -119,6 +119,7 @@ declare module 'wink-nlp' {
     freqTable<T>(tokens: T[]): Array<[token: T, freq: number]>;
     bigrams<T>(tokens: T[]): Array<[T, T]>;
     unique<T>(tokens: T[]): T[];
+    text(tokens: any[]): string;
     markedUpText(tokens: any[]): string;
   }
 
@@ -134,7 +135,8 @@ declare module 'wink-nlp' {
     parentEntity(): ItemEntity | undefined;
     parentCustomEntity(): ItemCustomEntity | undefined;
     markup(beginMarker: string, endMarker: string): void;
-    out<T>(itsf: ItsFunction<T>): T;
+    out(): string;
+    out<T>(itsf: ItsFunction<T>): T | string;
     parentSentence(): ItemSentence;
     index(): number;
   }
@@ -144,7 +146,9 @@ declare module 'wink-nlp' {
     filter(f: (token: ItemToken) => boolean): SelectedTokens;
     itemAt(k: number): ItemToken | undefined;
     length(): number;
-    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+    out(): string[];
+    out<T>(itsf: ItsFunction<T>): T[] | string[];
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U | T[] | string[];
   }
 
   export interface Tokens {
@@ -152,13 +156,16 @@ declare module 'wink-nlp' {
     filter(f: (token: ItemToken) => boolean): SelectedTokens;
     itemAt(k: number): ItemToken | undefined;
     length(): number;
-    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+    out(): string[];
+    out<T>(itsf: ItsFunction<T>): T[] | string[];
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U | T[] | string[];
   }
 
   export interface ItemEntity {
     parentDocument(): Document;
     markup(beginMarker: string, endMarker: string): void;
-    out<T>(itsf: ItsFunction<T>): T;
+    out(): string;
+    out<T>(itsf: ItsFunction<T>): T | string;
     parentSentence(): ItemSentence;
     tokens(): Tokens;
     index(): number;
@@ -169,7 +176,9 @@ declare module 'wink-nlp' {
     filter(f: (entity: ItemEntity) => boolean): SelectedEntities;
     itemAt(k: number): ItemEntity | undefined;
     length(): number;
-    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+    out(): string[];
+    out<T>(itsf: ItsFunction<T>): T[] | string[];
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U | T[] | string[];
   }
 
   export interface Entities {
@@ -177,13 +186,16 @@ declare module 'wink-nlp' {
     filter(f: (entity: ItemEntity) => boolean): SelectedEntities;
     itemAt(k: number): ItemEntity | undefined;
     length(): number;
-    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+    out(): string[];
+    out<T>(itsf: ItsFunction<T>): T[] | string[];
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U | T[] | string[];
   }
 
   export interface ItemCustomEntity {
     parentDocument(): Document;
     markup(beginMarker: string, endMarker: string): void;
-    out<T>(itsf: ItsFunction<T>): T;
+    out(): string;
+    out<T>(itsf: ItsFunction<T>): T | string;
     parentSentence(): ItemSentence;
     tokens(): Tokens;
     index(): number;
@@ -194,7 +206,9 @@ declare module 'wink-nlp' {
     filter(f: (entity: ItemCustomEntity) => boolean): SelectedCustomEntities;
     itemAt(k: number): ItemCustomEntity | undefined;
     length(): number;
-    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+    out(): string[];
+    out<T>(itsf: ItsFunction<T>): T[] | string[];
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U | T[] | string[];
   }
 
   export interface CustomEntities {
@@ -202,13 +216,16 @@ declare module 'wink-nlp' {
     filter(f: (entity: ItemCustomEntity) => boolean): SelectedCustomEntities;
     itemAt(k: number): ItemCustomEntity | undefined;
     length(): number;
-    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+    out(): string[];
+    out<T>(itsf: ItsFunction<T>): T[] | string[];
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U | T[] | string[];
   }
 
   export interface ItemSentence {
     parentDocument(): Document;
     markup(beginMarker: string, endMarker: string): void;
-    out<T>(itsf: ItsFunction<T>): T;
+    out(): string;
+    out<T>(itsf: ItsFunction<T>): T[] | string;
     entities(): Entities;
     customEntities(): CustomEntities;
     tokens(): Tokens;
@@ -219,7 +236,9 @@ declare module 'wink-nlp' {
     each(f: (entity: ItemSentence) => void): void;
     itemAt(k: number): ItemSentence | undefined;
     length(): number;
-    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U;
+    out(): string[];
+    out<T>(itsf: ItsFunction<T>): T[] | string[];
+    out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U | T[] | string[];
   }
 
   export interface Document {
@@ -227,7 +246,8 @@ declare module 'wink-nlp' {
     customEntities(): CustomEntities;
     isLexeme(text: string): boolean;
     isOOV(text: string): boolean;
-    out<T>(itsf: ItsFunction<T>): T;
+    out(): string;
+    out<T>(itsf: ItsFunction<T>): T[] | string;
     sentences(): Sentences;
     tokens(): Tokens;
     printTokens(): void;
