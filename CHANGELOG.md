@@ -1,3 +1,10 @@
+# [Introducing Typescript support](https://github.com/winkjs/wink-nlp/releases/tag/1.8.0)
+## Version 1.8.0 July 31, 2021
+
+### ✨ Features
+- We have added support for Typescript. 🙌🎉
+
+
 # [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.7.2)
 ## Version 1.7.2 July 15, 2021
 
