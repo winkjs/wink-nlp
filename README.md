@@ -107,6 +107,10 @@ Performs tokenization, sentence boundary detection, pos tagging, named entity de
 #### [Hashtag Sentiment](https://winkjs.org/showcase-hashtag/) 🎭
 Analyzes sentiments of recent tweets containing the given hashtag.
 
+## Processing Pipeline
+<img src="https://winkjs.org/images/wink-nlp-processing-pipeline.png" alt="Processing pipeline: text, tokenization, SBD, negation, sentiment, NER, POS, CER" title="WinkNLP processing pipeline">
+
+Read more about the processing pipeline and how to configure it in the [winkNLP documentation](https://winkjs.org/wink-nlp/processing-pipeline.html).
 
 
 ## Speed & Accuracy
