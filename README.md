@@ -11,6 +11,13 @@ winkNLP is a JavaScript library for Natural Language Processing (NLP). Designed 
 
 
 ## Features
+WinkNLP has a comprehensive processing pipeline covering tokenization, sentence boundary detection (sbd), negation handling, sentiment analysis, part-of-speech (pos) tagging, named entity recognition (ner), custom entities recognition (cer):
+
+<img src="https://winkjs.org/images/wink-nlp-processing-pipeline.png" alt="Processing pipeline: text, tokenization, SBD, negation, sentiment, NER, POS, CER" title="WinkNLP processing pipeline">
+
+At every stage a range of properties become accessible for tokens, sentences, and entities. Read more about the processing pipeline and how to configure it in the [winkNLP documentation](https://winkjs.org/wink-nlp/processing-pipeline.html).
+
+
 It packs a rich feature set into a small foot print codebase of [under 1500 lines](https://coveralls.io/github/winkjs/wink-nlp?branch=master):
 
 1. Fast, lossless & multilingual [tokenizer](https://winkjs.org/wink-nlp/processing-pipeline.html)
@@ -19,23 +26,21 @@ It packs a rich feature set into a small foot print codebase of [under 1500 line
 
 3. Built-in [API](https://winkjs.org/wink-nlp/visualizing-markup.html) to aid [text visualization](https://observablehq.com/@winkjs/how-to-perform-sentiment-analysis?collection=@winkjs/winknlp-recipes)
 
-4. Easy information extraction from raw text
+4. Extensive [text processing features](https://winkjs.org/wink-nlp/its-as-helper.html) such as bag-of-words, frequency table, stop word removal, readability statistics computation and many more.
 
-5. Extensive [text processing features](https://winkjs.org/wink-nlp/its-as-helper.html) such as bag-of-words, frequency table, stop word removal, readability statistics computation and many more.
+5. Pre-trained [language models](https://winkjs.org/wink-nlp/language-models.html) with sizes starting from <3MB onwards
 
-6. Pre-trained [language models](https://winkjs.org/wink-nlp/language-models.html) with sizes starting from <3MB onwards
+6. [BM25-based vectorizer](https://winkjs.org/wink-nlp/bm25-vectorizer.html)
 
-7. [BM25-based vectorizer](https://winkjs.org/wink-nlp/bm25-vectorizer.html)
+7. Multiple [similarity](https://winkjs.org/wink-nlp/similarity.html) methods
 
-8. Multiple [similarity](https://winkjs.org/wink-nlp/similarity.html) methods
+8. Word vector integration
 
-9. Word vector integration
+9. No external dependencies
 
-10. Comprehensive [NLP pipeline](https://winkjs.org/wink-nlp/processing-pipeline.html) covering tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech (pos) tagging, lemmatization, named entity extraction, custom entities detection and pattern matching
+10. [Runs on web browsers](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html)
 
-11. No external dependencies
-
-12. [Runs on web browsers](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html).
+11. [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts).
 
 
 ## Installation
@@ -106,11 +111,6 @@ Performs tokenization, sentence boundary detection, pos tagging, named entity de
 
 #### [Hashtag Sentiment](https://winkjs.org/showcase-hashtag/) 🎭
 Analyzes sentiments of recent tweets containing the given hashtag.
-
-## Processing Pipeline
-<img src="https://winkjs.org/images/wink-nlp-processing-pipeline.png" alt="Processing pipeline: text, tokenization, SBD, negation, sentiment, NER, POS, CER" title="WinkNLP processing pipeline">
-
-Read more about the processing pipeline and how to configure it in the [winkNLP documentation](https://winkjs.org/wink-nlp/processing-pipeline.html).
 
 
 ## Speed & Accuracy
