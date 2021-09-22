@@ -14,6 +14,11 @@ declare module 'wink-eng-lite-web-model' {
   export default model;
 }
 
+declare module 'wink-eng-lite-model' {
+  import { model } from 'wink-eng-lite-web-model'; 
+  export default model;
+}
+
 declare module 'wink-nlp' {
   // turn off exporting by default since we don't want to expose internal details
   export {};
