@@ -1,3 +1,9 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.8.1)
+## Version 1.8.1 September 22, 2021
+
+### ⚙️ Updates
+- Included NLP Pipe details in the README file. 🤓
+
 # [Introducing Typescript support](https://github.com/winkjs/wink-nlp/releases/tag/1.8.0)
 ## Version 1.8.0 July 31, 2021
 
