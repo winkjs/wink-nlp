@@ -15,7 +15,15 @@ declare module 'wink-eng-lite-web-model' {
 }
 
 declare module 'wink-eng-lite-model' {
-  import { model } from 'wink-eng-lite-web-model'; 
+  export {};
+
+  export type ModelAddons = unknown;
+
+  export interface Model {
+    addons: ModelAddons;
+  }
+
+  const model: Model;
   export default model;
 }
 
