@@ -1,9 +1,10 @@
 {
   "name": "wink-nlp",
   "version": "1.8.1",
-  "description": "Developer friendly NLP ✨",
+  "description": "Developer friendly Natural Language Processing ✨",
   "keywords": [
     "NLP",
+    "natural language processing",
     "tokenize",
     "SBD",
     "sentence boundary detection",
