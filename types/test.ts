@@ -1,4 +1,5 @@
 import winkNlp, {
+  Model,
   Sentences,
   CustomEntities,
   SelectedCustomEntities,
@@ -14,7 +15,9 @@ import winkNlp, {
   ItsFunction,
   AsFunction,
 } from 'wink-nlp';
-import model from 'wink-eng-lite-web-model';
+
+// dummy model to test with
+const model = ({} as any) as Model;
 
 // $ExpectType WinkMethods
 winkNlp(model);
