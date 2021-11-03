@@ -21,6 +21,7 @@
     "bm25",
     "vectorizer",
     "winkNLP",
+    "winkjs",
     "wink"
   ],
   "main": "src/wink-nlp.js",

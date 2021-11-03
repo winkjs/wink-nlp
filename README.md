@@ -109,8 +109,8 @@ Reads any wikipedia article and generates a visual timeline of all its events.
 #### [NLP Wizard](https://winkjs.org/showcase-wiz/) 🧙
 Performs tokenization, sentence boundary detection, pos tagging, named entity detection and sentiment analysis of user input text in real time.
 
-#### [Hashtag Sentiment](https://winkjs.org/showcase-hashtag/) 🎭
-Analyzes sentiments of recent tweets containing the given hashtag.
+#### [Naive Wikification Tool](https://observablehq.com/@winkjs/how-to-build-a-naive-wikification-tool) 🔗
+Links entities such as famous persons, locations or objects to the relevant Wikipedia pages.
 
 
 ## Speed & Accuracy
