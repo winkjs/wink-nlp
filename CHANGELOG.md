@@ -1,3 +1,12 @@
+# [Enhancing Typescript support](https://github.com/winkjs/wink-nlp/releases/tag/1.9.0)
+## Version 1.9.0 November 06, 2021
+
+### ✨ Features
+- We have enhanced typescript support to allow easy addition of new typescript enabled language models. 👏
+
+### ⚙️ Updates
+- Added naive wikification showcase in README. 😎
+
 # [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.8.1)
 ## Version 1.8.1 September 22, 2021
 
