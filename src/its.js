@@ -205,8 +205,15 @@ its.tf = function ( tf ) {
   return arr.sort( sort4FT );
 }; // tf()
 
-its.modelJSON = function ( tf, idf ) {
-  return JSON.stringify( { tf: tf, idf: idf } );
+its.modelJSON = function ( tf, idf, terms, docId, sumOfAllDLs ) {
+  return JSON.stringify( {
+      uid: 'WinkNLP-BM25Vectorizer-Model/1.0.0',
+      tf: tf,
+      idf: idf,
+      terms: terms,
+      docId: docId,
+      sumOfAllDLs: sumOfAllDLs
+   } );
 }; // model()
 
 module.exports = its;

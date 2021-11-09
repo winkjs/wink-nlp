@@ -90,7 +90,7 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( '.out( its.modelJSON ) should return []', function () {
-      expect( v.out( its.modelJSON ) ).to.deep.equal( JSON.stringify( { tf: [], idf: {} } ) );
+      expect( v.out( its.modelJSON ) ).to.deep.equal( '{"uid":"WinkNLP-BM25Vectorizer-Model/1.0.0","tf":[],"idf":{},"terms":[],"docId":0,"sumOfAllDLs":0}' );
     } );
 
     it( '.length() should return []', function () {
@@ -124,7 +124,7 @@ describe( 'bm25-vectorizer', function () {
 
   describe( 'learn from 1-document', function () {
     const bow = { rain: 0.395562849, go: 0.287682072, away: 0.287682072 };
-    const json = '{"tf":[{"rain":0.395562849,"go":0.287682072,"away":0.287682072}],"idf":{"rain":0.287682072,"go":0.287682072,"away":0.287682072}}';
+    const json = '{"uid":"WinkNLP-BM25Vectorizer-Model/1.0.0","tf":[{"rain":0.395562849,"go":0.287682072,"away":0.287682072}],"idf":{"rain":0.287682072,"go":0.287682072,"away":0.287682072},"terms":["away","go","rain"],"docId":1,"sumOfAllDLs":4}';
     const v = bm25();
     v.learn( 'rain rain go away'.split( /\s+/g ) );
 
@@ -269,7 +269,7 @@ describe( 'bm25-vectorizer', function () {
     const v = bm25( { norm: 'l1' } );
     // johann: `ln( 1 + ( ( 4 - 2 + 0.5 ) / ( 2 + 0.5 ) ) ) = 0.693147181`
     // bach: `ln( 1 + ( ( 4 - 4 + 0.5 ) / ( 4 + 0.5 ) ) ) = 0.105360516`
-    const model = '{"tf":[{"bach":1},{"j":0.919531173,"bach":0.080468827},{"johann":0.346144285,"s":0.601240713,"bach":0.052615002},{"johann":0.346144285,"sebastian":0.601240713,"bach":0.052615002}],"idf":{"bach":0.105360516,"j":1.203972804,"johann":0.693147181,"s":1.203972804,"sebastian":1.203972804}}';
+    const model = '{"uid":"WinkNLP-BM25Vectorizer-Model/1.0.0","tf":[{"bach":1},{"j":0.919531173,"bach":0.080468827},{"johann":0.346144285,"s":0.601240713,"bach":0.052615002},{"johann":0.346144285,"sebastian":0.601240713,"bach":0.052615002}],"idf":{"bach":0.105360516,"j":1.203972804,"johann":0.693147181,"s":1.203972804,"sebastian":1.203972804},"terms":["bach","j","johann","s","sebastian"],"docId":4,"sumOfAllDLs":9}';
     v.learn( 'Bach'.toLowerCase().split( /\s+/g ) );
     v.learn( 'J Bach'.toLowerCase().split( /\s+/g ) );
     v.learn( 'Johann S Bach'.toLowerCase().split( /\s+/g ) );
