@@ -218,8 +218,11 @@ var bm25Vectorizer = function ( config ) {
    */
   methods.out = function ( f ) {
     computeWeights();
-    if ( allowed.its4BM25.has( f ) ) return f( tf, idf, terms );
-    return its.docBOWArray( tf, idf, terms );
+    // Pass `docId` & `sumOfAllDLs` in additionn to `tf`, `idf` & `terms`; this
+    // is needed while saving the model JSON.
+    if ( allowed.its4BM25.has( f ) ) return f( tf, idf, terms, docId, sumOfAllDLs );
+    // In case of innvalid `f`, fall back to the default method — `docBOWArray`.
+    return its.docBOWArray( tf, idf, terms, docId, sumOfAllDLs );
   }; // out()
 
   // ## doc
