@@ -118,6 +118,8 @@ The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~525,000 tok
 
 The benchmark was conducted on [Node.js versions 14.8.0, and 12.18.3](https://nodejs.org/en/about/releases/).
 
+The [winkNLP](https://winkjs.org/wink-nlp/) delivers similar performance on browsers; its performance on a specific machine/browser combination can be measured using the Observable notebook — [How to measure winkNLP's speed on browsers?](https://observablehq.com/@winkjs/how-to-measure-winknlps-speed-on-browsers?collection=@winkjs/winknlp-recipes).
+
 It pos tags a subset of WSJ corpus with an accuracy of **~94.7%** — this includes *tokenization of raw text prior to pos tagging*. The current state-of-the-art is at ~97% accuracy but at lower speeds and is generally computed using gold standard pre-tokenized corpus.
 
 Its general purpose sentiment analysis delivers a [f-score](https://en.wikipedia.org/wiki/F1_score) of **~84.5%**, when validated using Amazon Product Review [Sentiment Labelled Sentences Data Set](https://archive.ics.uci.edu/ml/machine-learning-databases/00331/) at [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php). The current benchmark accuracy for **specifically trained** models can range around 95%.
