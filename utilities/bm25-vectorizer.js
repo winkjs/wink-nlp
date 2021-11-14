@@ -134,6 +134,7 @@ var bm25Vectorizer = function ( config ) {
   var computeWeights = function () {
     // If weights have been computed, then re-computation is not allowed.
     if ( weightsComputed ) return;
+    if ( docId === 0 ) throw Error( 'wink-nlp: this operation doesn\'t make sense without any learning; use learn() API first.' );
     // Set the average document length used for normalization.
     const avgDL = sumOfAllDLs / docId;
     // Compute IDF.

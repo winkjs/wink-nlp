@@ -67,30 +67,14 @@ describe( 'bm25-vectorizer', function () {
     } );
   } );
 
-  describe( 'learn from 0-documents', function () {
+  describe( 'out() should throw error without any learnings, whereas length() should work', function () {
     const v = bm25();
-    it( '.out() should return []', function () {
-      expect( v.out() ).to.deep.equal( [] );
+    it( 'should throw error without any learnning on out()', function () {
+      expect( v.out.bind() ).to.throw( 'wink-nlp: this operation doesn\'t make sense without any learning; use learn() API first.' );
     } );
 
-    it( '.out( its.docTermMatrix ) should return []', function () {
-      expect( v.out( its.docTermMatrix ) ).to.deep.equal( [] );
-    } );
-
-    it( '.out( its.docBOWArray ) should return []', function () {
-      expect( v.out( its.docBOWArray ) ).to.deep.equal( [] );
-    } );
-
-    it( '.out( its.terms ) should return []', function () {
-      expect( v.out( its.terms ) ).to.deep.equal( [] );
-    } );
-
-    it( '.out( its.idf ) should return []', function () {
-      expect( v.out( its.idf ) ).to.deep.equal( [] );
-    } );
-
-    it( '.out( its.modelJSON ) should return []', function () {
-      expect( v.out( its.modelJSON ) ).to.deep.equal( '{"uid":"WinkNLP-BM25Vectorizer-Model/1.0.0","tf":[],"idf":{},"terms":[],"docId":0,"sumOfAllDLs":0}' );
+    it( 'doc.out() should return undefined', function () {
+      expect( v.doc( 0 ).out.bind() ).to.throw( 'wink-nlp: this operation doesn\'t make sense without any learning; use learn() API first.' );
     } );
 
     it( '.length() should return []', function () {
@@ -98,28 +82,9 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( 'doc.out() should return undefined', function () {
-      expect( v.doc( 0 ).out() ).to.deep.equal( undefined );
-    } );
-
-    it( 'doc.out( its.tf ) should return []', function () {
-      expect( v.doc( 0 ).out( its.tf ) ).to.deep.equal( [] );
-    } );
-
-    it( 'doc.out( its.vector ) should return []', function () {
-      expect( v.doc( 0 ).out( its.vector ) ).to.deep.equal( [] );
-    } );
-
-    it( 'doc.out( its.bow ) should return []', function () {
-      expect( v.doc( 0 ).out( its.bow ) ).to.deep.equal( undefined );
-    } );
-
-    it( 'doc.length() should return []', function () {
       expect( v.doc( 0 ).length() ).to.equal( 0 );
     } );
 
-    // it( 'should throw error if readDoc is given non-text', function () {
-    //   expect( nlp.readDoc.bind( 1 ) ).to.throw( /^wink-nlp: expecting a valid Javascript string/ );
-    // } );
   } );
 
   describe( 'learn from 1-document', function () {
@@ -167,6 +132,12 @@ describe( 'bm25-vectorizer', function () {
     it( 'doc.out( its.tf ) should return freq table of terms', function () {
       expect( v.doc( 0 ).out( its.tf ) ).to.deep.equal( [ [ 'rain', 0.395562849 ], [ 'away', 0.287682072 ], [ 'go', 0.287682072 ] ] );
     } );
+
+    it( 'doc.out() should return freq table of terms', function () {
+      // To test its.bow — default fall back.
+      expect( v.doc( 0 ).out() ).to.deep.equal( { rain: 0.395562849, away: 0.287682072, go: 0.287682072 } );
+    } );
+
 
     it( 'doc.out( its.vector ) should return its vector', function () {
       expect( v.doc( 0 ).out( its.vector ) ).to.deep.equal( [ 0.287682072, 0.287682072, 0.395562849 ] );
