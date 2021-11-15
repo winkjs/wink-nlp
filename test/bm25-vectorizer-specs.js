@@ -88,8 +88,8 @@ describe( 'bm25-vectorizer', function () {
   } );
 
   describe( 'learn from 1-document', function () {
-    const bow = { rain: 0.395562849, go: 0.287682072, away: 0.287682072 };
-    const json = '{"uid":"WinkNLP-BM25Vectorizer-Model/1.0.0","tf":[{"rain":0.395562849,"go":0.287682072,"away":0.287682072}],"idf":{"rain":0.287682072,"go":0.287682072,"away":0.287682072},"terms":["away","go","rain"],"docId":1,"sumOfAllDLs":4}';
+    const bow = { rain: 0.395563, go: 0.287682, away: 0.287682 };
+    const json = '{"uid":"WinkNLP-BM25Vectorizer-Model/1.0.0","tf":[{"rain":0.395563,"go":0.287682,"away":0.287682}],"idf":{"rain":0.287682,"go":0.287682,"away":0.287682},"terms":["away","go","rain"],"docId":1,"sumOfAllDLs":4}';
     const v = bm25();
     v.learn( 'rain rain go away'.split( /\s+/g ) );
 
@@ -102,7 +102,7 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( 'out( its.docTermMatrix ) should return document term matrix', function () {
-      expect( v.out( its.docTermMatrix ) ).to.deep.equal( [ [ 0.287682072, 0.287682072, 0.395562849 ] ] );
+      expect( v.out( its.docTermMatrix ) ).to.deep.equal( [ [ 0.287682, 0.287682, 0.395563 ] ] );
     } );
 
     it( 'out( its.docBOWArray ) should return [ bow ]', function () {
@@ -110,7 +110,7 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( 'out( its.idf ) should return [ bow ]', function () {
-      expect( v.out( its.idf ) ).to.deep.equal( [ [ 'away', 0.287682072 ], [ 'go', 0.287682072 ], [ 'rain', 0.287682072 ] ] );
+      expect( v.out( its.idf ) ).to.deep.equal( [ [ 'away', 0.287682 ], [ 'go', 0.287682 ], [ 'rain', 0.287682 ] ] );
     } );
 
     it( 'out( its.terms ) should return sorted array of terms', function () {
@@ -122,7 +122,7 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( 'vectorOf() should return vector of tokens', function () {
-      expect( v.vectorOf( [ 'rain', 'is', 'going', 'away' ] ) ).to.deep.equal( [ 0.287682072, 0, 0.287682072 ] );
+      expect( v.vectorOf( [ 'rain', 'is', 'going', 'away' ] ) ).to.deep.equal( [ 0.287682, 0, 0.287682 ] );
     } );
 
     it( 'length() should return 3', function () {
@@ -130,17 +130,17 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( 'doc.out( its.tf ) should return freq table of terms', function () {
-      expect( v.doc( 0 ).out( its.tf ) ).to.deep.equal( [ [ 'rain', 0.395562849 ], [ 'away', 0.287682072 ], [ 'go', 0.287682072 ] ] );
+      expect( v.doc( 0 ).out( its.tf ) ).to.deep.equal( [ [ 'rain', 0.395563 ], [ 'away', 0.287682 ], [ 'go', 0.287682 ] ] );
     } );
 
     it( 'doc.out() should return freq table of terms', function () {
       // To test its.bow — default fall back.
-      expect( v.doc( 0 ).out() ).to.deep.equal( { rain: 0.395562849, away: 0.287682072, go: 0.287682072 } );
+      expect( v.doc( 0 ).out() ).to.deep.equal( { rain: 0.395563, away: 0.287682, go: 0.287682 } );
     } );
 
 
     it( 'doc.out( its.vector ) should return its vector', function () {
-      expect( v.doc( 0 ).out( its.vector ) ).to.deep.equal( [ 0.287682072, 0.287682072, 0.395562849 ] );
+      expect( v.doc( 0 ).out( its.vector ) ).to.deep.equal( [ 0.287682, 0.287682, 0.395563 ] );
     } );
 
     it( 'doc.out( its.bow ) should return its bow', function () {
@@ -155,18 +155,18 @@ describe( 'bm25-vectorizer', function () {
   describe( 'learn from multiple documents with l2 norm', function () {
     const terms = [ 'are', 'black', 'blue', 'cats', 'rats', 'some', 'white' ];
     const idf = [
-      [ 'black', 0.980829253 ],
-      [ 'blue', 0.980829253 ],
-      [ 'cats', 0.980829253 ],
-      [ 'some', 0.980829253 ],
-      [ 'white', 0.980829253 ],
-      [ 'rats', 0.470003629 ],
-      [ 'are', 0.133531393 ]
+      [ 'black', 0.980829 ],
+      [ 'blue', 0.980829 ],
+      [ 'cats', 0.980829 ],
+      [ 'some', 0.980829 ],
+      [ 'white', 0.980829 ],
+      [ 'rats', 0.470004 ],
+      [ 'are', 0.133531 ]
     ];
     const dtm = [
-      [ 0.121858341, 0, 0.895087087, 0, 0.428916835, 0, 0 ],
-      [ 0.095823468, 0, 0, 0.703852919, 0, 0, 0.703852919 ],
-      [ 0.086275085, 0.633717097, 0, 0, 0.435157318, 0.633717097, 0 ]
+      [ 0.121858, 0, 0.895087, 0, 0.428917, 0, 0 ],
+      [ 0.095823, 0, 0, 0.703853, 0, 0, 0.703853 ],
+      [ 0.086275, 0.633717, 0, 0, 0.435158, 0.633717, 0 ]
     ];
     const v = bm25( { norm: 'l2' } );
     v.learn( 'rats are blue'.split( /\s+/g ) );
@@ -174,7 +174,7 @@ describe( 'bm25-vectorizer', function () {
     v.learn( 'some rats rats are black'.split( /\s+/g ) );
 
     it( 'doc.out( its.vector ) should return its vector', function () {
-      expect( v.doc( 2 ).out( its.vector ) ).to.deep.equal( [ 0.086275085, 0.633717097, 0, 0, 0.435157318, 0.633717097, 0 ] );
+      expect( v.doc( 2 ).out( its.vector ) ).to.deep.equal( [ 0.086275, 0.633717, 0, 0, 0.435158, 0.633717, 0 ] );
     } );
 
     it( 'out( its.idf ) should return its idfs freq table', function () {
@@ -190,25 +190,25 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( 'vectorOf() should return its vector', function () {
-      expect( v.vectorOf( 'rats were blue'.split( /\s+/g ) ) ).to.deep.equal( [ 0, 0, 0.901807807, 0, 0.432137338, 0, 0 ] );
+      expect( v.vectorOf( 'rats were blue'.split( /\s+/g ) ) ).to.deep.equal( [ 0, 0, 0.901808, 0, 0.432138, 0, 0 ] );
     } );
   } );
 
   describe( 'learn from multiple documents with l1 norm', function () {
     const terms = [ 'are', 'black', 'blue', 'cats', 'rats', 'some', 'white' ];
     const idf = [
-      [ 'black', 0.980829253 ],
-      [ 'blue', 0.980829253 ],
-      [ 'cats', 0.980829253 ],
-      [ 'some', 0.980829253 ],
-      [ 'white', 0.980829253 ],
-      [ 'rats', 0.470003629 ],
-      [ 'are', 0.133531393 ]
+      [ 'black', 0.980829 ],
+      [ 'blue', 0.980829 ],
+      [ 'cats', 0.980829 ],
+      [ 'some', 0.980829 ],
+      [ 'white', 0.980829 ],
+      [ 'rats', 0.470004 ],
+      [ 'are', 0.133531 ]
     ];
     const dtm = [
-      [ 0.08428074, 0, 0.619068019, 0, 0.296651241, 0, 0 ],
-      [ 0.063732358, 0, 0, 0.468133821, 0, 0, 0.468133821 ],
-      [ 0.048228909, 0.354256208, 0, 0, 0.243258675, 0.354256208, 0 ]
+      [ 0.084281, 0, 0.619068, 0, 0.296652, 0, 0 ],
+      [ 0.063732, 0, 0, 0.468134, 0, 0, 0.468134 ],
+      [ 0.048229, 0.354256, 0, 0, 0.243259, 0.354256, 0 ]
     ];
     const v = bm25( { norm: 'l1' } );
     v.learn( 'rats are blue'.split( /\s+/g ) );
@@ -216,7 +216,7 @@ describe( 'bm25-vectorizer', function () {
     v.learn( 'some rats rats are black'.split( /\s+/g ) );
 
     it( 'doc.out( its.vector ) should return its vector', function () {
-      expect( v.doc( 2 ).out( its.vector ) ).to.deep.equal( [ 0.048228909, 0.354256208, 0, 0, 0.243258675, 0.354256208, 0 ] );
+      expect( v.doc( 2 ).out( its.vector ) ).to.deep.equal( [ 0.048229, 0.354256, 0, 0, 0.243259, 0.354256, 0 ] );
     } );
 
     it( 'out( its.idf ) should return its idfs freq table', function () {
@@ -240,7 +240,7 @@ describe( 'bm25-vectorizer', function () {
     const v = bm25( { norm: 'l1' } );
     // johann: `ln( 1 + ( ( 4 - 2 + 0.5 ) / ( 2 + 0.5 ) ) ) = 0.693147181`
     // bach: `ln( 1 + ( ( 4 - 4 + 0.5 ) / ( 4 + 0.5 ) ) ) = 0.105360516`
-    const model = '{"uid":"WinkNLP-BM25Vectorizer-Model/1.0.0","tf":[{"bach":1},{"j":0.919531173,"bach":0.080468827},{"johann":0.346144285,"s":0.601240713,"bach":0.052615002},{"johann":0.346144285,"sebastian":0.601240713,"bach":0.052615002}],"idf":{"bach":0.105360516,"j":1.203972804,"johann":0.693147181,"s":1.203972804,"sebastian":1.203972804},"terms":["bach","j","johann","s","sebastian"],"docId":4,"sumOfAllDLs":9}';
+    const model = '{"uid":"WinkNLP-BM25Vectorizer-Model/1.0.0","tf":[{"bach":1},{"j":0.919531,"bach":0.080469},{"johann":0.346144,"s":0.601241,"bach":0.052615},{"johann":0.346144,"sebastian":0.601241,"bach":0.052615}],"idf":{"bach":0.105361,"j":1.203973,"johann":0.693147,"s":1.203973,"sebastian":1.203973},"terms":["bach","j","johann","s","sebastian"],"docId":4,"sumOfAllDLs":9}';
     v.learn( 'Bach'.toLowerCase().split( /\s+/g ) );
     v.learn( 'J Bach'.toLowerCase().split( /\s+/g ) );
     v.learn( 'Johann S Bach'.toLowerCase().split( /\s+/g ) );

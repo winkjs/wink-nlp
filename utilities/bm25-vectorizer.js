@@ -95,7 +95,7 @@ var bm25Vectorizer = function ( config ) {
   const k1 = getValidCfgNum( cfg.k1, 1.2, 0, 100 );
   const b = getValidCfgNum( cfg.b, 0.75, 0, 1 );
   // Setup precision.
-  const precision = getValidCfgNum( cfg.precision, 9, 1, 18 );
+  const precision = getValidCfgNum( cfg.precision, 6, 1, 12 );
   // Setup norm.
   const norm = (
                  ( cfg.norm === null ) ||
@@ -313,7 +313,7 @@ var bm25Vectorizer = function ( config ) {
     } else if ( norm === NONE ) thisNorm = 1;
 
     // `thisNorm || 1` ensures that there is no attempt to divide by zero!
-    return arr.map( ( v ) => +( v / ( thisNorm || 1 ) ).toFixed( 9 ) );
+    return arr.map( ( v ) => +( v / ( thisNorm || 1 ) ).toFixed( precision ) );
   }; // vectorOf()
 
   methods.config = ( () => ( { k: k, k1: k1, b: b, norm: norm } ) );
