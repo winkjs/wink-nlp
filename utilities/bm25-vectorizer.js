@@ -318,6 +318,34 @@ var bm25Vectorizer = function ( config ) {
 
   methods.config = ( () => ( { k: k, k1: k1, b: b, norm: norm } ) );
 
+  // ## loadModel
+  /**
+   * Loads the input model JSON into the BM25's respective data structure. Throws
+   * error if invalid JSON or model is passed. Sets `weightsComputed` to true to
+   * prevent further learning.
+   * @param  {string} json  Input model's JSON string.
+   * @return {void}         Nothing!
+   */
+  methods.loadModel = function ( json ) {
+    let model;
+    try {
+      model = JSON.parse( json );
+    } catch (e) {
+      throw Error( `wink-nlp: invalid input JSON:\n\t${e}\n\n` );
+    }
+
+    if ( helper.isObject( model ) && ( Object.keys( model ) === 6 ) && ( model.uid === 'WinkNLP-BM25Vectorizer-Model/1.0.0' ) ) {
+      docId = model.docId;
+      tf = model.tf;
+      idf = model.idf;
+      terms = model.terms;
+      sumOfAllDLs = model.sumOfAllDLs;
+      weightsComputed = true;
+    } else {
+      throw Error( 'wink-nlp: invalid model format/version' );
+    }
+  }; // loadModel()
+
   return methods;
 }; // bm25Vectorizer()
 
