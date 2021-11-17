@@ -328,13 +328,16 @@ var bm25Vectorizer = function ( config ) {
    */
   methods.loadModel = function ( json ) {
     let model;
+
+    if ( docId > 0 ) throw Error( 'wink-nlp: can not load model after learning.' );
+
     try {
       model = JSON.parse( json );
     } catch (e) {
       throw Error( `wink-nlp: invalid input JSON:\n\t${e}\n\n` );
     }
 
-    if ( helper.isObject( model ) && ( Object.keys( model ) === 6 ) && ( model.uid === 'WinkNLP-BM25Vectorizer-Model/1.0.0' ) ) {
+    if ( helper.isObject( model ) && ( Object.keys( model ).length === 6 ) && ( model.uid === 'WinkNLP-BM25Vectorizer-Model/1.0.0' ) ) {
       docId = model.docId;
       tf = model.tf;
       idf = model.idf;

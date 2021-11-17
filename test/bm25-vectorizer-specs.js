@@ -274,4 +274,20 @@ describe( 'bm25-vectorizer', function () {
       expect( v.vectorOf([ 'cat', 'cat', 'green', 'is' ] ) ).to.deep.equal( [ 0, 0, 0, 0, 0 ] );
     } );
   } );
+
+  describe( 'load model json', function () {
+    const v1 = bm25();
+    v1.learn( 'the quick brown fox jumped over the lazy dog'.toLowerCase().split( /\s+/g ) );
+    v1.learn( 'the fast fox jumped over the lazy dog'.toLowerCase().split( /\s+/g ) );
+    v1.learn( 'the dog sat there and did nothing'.toLowerCase().split( /\s+/g ) );
+    v1.learn( 'the other animals sat there watching'.toLowerCase().split( /\s+/g ) );
+
+    const v2 = bm25();
+    const model = v1.out( its.modelJSON );
+    v2.loadModel( model );
+
+    it( 'v1 and v2 out() should match', function () {
+      expect( v1.out( its.docBOWArray ) ).to.deep.equal( v2.out( its.docBOWArray ) );
+    } );
+  } );
 } );
