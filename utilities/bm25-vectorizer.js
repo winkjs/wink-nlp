@@ -316,6 +316,9 @@ var bm25Vectorizer = function ( config ) {
    * @return {void}         Nothing!
    */
   methods.loadModel = function ( json ) {
+    // Used to check presence of required fields; `uid` is checked separately.
+    const modelFields = [ 'docId', 'tf', 'idf', 'terms', 'sumOfAllDLs' ];
+
     let model;
 
     if ( docId > 0 ) throw Error( 'wink-nlp: can not load model after learning.' );
@@ -327,11 +330,19 @@ var bm25Vectorizer = function ( config ) {
     }
 
     if ( helper.isObject( model ) && ( Object.keys( model ).length === 6 ) && ( model.uid === 'WinkNLP-BM25Vectorizer-Model/1.0.0' ) ) {
+      // Check presence of all required fields.
+      modelFields.forEach( ( f ) => {
+        if ( model[ f ] === undefined ) throw Error( 'wink-nlp: invalid model format/version' );
+      } );
+
+      // All good, set fields.
       docId = model.docId;
       tf = model.tf;
       idf = model.idf;
       terms = model.terms;
       sumOfAllDLs = model.sumOfAllDLs;
+
+      // To prevent further learning.
       weightsComputed = true;
     } else {
       throw Error( 'wink-nlp: invalid model format/version' );

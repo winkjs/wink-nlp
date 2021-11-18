@@ -297,9 +297,14 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( 'should throw error if invalid model is used', function () {
+      // Incorrect JSON.
       expect( () => v3.loadModel('[]') ).to.throw( 'wink-nlp: invalid model format/version' );
+      // No fields.
       expect( () => v3.loadModel('{}') ).to.throw( 'wink-nlp: invalid model format/version' );
+      // Incorrect UID.
       expect( () => v3.loadModel( JSON.stringify( { uid: 'junk' } ) ) ).to.throw( 'wink-nlp: invalid model format/version' );
+      // Missing required fields.
+      expect( () => v3.loadModel( JSON.stringify( { uid: 'WinkNLP-BM25Vectorizer-Model/1.0.0', 0: 0, 1: 1, 2: 2, 3: 3, 4: 4 } ) ) ).to.throw( 'wink-nlp: invalid model format/version' );
     } );
   } );
 } );
