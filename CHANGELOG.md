@@ -1,5 +1,5 @@
 # [Enabling loading of BM25Vectorizer model](https://github.com/winkjs/wink-nlp/releases/tag/1.10.0)
-## Version 1.10.0 November 06, 2021
+## Version 1.10.0 November 18, 2021
 
 ### ✨ Features
 - Easily load BM25Vectorizer's model using newly introduced `.loadModel()` api. 🎉
