@@ -286,8 +286,29 @@ describe( 'bm25-vectorizer', function () {
     const model = v1.out( its.modelJSON );
     v2.loadModel( model );
 
+    const v3 = bm25();
+
     it( 'v1 and v2 out() should match', function () {
       expect( v1.out( its.docBOWArray ) ).to.deep.equal( v2.out( its.docBOWArray ) );
+      expect( v1.out( its.docTermMatrix ) ).to.deep.equal( v2.out( its.docTermMatrix ) );
+      expect( v1.out( its.idf ) ).to.deep.equal( v2.out( its.idf ) );
+      expect( v1.out( its.terms ) ).to.deep.equal( v2.out( its.terms ) );
+      expect( v1.out( its.tf ) ).to.deep.equal( v2.out( its.tf ) );
+    } );
+
+    it( 'should throw error if learn() has been used', function () {
+      expect( () => v1.loadModel('[]') ).to.throw( 'wink-nlp: can not load model after learning.' );
+    } );
+
+    it( 'should throw error if invalid JSON is used', function () {
+
+      expect( () => v3.loadModel('[model]') ).to.throw( 'wink-nlp: invalid input JSON:' );
+    } );
+
+    it( 'should throw error if invalid model is used', function () {
+      expect( () => v3.loadModel('[]') ).to.throw( 'wink-nlp: invalid model format/version' );
+      expect( () => v3.loadModel('{}') ).to.throw( 'wink-nlp: invalid model format/version' );
+      expect( () => v3.loadModel( JSON.stringify( { uid: 'junk' } ) ) ).to.throw( 'wink-nlp: invalid model format/version' );
     } );
   } );
 } );
