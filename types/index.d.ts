@@ -306,7 +306,7 @@ declare module 'wink-nlp/utilities/bm25-vectorizer' {
 
   import { Tokens, Document, ItsFunction } from 'wink-nlp';
 
-  export type Norm = "l2" | "NONE";
+  export type Norm = "l1" | "l2" | "none";
 
   export interface BM25VectorizerConfig {
     k: number;
@@ -317,10 +317,11 @@ declare module 'wink-nlp/utilities/bm25-vectorizer' {
 
   export interface BM25Vectorizer {
     learn(tokens: Tokens): void;
-    doc(n: number): Document;
     out<T>(f: ItsFunction<T>): T;
+    doc(n: number): Document;
     vectorOf(tokens: Tokens): number[];
     config(): BM25VectorizerConfig;
+    loadModel(json: string): void;
   }
 
   export default function bm25Vectorizer(config?: BM25VectorizerConfig): BM25Vectorizer;

@@ -272,17 +272,6 @@ var bm25Vectorizer = function ( config ) {
     return api;
   }; // doc()
 
-  // ## length
-  /**
-   *
-   * Returns the number of unique tokens in the entire corpus.
-   *
-   * @return {number} the number of unique tokens in the corpus.
-   */
-  methods.length = function () {
-    return Object.keys( idf ).length;
-  }; // length()
-
   // ## vectorOf
   /**
    * Computes the vector of the input document given in form of tokens using

@@ -77,14 +77,9 @@ describe( 'bm25-vectorizer', function () {
       expect( v.doc( 0 ).out.bind() ).to.throw( 'wink-nlp: this operation doesn\'t make sense without any learning; use learn() API first.' );
     } );
 
-    it( '.length() should return []', function () {
-      expect( v.length() ).to.equal( 0 );
-    } );
-
     it( 'doc.out() should return undefined', function () {
       expect( v.doc( 0 ).length() ).to.equal( 0 );
     } );
-
   } );
 
   describe( 'learn from 1-document', function () {
@@ -123,10 +118,6 @@ describe( 'bm25-vectorizer', function () {
 
     it( 'vectorOf() should return vector of tokens', function () {
       expect( v.vectorOf( [ 'rain', 'is', 'going', 'away' ] ) ).to.deep.equal( [ 0.287682, 0, 0.287682 ] );
-    } );
-
-    it( 'length() should return 3', function () {
-      expect( v.length() ).to.equal( 3 );
     } );
 
     it( 'doc.out( its.tf ) should return freq table of terms', function () {
