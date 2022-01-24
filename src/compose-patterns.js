@@ -110,6 +110,9 @@ var product = function ( a ) {
  * (if any) must be separated by a `|` character. The patterns are composed by
  * computing the cartesian product of all the phrases.
  *
+ * If a single patterns expands to a large size then it issues console
+ * warning/error at 512/65536 level.
+ *
  * @param {string} str the input string.
  * @return {string[]} of all possible patterns.
  * @private
@@ -117,6 +120,8 @@ var product = function ( a ) {
 var composePatterns = function ( str ) {
   if ( !str || ( typeof str !== 'string' ) ) return [];
 
+  const LIMIT1 = 512;
+  const LIMIT2 = 65536;
   var quotedTextElems = extractEnclosedText( str );
   var patterns = [];
   var finalPatterns = [];
@@ -125,6 +130,20 @@ var composePatterns = function ( str ) {
   quotedTextElems.forEach( function ( e ) {
     patterns.push( e.split( '|' ) );
   } );
+
+  // Compute the size of the array that will be produced as a result of processing
+  // the pattern.
+  const size = patterns.reduce( ( ( prev, curr ) => prev * curr.length ), 1 );
+
+  // Issue warning/error if the size is prohibitively large from the end-user
+  // prespective. Note: while winkNLP can handle even larger sizes, it can
+  // still break down in the event of explosion!
+  if ( size > LIMIT1 && size < LIMIT2 ) {
+    console.warn( 'winkNLP: complex pattern detected, consider simplifying it!' );
+  } else if ( size > LIMIT2 ) console.error(
+                              'winkNLP: very complex pattern detected, please review and simplify.\n' +
+                              '         === It may slow down further execution! ===\n\n'
+                             );
 
   product( patterns ).forEach( function ( e ) {
     finalPatterns.push( e.join( ' ' ).trim().split( /\s+/ ) );

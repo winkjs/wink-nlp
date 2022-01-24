@@ -65,4 +65,14 @@ describe( 'composePatterns()', function () {
   it( 'should return [ [ \'text\' ] ] for input "text"', function () {
     expect( composePatterns( 'text' ) ).to.deep.equal( [ [ 'text' ] ] );
   } );
+
+  it( 'should issue warning when patterns > 512', function () {
+    const text = '[a|b|c|d] [a|b|c|d] [a|b|c|d] [a|b|c|d] [a|b|c|d]';
+    expect( composePatterns( text ).length ).to.equal( 1024 );
+  } );
+
+  it( 'should issue error when patterns > 65536', function () {
+    const text = '[a|b|c|d] [a|b|c|d] [a|b|c|d] [a|b|c|d] [a|b|c|d] [a|b|c|d] [a|b|c|d] [a|b|c|d] [a|b]';
+    expect( composePatterns( text ).length ).to.equal( 131072 );
+  } );
 } );
