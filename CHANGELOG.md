@@ -1,3 +1,11 @@
+# [Enhancing custom entities & BM25Vectorizer](https://github.com/winkjs/wink-nlp/releases/tag/1.11.0)
+## Version 1.11.0 January 30, 2022
+
+### ✨ Features
+- Obtain bag-of-words for a tokenized text from BM25Vectorizer using `.bowOf()` api — useful for bow based [similarity](https://winkjs.org/wink-nlp/similarity.html) computation. 👍
+- [`learnCustomEntities()`](https://winkjs.org/wink-nlp/learn-custom-entities.html) displays a console warning, if a complex [short hand pattern](https://winkjs.org/wink-nlp/custom-entities.html) is likely to cause learning/execution slow down.🤞❗️
+
+
 # [Enabling loading of BM25Vectorizer model](https://github.com/winkjs/wink-nlp/releases/tag/1.10.0)
 ## Version 1.10.0 November 18, 2021
 
