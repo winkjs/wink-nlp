@@ -304,7 +304,7 @@ declare module 'wink-nlp/utilities/bm25-vectorizer' {
   // turn off exporting by default since we don't want to expose internal details
   export { };
 
-  import { Tokens, Document, ItsFunction } from 'wink-nlp';
+  import { Tokens, Document, ItsFunction, Bow } from 'wink-nlp';
 
   export type Norm = "l1" | "l2" | "none";
 
@@ -320,6 +320,7 @@ declare module 'wink-nlp/utilities/bm25-vectorizer' {
     out<T>(f: ItsFunction<T>): T;
     doc(n: number): Document;
     vectorOf(tokens: Tokens): number[];
+    bowOf(tokens: Tokens): Bow;
     config(): BM25VectorizerConfig;
     loadModel(json: string): void;
   }

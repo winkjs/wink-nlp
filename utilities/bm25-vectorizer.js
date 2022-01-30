@@ -276,7 +276,7 @@ var bm25Vectorizer = function ( config ) {
   /**
    * Computes the vector of the input document given in form of tokens using
    * the tf-idf learned so far.
-   * @param  {string}     tokens  tokenized document, usually obtained via winkNLP.
+   * @param  {string[]}   tokens  tokenized document, usually obtained via winkNLP.
    * @return {number[]}           its vector.
    */
   methods.vectorOf = function ( tokens ) {
@@ -302,8 +302,46 @@ var bm25Vectorizer = function ( config ) {
     } else if ( norm === NONE ) thisNorm = 1;
 
     // `thisNorm || 1` ensures that there is no attempt to divide by zero!
+    // This may happen if all tokens are unseen.
     return arr.map( ( v ) => +( v / ( thisNorm || 1 ) ).toFixed( precision ) );
   }; // vectorOf()
+
+  // ## bowOf
+  /**
+   * Computes the bag-of-words (bowOf) of the input document, using the tf-idf
+   * learned so far.
+   * @param  {string[]}   tokens  tokenized text, usually obtained via winkNLP.
+   * @return {object}             its bow.
+   */
+  methods.bowOf = function ( tokens ) {
+    computeWeights();
+    const bow = Object.create( null );
+    const avgDL = sumOfAllDLs / docId;
+    let thisNorm = 0;
+
+    for ( let i = 0; i < tokens.length; i += 1 ) {
+      const t = tokens[ i ];
+      // bow applies only if the token is not an unseen one!
+      if ( idf[ t ] ) bow[ t ] = 1 + ( bow[ t ] || 0 );
+    }
+
+    for ( const t in bow ) { // eslint-disable-line guard-for-in
+      bow[ t ] = idf[ t ] * ( ( k1 + 1 ) * bow[ t ] ) / ( ( k1 * ( 1 - b + ( b * ( tokens.length / avgDL ) ) ) ) + bow[ t ] );
+      thisNorm += normFn[ norm ]( bow[ t ] );
+    }
+
+    if ( norm === L2 ) {
+      thisNorm = Math.sqrt( thisNorm );
+    } else if ( norm === NONE ) thisNorm = 1;
+
+    for ( const t in bow ) { // eslint-disable-line guard-for-in
+      // Unlike in `vectorOf`, `thisNorm || 1` is not needed here as bow will be
+      // empty if `thisNorm` is zero!
+      bow[ t ] = +( bow[ t ] / thisNorm ).toFixed( precision );
+    }
+
+    return bow;
+  }; // bowOf()
 
   methods.config = ( () => ( { k: k, k1: k1, b: b, norm: norm } ) );
 

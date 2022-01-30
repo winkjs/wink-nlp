@@ -120,6 +120,10 @@ describe( 'bm25-vectorizer', function () {
       expect( v.vectorOf( [ 'rain', 'is', 'going', 'away' ] ) ).to.deep.equal( [ 0.287682, 0, 0.287682 ] );
     } );
 
+    it( 'bowOf() should return bow of tokens', function () {
+      expect( v.bowOf( [ 'rain', 'is', 'going', 'away' ] ) ).to.deep.equal( { away: 0.287682, rain: 0.287682 } );
+    } );
+
     it( 'doc.out( its.tf ) should return freq table of terms', function () {
       expect( v.doc( 0 ).out( its.tf ) ).to.deep.equal( [ [ 'rain', 0.395563 ], [ 'away', 0.287682 ], [ 'go', 0.287682 ] ] );
     } );
@@ -182,6 +186,10 @@ describe( 'bm25-vectorizer', function () {
 
     it( 'vectorOf() should return its vector', function () {
       expect( v.vectorOf( 'rats were blue'.split( /\s+/g ) ) ).to.deep.equal( [ 0, 0, 0.901808, 0, 0.432138, 0, 0 ] );
+    } );
+
+    it( 'bowOf() should return its bow', function () {
+      expect( v.bowOf( 'rats were blue'.split( /\s+/g ) ) ).to.deep.equal( { blue: 0.901808, rats: 0.432138 } );
     } );
   } );
 
@@ -252,6 +260,10 @@ describe( 'bm25-vectorizer', function () {
     it( 'should return 0-vector', function () {
       expect( v.vectorOf([ 'cat', 'cat', 'green', 'is' ] ) ).to.deep.equal( [ 0, 0, 0, 0, 0 ] );
     } );
+
+    it( 'should return empty bow', function () {
+      expect( v.bowOf([ 'cat', 'cat', 'green', 'is' ] ) ).to.deep.equal( {} );
+    } );
   } );
 
   describe( 'completely OOV tokens with l2 norm', function () {
@@ -263,6 +275,10 @@ describe( 'bm25-vectorizer', function () {
 
     it( 'should return 0-vector', function () {
       expect( v.vectorOf([ 'cat', 'cat', 'green', 'is' ] ) ).to.deep.equal( [ 0, 0, 0, 0, 0 ] );
+    } );
+
+    it( 'should return empty bow', function () {
+      expect( v.bowOf([ 'cat', 'cat', 'green', 'is' ] ) ).to.deep.equal( {} );
     } );
   } );
 
