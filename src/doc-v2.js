@@ -456,6 +456,9 @@ var doc = function ( docData, addons ) {
 
   methods.printTokens = () => printTokens( tokens, cache );
 
+  // Enusre that we make a deep copy of config before returning to avoid corruption!
+  methods.pipeConfig = () => JSON.parse( JSON.stringify( docData.currPipe ) );
+
   return methods;
 };
 

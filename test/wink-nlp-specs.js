@@ -155,6 +155,10 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
   it( 'should throw error if readDoc is given non-text', function () {
     expect( nlp.readDoc.bind( 1 ) ).to.throw( /^wink-nlp: expecting a valid Javascript string/ );
   } );
+
+  it( 'pipeConfig should return sbd, negation, sa, pos, ner and cer as true', function () {
+    expect( nlp.readDoc('Test').pipeConfig() ).to.deep.equal( { sbd: true, negation: true, pos: true, sentiment: true, ner: true, cer: true } );
+  } );
 } );
 
 describe( 'OOV handling', function () {
@@ -227,6 +231,7 @@ describe( 'Annotation pipe validity checks', function () {
 
 describe( 'Empty Annotation pipe should not detect any of the existing annotations', function () {
   const nlpNoAnno = winkNLP( model, [] );
+
   it( 'should still learn from patterns', function () {
     const patterns = [
       { name: 'adjectiveNounPair', patterns: [ 'ADJ' ] }
@@ -235,6 +240,11 @@ describe( 'Empty Annotation pipe should not detect any of the existing annotatio
   } );
 
   const doc = nlpNoAnno.readDoc( 'Hello World! Not happy! :-)' );
+
+  it( 'pipeConfig should return empty config', function () {
+    expect( doc.pipeConfig() ).to.deep.equal( Object.create( null ) );
+  } );
+
   it( 'should return single sentence', function () {
     expect( doc.sentences().length() ).to.equal( 1 );
     expect( doc.sentences().out()[ 0 ] ).to.equal( doc.out() );

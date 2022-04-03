@@ -109,14 +109,9 @@ var nlp = function ( theModel, pipe ) {
   // Used to innstantiate the compiler.
   var cerMetaModel;
 
-  // Annotation stuff.
+  // Contains a list of valid annotations built from `theModel`.
   var validAnnotations = Object.create( null );
-  validAnnotations.sbd = true;
-  validAnnotations.negation = true;
-  validAnnotations.sentiment = true;
-  validAnnotations.pos = true;
-  validAnnotations.ner = true;
-  validAnnotations.cer = true;
+
   // Current pipe.
   var currPipe = Object.create( null );
   var onlyTokenization = true;
@@ -231,6 +226,9 @@ var nlp = function ( theModel, pipe ) {
     // Markings are 4-tuples of `start`, `end` **token indexes**,  and `begin & end markers`.
     // The begin & end markers are used to markup the tokens specified.
     rdd.markings = [];
+    // Publish the current annotation pipeline so that code can inquire about
+    // active annotations!
+    rdd.currPipe = currPipe;
 
     var wrappedDocData = DocDataWrapper( rdd );  // eslint-disable-line new-cap
 
@@ -394,6 +392,15 @@ var nlp = function ( theModel, pipe ) {
   } else {
     throw Error( 'wink-nlp: invalid model used.' );
   }
+
+  // Build a list of valid annotations from `theModel`. This will ensure that
+  // only **available** annotations from the model can be used in the pipe.
+  validAnnotations.sbd = typeof theModel.sbd === 'function';
+  validAnnotations.negation = typeof theModel.negation === 'function';
+  validAnnotations.sentiment = typeof theModel.sa === 'function';
+  validAnnotations.pos = typeof theModel.pos === 'function';
+  validAnnotations.ner = typeof theModel.ner === 'function';
+  validAnnotations.cer = typeof theModel.metaCER === 'function';
 
   const tempPipe = ( pipe === undefined ) ? Object.keys( validAnnotations ) : pipe;
   if ( helper.isArray( tempPipe ) ) {
