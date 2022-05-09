@@ -1,6 +1,6 @@
 # winkNLP
 
-### [![Build Status](https://travis-ci.com/winkjs/wink-nlp.svg?branch=master)](https://travis-ci.com/github/winkjs/wink-nlp) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-nlp/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-nlp?branch=master) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby) [![Follow on Twitter](https://img.shields.io/twitter/follow/winkjs_org?style=social)](https://twitter.com/winkjs_org)
+### [![Build Status](https://travis-ci.com/winkjs/wink-nlp.svg?branch=master)](https://travis-ci.com/github/winkjs/wink-nlp) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-nlp/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-nlp?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/winkjs/wink-nlp/badge.svg)](https://snyk.io/test/github/winkjs/wink-nlp) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby) [![Follow on Twitter](https://img.shields.io/twitter/follow/winkjs_org?style=social)](https://twitter.com/winkjs_org)
 
 ## Developer friendly Natural Language Processing ✨
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](https://winkjs.org/)
@@ -136,13 +136,13 @@ Wink NLP delivers this performance with the minimal load on RAM. For example, it
 ## Need Help?
 
 ### Usage query 👩🏽‍💻
-Please ask at [Stack Overflow](https://stackoverflow.com/) or discuss it at [Wink JS Gitter Lobby](https://gitter.im/winkjs/Lobby).
+Please ask at [Stack Overflow](https://stackoverflow.com/) or discuss at [Wink JS GitHub Discussions](https://github.com/winkjs/wink-nlp/discussions) or chat with us at [Wink JS Gitter Lobby](https://gitter.im/winkjs/Lobby).
 
 ### Bug report 🐛
 If you spot a bug and the same has not yet been reported, raise a new [issue](https://github.com/winkjs/wink-nlp/issues) or consider fixing it and sending a PR.
 
 ### New feature ✨
-Looking for a new feature, request it via a new [issue](https://github.com/winkjs/wink-nlp/issues) or consider becoming a [contributor](https://github.com/winkjs/wink-nlp/blob/master/CONTRIBUTING.md).
+Looking for a new feature, request it via the [new features & ideas](https://github.com/winkjs/wink-nlp/discussions/categories/new-features-ideas) discussion forum  or consider becoming a [contributor](https://github.com/winkjs/wink-nlp/blob/master/CONTRIBUTING.md).
 
 
 ## About wink
