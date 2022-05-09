@@ -1,6 +1,6 @@
 # winkNLP
 
-### [![Build Status](https://travis-ci.com/winkjs/wink-nlp.svg?branch=master)](https://travis-ci.com/github/winkjs/wink-nlp) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-nlp/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-nlp?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/winkjs/wink-nlp/badge.svg)](https://snyk.io/test/github/winkjs/wink-nlp) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby) [![Follow on Twitter](https://img.shields.io/twitter/follow/winkjs_org?style=social)](https://twitter.com/winkjs_org)
+### [![Build Status](https://travis-ci.com/winkjs/wink-nlp.svg?branch=master)](https://travis-ci.com/github/winkjs/wink-nlp) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-nlp/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-nlp?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/winkjs/wink-nlp/badge.svg)](https://snyk.io/test/github/winkjs/wink-nlp) [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6035/badge)](https://bestpractices.coreinfrastructure.org/projects/6035) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/winkjs/Lobby) [![Follow on Twitter](https://img.shields.io/twitter/follow/winkjs_org?style=social)](https://twitter.com/winkjs_org)
 
 ## Developer friendly Natural Language Processing ✨
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](https://winkjs.org/)
