@@ -33,6 +33,7 @@
 var chai = require( 'chai' );
 var mocha = require( 'mocha' );
 var bm25 = require( '../utilities/bm25-vectorizer.js' );
+var similarity = require( '../utilities/similarity.js' );
 var its = require( '../src/its.js' );
 
 
@@ -231,7 +232,7 @@ describe( 'bm25-vectorizer', function () {
     } );
 
     it( 'should throw error learn() is called after out()', function () {
-      expect( v.learn.bind( [ 'hello', 'world' ] ) ).to.throw( 'wink-nlp: learn can not be used after a call to out() API in BM25 Vectorizer' );
+      expect( v.learn.bind( null, [ 'hello', 'world' ] ) ).to.throw( 'wink-nlp: learn can not be used after a call to out() API in BM25 Vectorizer' );
     } );
   } );
 
@@ -321,6 +322,56 @@ describe( 'bm25-vectorizer', function () {
       expect( () => v3.loadModel( JSON.stringify( { uid: 'junk' } ) ) ).to.throw( 'wink-nlp: invalid model format/version' );
       // Missing required fields.
       expect( () => v3.loadModel( JSON.stringify( { uid: 'WinkNLP-BM25Vectorizer-Model/1.0.0', 0: 0, 1: 1, 2: 2, 3: 3, 4: 4 } ) ) ).to.throw( 'wink-nlp: invalid model format/version' );
+    } );
+  } );
+
+  describe( 'similarity computation using bm25 output', function () {
+    const v = bm25( { norm: 'none' } );
+    v.learn( 'cat was black'.toLowerCase().split( /\s+/g ) );
+    v.learn( 'dog is white'.toLowerCase().split( /\s+/g ) );
+    v.learn( 'dog is cute'.toLowerCase().split( /\s+/g ) );
+
+    it( 'completely different sentences should return 0', function () {
+      const b1 = v.bowOf( 'cat is not yellow'.toLowerCase().split( /\s+/g ) );
+      const b2 = v.bowOf( 'dog were rarely pink'.toLowerCase().split( /\s+/g ) );
+      expect( similarity.bow.cosine( b1, b2 ) ).to.equal( 0 );
+    } );
+
+    it( 'completely different sentences with all OOV should return 1 with processOOV as false', function () {
+      // This happens as both bows are empty because OOVs are ignored!
+      const b1 = v.bowOf( 'ugly bat'.toLowerCase().split( /\s+/g ) );
+      const b2 = v.bowOf( 'dangerous snake'.toLowerCase().split( /\s+/g ) );
+
+      expect( similarity.bow.cosine( b1, b2 ) ).to.equal( 1 );
+    } );
+
+    it( 'completely different sentences with all OOV should return 0 with processOOV as true', function () {
+      // Here OOVs are not ignored, so we get non-empty bows.
+      const b1 = v.bowOf( 'ugly bat'.toLowerCase().split( /\s+/g ), true );
+      const b2 = v.bowOf( 'dangerous snake'.toLowerCase().split( /\s+/g ), true );
+      expect( similarity.bow.cosine( b1, b2 ) ).to.equal( 0 );
+    } );
+
+    it( 'With processOOV as non boolean, it should throw error', function () {
+      expect( v.bowOf.bind( null, [ 'ugly', 'bat' ], 99 ) ).to.throw( 'wink-nlp: processOOV must be a boolean.' );
+    } );
+
+    it( 'partially different sentences should return <1', function () {
+      const b1 = v.bowOf( 'cat is black'.toLowerCase().split( /\s+/g ) );
+      const b2 = v.bowOf( 'dog is black'.toLowerCase().split( /\s+/g ) );
+      expect( similarity.bow.cosine( b1, b2 ) ).to.equal( 0.681698 );
+    } );
+
+    it( 'identical sentences should return 1', function () {
+      const b1 = v.bowOf([ 'dog is white'.toLowerCase().split( /\s+/g ) ] );
+      const b2 = v.bowOf([ 'dog is white'.toLowerCase().split( /\s+/g ) ] );
+      expect( similarity.bow.cosine( b1, b2 ) ).to.equal( 1 );
+    } );
+
+    it( 'empty sentences should return 1', function () {
+      const b1 = v.bowOf([ ''.toLowerCase().split( /\s+/g ) ] );
+      const b2 = v.bowOf([ ''.toLowerCase().split( /\s+/g ) ] );
+      expect( similarity.bow.cosine( b1, b2 ) ).to.equal( 1 );
     } );
   } );
 } );

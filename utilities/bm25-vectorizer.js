@@ -309,24 +309,37 @@ var bm25Vectorizer = function ( config ) {
   // ## bowOf
   /**
    * Computes the bag-of-words (bowOf) of the input document, using the tf-idf
-   * learned so far.
-   * @param  {string[]}   tokens  tokenized text, usually obtained via winkNLP.
-   * @return {object}             its bow.
+   * learned so far. If `processOOV` is true then for OOV token's frequency is
+   * computed and its `idf` is assumed to be **1**; otherwise all OOVs are ignored.
+   * @param  {string[]}   tokens      tokenized text, usually obtained via winkNLP.
+   * @param  {boolean}    processOOV  true — process OOV, false — ignore OOV (default).
+   * @return {object}                 its bow.
    */
-  methods.bowOf = function ( tokens ) {
+  methods.bowOf = function ( tokens, processOOV = false ) {
     computeWeights();
     const bow = Object.create( null );
     const avgDL = sumOfAllDLs / docId;
     let thisNorm = 0;
 
+    if ( typeof processOOV !== 'boolean' ) {
+      throw Error( 'wink-nlp: processOOV must be a boolean.' );
+    }
+
     for ( let i = 0; i < tokens.length; i += 1 ) {
       const t = tokens[ i ];
-      // bow applies only if the token is not an unseen one!
-      if ( idf[ t ] ) bow[ t ] = 1 + ( bow[ t ] || 0 );
+      // `processOOV` true means count every term otherwise count only if it is
+      // in the vocabulary i.e. `idf`.
+      if ( processOOV ) {
+        bow[ t ] = 1 + ( bow[ t ] || 0 );
+      } else if ( idf[ t ] ) bow[ t ] = 1 + ( bow[ t ] || 0 );
     }
 
     for ( const t in bow ) { // eslint-disable-line guard-for-in
-      bow[ t ] = idf[ t ] * ( ( k1 + 1 ) * bow[ t ] ) / ( ( k1 * ( 1 - b + ( b * ( tokens.length / avgDL ) ) ) ) + bow[ t ] );
+      // `bow` tokens are determined by `processOOV` i.e. if true it will contain
+      // OOVs also otherwise it will not have any OOV. On the other hand `idf`
+      // always contains all the seen tokens. Therefore when `processOOV` is true,
+      // the `idf[ t ]` for all OOV will be taken as **1** (highest possible value).
+      bow[ t ] = ( idf[ t ] || 1 ) * ( ( k1 + 1 ) * bow[ t ] ) / ( ( k1 * ( 1 - b + ( b * ( tokens.length / avgDL ) ) ) ) + bow[ t ] );
       thisNorm += normFn[ norm ]( bow[ t ] );
     }
 
