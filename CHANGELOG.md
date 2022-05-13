@@ -1,3 +1,11 @@
+# [Some enhancements plus earned OpenSSF best practices passing badge](https://github.com/winkjs/wink-nlp/releases/tag/1.12.0)
+## Version 1.12.0 May 13, 2022
+
+### ✨ Features
+- winkNLP earned [Open Source Security Foundation (OpenSSF) Best Practices passing badge](https://bestpractices.coreinfrastructure.org/en/projects/6035). 🎉 👏 🙌
+- `.bowOf()` api of [BM25Vectorizer](https://winkjs.org/wink-nlp/bm25-vectorizer.html) now supports processing of OOV tokens — useful for cosine similarity computation. 😎
+- [Document](https://winkjs.org/wink-nlp/document.html) has a new API — `.pipeConfig()` to inquire the active processing pipeline.
+
 # [Enhancing custom entities & BM25Vectorizer](https://github.com/winkjs/wink-nlp/releases/tag/1.11.0)
 ## Version 1.11.0 January 30, 2022
 
