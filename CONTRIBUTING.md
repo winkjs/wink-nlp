@@ -5,14 +5,15 @@ Thank you for taking time to contribute. We are delighted to receive contributio
 ## Getting Started
 1. Fork the repository from github
 2. Develop your code changes
+2. Write test cases for 100% functional coverage
 3. Ensure that the API is properly documented
 4. Capture the logic in comments
 4. Ensure proper linting via  `npm run pretest`
 5. Run tests using `npm run test`
-6. Make sure coverage either stays at the current levels or improves
+6. Make sure coverage either stays at the current levels or improves; note minimum acceptable level is >99.5%
 7. Commit your changes in compliance with commit guidelines
 8. Push to your fork
-9. Sign the CLA if you are contributing for the first time
+9. [Sign the CLA](https://cla-assistant.io/winkjs/wink-nlp) if you are contributing for the first time
 10. Finally, submit a pull request.
 
 
@@ -29,7 +30,7 @@ By contributing, you are expected to uphold [wink’s code of conduct](CODE_OF_C
 ### About Wink
 Wink is a growing open source project focusing on **Natural Language Processing**, **Machine Learning** and **Statistics**. It contains multiple repositories or packages. All packages expose consistent and uniform APIs, thus minimizing the need to learn a new interface for each task. Do take out some time in understanding the structure of APIs, before attempting any enhancements. In wink, we prefer **functions** and **closures** over objects.
 
-Like artisans, we too need a toolset and process to create beautiful software. The process is orchestrated by [Travis CI](https://travis-ci.org/) in accordance to the configuration files present in each repository. The details and tools used are outlined below.
+Like artisans, we too need a toolset and process to create beautiful software. The process is orchestrated by [Travis CI](https://www.travis-ci.com) in accordance to the configuration files present in each repository. The details and tools used are outlined below.
 
 
 ### Linting
@@ -37,10 +38,10 @@ Well defined linting rules or **coding standards** help us in making code more c
 
 
 ### Documenting
-We believe that the documentation must not only explain the API but also narrate the story of logic, algorithms and references used. Wink uses the [JSDoc](http://usejsdoc.org/) standard for API documentation and [Literate-Programming Standards](https://en.wikipedia.org/wiki/Literate_programming) for documenting the logic using [docker](http://jbt.github.io/docker/src/docker.js.html).
+We believe that the documentation must not only explain the API but also narrate the story of logic, algorithms and references used. Wink uses the [JSDoc](https://jsdoc.app) standard for API documentation and [Literate-Programming Standards](https://en.wikipedia.org/wiki/Literate_programming) for documenting the logic using [docker](http://jbt.github.io/docker/src/docker.js.html); the `npm run sourcedocs` script generates a well formatted code documentation in HTML.
 
 ### Testing
-Wink requires a test coverage of **atleast > 99.5%** and aims for 100%. Any new contribution must maintain the existing test coverage level. We use [Chai](http://chaijs.com/), [Mocha](https://mochajs.org/) and [Istanbul](https://inch-ci.org/), [Coveralls](https://coveralls.io/) to run tests and determine coverage.
+Wink requires a test coverage of **atleast > 99.5%** and aims for 100%. Any new contribution must maintain the existing test coverage level. We use [Chai](http://chaijs.com/), [Mocha](https://mochajs.org/) and [Istanbul](https://istanbul.js.org), [Coveralls](https://coveralls.io/) to run tests and determine coverage.
 
 ### Committing
 We follow [commit guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits) from the Google's [Angular Project](https://angular.io/), whose documentation is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See important excerpts for quick reference below:
@@ -79,4 +80,4 @@ The header is **mandatory** and the scope of the header is optional. Any line of
 
 ### Contributor License Agreement (CLA)
 
-The [CLA](https://gist.github.com/sanjayaksaxena/8b96d3d4f2be6cdc0f28a5839d5a5b2a) is for your protection as well as the protection of [GRAYPE](http://graype.in) and it’s licensees; it does not change your rights to use your own Contributions for any other purpose. Our CLA is a short and easy to understand agreement and can be signed using a simple click-through form.  Please sign our Contributor License Agreement (CLA) before sending pull requests. It's a quick process, we promise!
+The [CLA](https://gist.github.com/sanjayaksaxena/8b96d3d4f2be6cdc0f28a5839d5a5b2a) is for your protection as well as the protection of [GRAYPE](http://graype.in) and it’s licensees; it does not change your rights to use your own Contributions for any other purpose. Our CLA is a short and easy to understand agreement and can be signed using a simple click-through form.  Please [sign our Contributor License Agreement (CLA)](https://cla-assistant.io/winkjs/wink-nlp) before sending pull requests. It's a quick process, we promise!
