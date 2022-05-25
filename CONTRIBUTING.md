@@ -65,7 +65,7 @@ It is important to maintain the performance of winkNLP, whenever a change is mad
 #### Security Considerations
 Our security review/testing is inspired from the recommendations in [OWASP's NodeJS Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html) that are applicable to winkNLP —  since it is a library used by developers to create NLP web/mobile/CLI  apps/tools, only Platform Security specific recommendations apply. We follow the  guidelines outlined below:
 
-1. Never depend on any external package.
+1. winkNLP has zero dependency on any external package.
 1. ESLint is used as a Static Analysis Security Testing (SAST) tool.
 1. Never use `eval()` function.
 1. Avoid prototype pollution possibilities by using objects created via  **`Object.create( null )`**.
