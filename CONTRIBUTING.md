@@ -65,12 +65,12 @@ It is important to maintain the performance of winkNLP, whenever a change is mad
 #### Security Considerations
 Our security review/testing is inspired from the recommendations in [OWASP's NodeJS Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html) that are applicable to winkNLP —  since it is a library used by developers to create NLP web/mobile/CLI  apps/tools, only Platform Security specific recommendations apply. We follow the  guidelines outlined below:
 
-1. Never depend on any external package.
-1. ESLint is used as a Static Analysis Security Testing (SAST) tool.
+1. Stay away from using any external package — winkNLP has 0 external dependency.
+1. Use ESLint as a Static Analysis Security Testing (SAST) tool.
 1. Never use `eval()` function.
-1. Avoid prototype pollution possibilities by using objects created via  **`Object.create( null )`**.
+1. Avoid prototype pollution by using objects created via **`Object.create( null )`**.
 1. Perform input validation with defined default behavior.
-1. Review regex thoroughly to avoid ReDoS by testing them properly using [regex 101](https://regex101.com) on Chrome browser (Latest stable version), Node.js (LTS version). They are also evaluated using tools like [regexploit](https://github.com/doyensec/regexploit).
+1. Use  tools like [regexploit](https://github.com/doyensec/regexploit) to detect potential ReDoS apart from reviewing regexes using  [regex 101](https://regex101.com) on Chrome browser (Latest stable version), Node.js (LTS version).
 
 ### Committing
 We follow [commit guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits) from Google's [Angular Project](https://angular.io/), whose documentation is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See important excerpts for quick reference below:
