@@ -1,3 +1,9 @@
+# [Ready for Node.js version 18](https://github.com/winkjs/wink-nlp/releases/tag/1.12.2)
+## Version 1.12.2 October 13, 2022
+
+### 🐛 Fixes
+- Fixed incorrect install command in README ✅
+
 # [Ready for Node.js version 18](https://github.com/winkjs/wink-nlp/releases/tag/1.12.1)
 ## Version 1.12.1 October 13, 2022
 
