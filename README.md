@@ -56,12 +56,14 @@ In order to use winkNLP after its installation, you also need to install a langu
 | Node.js Version |Installation |
 | --- | --- |
 | 16 or 18 | `npm wink-eng-lite-web-model --save` |
-| 14 or older | `node -e "require('wink-nlp/models/install')"` |
+| 14 or 12 | `node -e "require('wink-nlp/models/install')"` |
 
-The [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model) is designed to work with Node.js version 16 or 18. The second command installs the [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), which works with Node.js version 14 or older. It can also work on browsers as described in the next section.
+The [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model) is designed to work with Node.js version 16 or 18. It can also work on browsers as described in the next section.
+
+The second command installs the [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), which works with Node.js version 14 or 12. 
 
 ### How to install for Web Browser
-If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model) instead. Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html). Explore **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** on [Observable](https://observablehq.com/) for live browser based examples.
+If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model). Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html). Explore **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** on [Observable](https://observablehq.com/) for live browser based examples.
 
 ## Getting Started
 The "Hello World!" in winkNLP is given below:
@@ -115,7 +117,7 @@ Links entities such as famous persons, locations or objects to the relevant Wiki
 ## Speed & Accuracy
 The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~525,000 tokens per second** with its default language model — [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), when [benchmarked](https://github.com/bestiejs/benchmark.js) using "Ch 13 of Ulysses by James Joyce" on a 2.2 GHz Intel Core i7 machine with 16GB RAM. The processing included the entire NLP pipeline — tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, and named entity extraction. This speed is way ahead of the prevailing speed benchmarks.
 
-The benchmark was conducted on [Node.js versions 14.8.0, and 12.18.3](https://nodejs.org/en/about/releases/). It was also tested on Node.js versions 16 and 18.
+The benchmark was conducted on [Node.js versions 14.8.0, and 12.18.3](https://nodejs.org/en/about/releases/). It delivered similar/better performance on Node.js versions 16/18.
 
 The [winkNLP](https://winkjs.org/wink-nlp/) delivers similar performance on browsers; its performance on a specific machine/browser combination can be measured using the Observable notebook — [How to measure winkNLP's speed on browsers?](https://observablehq.com/@winkjs/how-to-measure-winknlps-speed-on-browsers?collection=@winkjs/winknlp-recipes).
 
