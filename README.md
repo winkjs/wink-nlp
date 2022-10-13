@@ -51,18 +51,17 @@ Use [npm](https://www.npmjs.com/package/wink-nlp) install:
 npm install wink-nlp --save
 ```
 
-In order to use winkNLP after its installation, you also need to install a language model. The following command installs the latest version of default language model — the light weight English language model called [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model).
+In order to use winkNLP after its installation, you also need to install a language model according to the node version used. The following table outlines the version specific installation command:
 
-```shell
-node -e "require( 'wink-nlp/models/install' )"
-```
-Any required model can be installed by specifying its name as the last parameter in the above command. For example:
-```shell
-node -e "require( 'wink-nlp/models/install' )" wink-eng-lite-model
-```
+| Node.js Version |Installation |
+| --- | --- |
+| 16 or 18 | `npm wink-eng-lite-web-model --save` |
+| 14 or older | `node -e "require('wink-nlp/models/install')"` |
+
+The [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model) is designed to work with Node.js version 16 or 18. The second command installs the [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), which works with Node.js version 14 or older. It can also work on browsers as described in the next section.
 
 ### How to install for Web Browser
-If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model) instead. Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html).
+If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model) instead. Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html). Explore **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** on [Observable](https://observablehq.com/) for live browser based examples.
 
 ## Getting Started
 The "Hello World!" in winkNLP is given below:
