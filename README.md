@@ -55,7 +55,7 @@ In order to use winkNLP after its installation, you also need to install a langu
 
 | Node.js Version |Installation |
 | --- | --- |
-| 16 or 18 | `npm wink-eng-lite-web-model --save` |
+| 16 or 18 | `npm install wink-eng-lite-web-model --save` |
 | 14 or 12 | `node -e "require('wink-nlp/models/install')"` |
 
 The [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model) is designed to work with Node.js version 16 or 18. It can also work on browsers as described in the next section.
