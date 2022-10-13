@@ -115,7 +115,7 @@ Links entities such as famous persons, locations or objects to the relevant Wiki
 ## Speed & Accuracy
 The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~525,000 tokens per second** with its default language model — [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), when [benchmarked](https://github.com/bestiejs/benchmark.js) using "Ch 13 of Ulysses by James Joyce" on a 2.2 GHz Intel Core i7 machine with 16GB RAM. The processing included the entire NLP pipeline — tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, and named entity extraction. This speed is way ahead of the prevailing speed benchmarks.
 
-The benchmark was conducted on [Node.js versions 14.8.0, and 12.18.3](https://nodejs.org/en/about/releases/).
+The benchmark was conducted on [Node.js versions 14.8.0, and 12.18.3](https://nodejs.org/en/about/releases/). It was also tested on Node.js versions 16 and 18.
 
 The [winkNLP](https://winkjs.org/wink-nlp/) delivers similar performance on browsers; its performance on a specific machine/browser combination can be measured using the Observable notebook — [How to measure winkNLP's speed on browsers?](https://observablehq.com/@winkjs/how-to-measure-winknlps-speed-on-browsers?collection=@winkjs/winknlp-recipes).
 
