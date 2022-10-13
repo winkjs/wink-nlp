@@ -1,3 +1,9 @@
+# [Ready for Node.js version 18](https://github.com/winkjs/wink-nlp/releases/tag/1.12.1)
+## Version 1.12.1 October 13, 2022
+
+### ⚙️ Updates
+- Ready for future — we have tested winkNLP on Node.js version 18 including its models. 🙌 🎉
+
 # [Some enhancements plus earned OpenSSF best practices passing badge](https://github.com/winkjs/wink-nlp/releases/tag/1.12.0)
 ## Version 1.12.0 May 13, 2022
 
