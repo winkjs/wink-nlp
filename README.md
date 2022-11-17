@@ -5,43 +5,46 @@
 ## Developer friendly Natural Language Processing ✨
 [<img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" >](https://winkjs.org/)
 
-winkNLP is a JavaScript library for Natural Language Processing (NLP). Designed specifically to make development of NLP solutions **easier** and **faster**, winkNLP is optimized for the right balance of performance and accuracy.  The package can handle large amount of raw text at speeds over **525,000 tokens/second**. And with a test coverage of ~100%, winkNLP is a tool for building production grade systems with confidence.
+WinkNLP is a JavaScript library for Natural Language Processing (NLP). Designed specifically to make development of NLP applications **easier** and **faster**, winkNLP is optimized for the right balance of performance and accuracy. 
 
-[<img src="https://user-images.githubusercontent.com/9491/100614781-ad17bb00-333c-11eb-87ab-2ae41aa21285.png" alt="Wink Wizard Showcase">](https://winkjs.org/showcase-wiz/)
+It is built ground up with a lean code base that has [no external dependency](https://snyk.io/test/github/winkjs/wink-nlp?tab=dependencies). A test coverage of [~100%](https://coveralls.io/github/winkjs/wink-nlp?branch=master) and compliance with the [Open Source Security Foundation best practices](https://bestpractices.coreinfrastructure.org/en/projects/6035) make winkNLP the ideal tool for building production grade systems with confidence.
 
+WinkNLP with full [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts), runs on Node.js and browsers.
+
+## Build amazing apps quickly
+| [Wikipedia article timeline](https://winkjs.org/showcase-timeline/) | [Context aware word cloud](https://observablehq.com/@winkjs/how-to-create-a-context-aware-word-cloud) | [Key sentences detection](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document) |
+| --- | --- | --- |
+| [<img src="https://user-images.githubusercontent.com/29990/202497363-19c30578-8146-4f36-9c4b-4de613610837.png">](https://winkjs.org/showcase-timeline/)| [<img src="https://user-images.githubusercontent.com/29990/202506181-1a926ee0-788f-4aa1-aeac-a097f09fe747.png">](https://observablehq.com/@winkjs/how-to-create-a-context-aware-word-cloud)|[<img src="https://user-images.githubusercontent.com/29990/202506490-7f999d12-8319-4969-b92b-0649559ffbe6.png">](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document)|
+
+Head to  [live examples](https://winkjs.org/examples.html) to explore further.
+
+## Blazing fast
+WinkNLP can easily process large amount of raw text at speeds over <mark>**650,000 tokens/second**</mark> on a M1 Macbook Pro in both browser and Node.js environments. It even runs smoothly on a low-end smartphone's browser.
+
+| Environment | Benchmarking Command |
+|--- | --- |
+| Node.js | [node benchmark/run](https://github.com/winkjs/wink-nlp/tree/master/benchmark) |
+| Browser | [How to measure winkNLP's speed on browsers?](https://observablehq.com/@winkjs/how-to-measure-winknlps-speed-on-browsers) |
 
 ## Features
-WinkNLP has a comprehensive natural language processing (NLP) pipeline covering tokenization, sentence boundary detection (sbd), negation handling, sentiment analysis, part-of-speech (pos) tagging, named entity recognition (ner), custom entities recognition (cer):
+WinkNLP has a [comprehensive natural language processing (NLP) pipeline](https://winkjs.org/wink-nlp/processing-pipeline.html) covering tokenization, sentence boundary detection (sbd), negation handling, sentiment analysis, part-of-speech (pos) tagging, named entity recognition (ner), custom entities recognition (cer). It offers a rich feature set:
 
-<img src="https://winkjs.org/images/wink-nlp-processing-pipeline.png" alt="Processing pipeline: text, tokenization, SBD, negation, sentiment, NER, POS, CER" title="WinkNLP processing pipeline">
+<table>
+<tr><td style="width:45%">Fast, lossless & multilingual tokenizer ⚡️</td><td>For example, a multilingual text string <b><code style="font-size: 0.9em">"¡Hola! नमस्कार! Hi! Bonjour chéri"</code></b> tokenizes as <code style="font-size: 0.9em">["¡", "Hola", "!", "नमस्कार", "!", "Hi", "!", "Bonjour", "chéri"]</code>.  It tokenizes text at <b>4 million</b> tokens/second on a M1 MBP's browser.</td></tr>
+<tr><td>Developer friendly and intuitive <a href="https://winkjs.org/wink-nlp/getting-started.html">API</a> 💚</td><td>As simple as DOM manipulation; most <a href="https://observablehq.com/@winkjs/how-to-build-a-naive-wikification-tool?collection=@winkjs/winknlp-recipes">live examples</a> have <b>30-40</b> lines of code.</td></tr>
+<tr><td>Best-in-class <a href="https://winkjs.org/wink-nlp/visualizing-markup.html">text visualization</a> 🖼</td><td>Programmatically <b><a href="https://winkjs.org/wink-nlp/markup.html">mark</a></b> tokens, sentences, entities, etc. using HTML mark or any other tag of your choice.</td></tr>
+<tr><td>Extensive text processing features ♻️</td><td>Checkout how a <a href="https://github.com/winkjs/wink-naive-bayes-text-classifier#readme">Naive Bayes classifier</a> achieves <b>impressive</b> chatbot intent classification accuracy with right kind of preprocessing with winkNLP.</td></tr>
+<tr><td>Pre-trained <a href="https://winkjs.org/wink-nlp/language-models.html">language models</a> 🔠</td><td>Compact sizes starting from <b>&lt;3MB</b>.</td></tr>
+<tr><td>Host of <a href="https://winkjs.org/wink-nlp/its-as-helper.html">utilities & tools</a> 💼</td><td>BM25 vectorizer; Several similarity methods – Cosine, Tversky, Sørensen-Dice, Otsuka-Ochiai; Helpers to get bag of words, frequency table, lemma/stem, stop word removal and many more.</td></tr>
+</table>
 
-At every stage a range of properties become accessible for tokens, sentences, and entities. Read more about the processing pipeline and how to configure it in the [winkNLP documentation](https://winkjs.org/wink-nlp/processing-pipeline.html).
+WinkJS also has packages like [Naive Bayes classifier](https://github.com/winkjs/wink-naive-bayes-text-classifier), [multi-class averaged perceptron](https://github.com/winkjs/wink-perceptron) and [popular token and string distance methods](https://github.com/winkjs/wink-distance), which complement winkNLP. 
 
-
-It packs a rich feature set into a small foot print codebase of [under 1500 lines](https://coveralls.io/github/winkjs/wink-nlp?branch=master):
-
-1. Fast, lossless & multilingual [tokenizer](https://winkjs.org/wink-nlp/processing-pipeline.html)
-
-2. Developer friendly and intuitive [API](https://winkjs.org/wink-nlp/getting-started.html)
-
-3. Built-in [API](https://winkjs.org/wink-nlp/visualizing-markup.html) to aid [text visualization](https://observablehq.com/@winkjs/how-to-perform-sentiment-analysis?collection=@winkjs/winknlp-recipes)
-
-4. Extensive [text processing features](https://winkjs.org/wink-nlp/its-as-helper.html) such as bag-of-words, frequency table, stop word removal, readability statistics computation and many more.
-
-5. Pre-trained [language models](https://winkjs.org/wink-nlp/language-models.html) with sizes starting from <3MB onwards
-
-6. [BM25-based vectorizer](https://winkjs.org/wink-nlp/bm25-vectorizer.html)
-
-7. Multiple [similarity](https://winkjs.org/wink-nlp/similarity.html) methods
-
-8. Word vector integration
-
-9. No external dependencies
-
-10. [Runs on web browsers](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html)
-
-11. [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts).
-
+## Documentation
+- [Concepts](https://winkjs.org/wink-nlp/getting-started.html) — everything you need to know to get started.
+- [API Reference](https://winkjs.org/wink-nlp/read-doc.html) — explains usage of APIs with examples.
+- [Change log](https://github.com/winkjs/wink-nlp/blob/master/CHANGELOG.md) — version history along with the details of breaking changes, if any.
+- [Examples](https://winkjs.org/examples.html) — live examples with code to give you a head start.
 
 ## Installation
 
@@ -51,22 +54,22 @@ Use [npm](https://www.npmjs.com/package/wink-nlp) install:
 npm install wink-nlp --save
 ```
 
-In order to use winkNLP after its installation, you also need to install a language model according to the node version used. The following table outlines the version specific installation command:
+In order to use winkNLP after its installation, you also need to install a language model according to the node version used. The table below outlines the version specific installation command:
 
 | Node.js Version |Installation |
 | --- | --- |
 | 16 or 18 | `npm install wink-eng-lite-web-model --save` |
 | 14 or 12 | `node -e "require('wink-nlp/models/install')"` |
 
-The [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model) is designed to work with Node.js version 16 or 18. It can also work on browsers as described in the next section.
+The [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model) is designed to work with Node.js version 16 or 18. It can also work on browsers as described in the next section. This is the **recommended** model.
 
 The second command installs the [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), which works with Node.js version 14 or 12. 
 
 ### How to install for Web Browser
 If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model). Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html). Explore **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** on [Observable](https://observablehq.com/) for live browser based examples.
 
-## Getting Started
-The "Hello World!" in winkNLP is given below:
+### Get started
+Here is the "Hello World!" of winkNLP:
 
 ```javascript
 // Load wink-nlp package.
@@ -99,40 +102,20 @@ console.log( doc.tokens().out() );
 console.log( doc.tokens().out( its.type, as.freqTable ) );
 // -> [ [ 'word', 5 ], [ 'punctuation', 2 ], [ 'emoji', 1 ] ]
 ```
-Experiment with the above code on [RunKit](https://npm.runkit.com/wink-nlp).
-
-### Explore Further
-Dive into [winkNLP's concepts](https://winkjs.org/wink-nlp/getting-started.html)  or head to **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** for common NLP tasks or just explore live [showcases](https://winkjs.org/showcase.html) to learn:
-
-#### [Wikipedia Timeline](https://winkjs.org/showcase-timeline/) ⏳
-Reads any wikipedia article and generates a visual timeline of all its events.
-
-#### [NLP Wizard](https://winkjs.org/showcase-wiz/) 🧙
-Performs tokenization, sentence boundary detection, pos tagging, named entity detection and sentiment analysis of user input text in real time.
-
-#### [Naive Wikification Tool](https://observablehq.com/@winkjs/how-to-build-a-naive-wikification-tool) 🔗
-Links entities such as famous persons, locations or objects to the relevant Wikipedia pages.
-
+Experiment with winkNLP on [RunKit](https://npm.runkit.com/wink-nlp).
 
 ## Speed & Accuracy
-The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~525,000 tokens per second** with its default language model — [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), when [benchmarked](https://github.com/bestiejs/benchmark.js) using "Ch 13 of Ulysses by James Joyce" on a 2.2 GHz Intel Core i7 machine with 16GB RAM. The processing included the entire NLP pipeline — tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, and named entity extraction. This speed is way ahead of the prevailing speed benchmarks.
+The [winkNLP](https://winkjs.org/wink-nlp/) processes raw text at **~650,000 tokens per second** with its [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model), when [benchmarked](https://github.com/bestiejs/benchmark.js) using "Ch 13 of Ulysses by James Joyce" on a M1 Macbook Pro machine with 16GB RAM. The processing included the entire NLP pipeline — tokenization, sentence boundary detection, negation handling, sentiment analysis, part-of-speech tagging, and named entity extraction. This speed is way ahead of the prevailing speed benchmarks.
 
-The benchmark was conducted on [Node.js versions 14.8.0, and 12.18.3](https://nodejs.org/en/about/releases/). It delivered similar/better performance on Node.js versions 16/18.
+The benchmark was conducted on [Node.js versions 16, and 18](https://nodejs.org/en/about/releases/).
 
-The [winkNLP](https://winkjs.org/wink-nlp/) delivers similar performance on browsers; its performance on a specific machine/browser combination can be measured using the Observable notebook — [How to measure winkNLP's speed on browsers?](https://observablehq.com/@winkjs/how-to-measure-winknlps-speed-on-browsers?collection=@winkjs/winknlp-recipes).
-
-It pos tags a subset of WSJ corpus with an accuracy of **~94.7%** — this includes *tokenization of raw text prior to pos tagging*. The current state-of-the-art is at ~97% accuracy but at lower speeds and is generally computed using gold standard pre-tokenized corpus.
+It pos tags a subset of WSJ corpus with an accuracy of **~94.7%** — this includes *tokenization of raw text prior to pos tagging*. The present state-of-the-art is at ~97% accuracy but at lower speeds and is generally computed using gold standard pre-tokenized corpus.
 
 Its general purpose sentiment analysis delivers a [f-score](https://en.wikipedia.org/wiki/F1_score) of **~84.5%**, when validated using Amazon Product Review [Sentiment Labelled Sentences Data Set](https://archive.ics.uci.edu/ml/machine-learning-databases/00331/) at [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php). The current benchmark accuracy for **specifically trained** models can range around 95%.
 
 ## Memory Requirement
 Wink NLP delivers this performance with the minimal load on RAM. For example, it processes the entire [History of India Volume I](https://en.wikisource.org/wiki/History_of_India/Volume_1) with a total peak memory requirement of under **80MB**. The book has around 350 pages which translates to over 125,000 tokens.
 
-## Documentation
-- [Concepts](https://winkjs.org/wink-nlp/getting-started.html) — everything you need to know to get started.
-- [API Reference](https://winkjs.org/wink-nlp/read-doc.html) — explains usage of APIs with examples.
-- [Change log](https://github.com/winkjs/wink-nlp/blob/master/CHANGELOG.md) — version history along with the details of breaking changes, if any.
-- [Showcases](https://winkjs.org/showcase.html) — live examples with code to give you a head start.
 
 ## Need Help?
 
@@ -146,8 +129,8 @@ If you spot a bug and the same has not yet been reported, raise a new [issue](ht
 Looking for a new feature, request it via the [new features & ideas](https://github.com/winkjs/wink-nlp/discussions/categories/new-features-ideas) discussion forum  or consider becoming a [contributor](https://github.com/winkjs/wink-nlp/blob/master/CONTRIBUTING.md).
 
 
-## About wink
-[Wink](https://winkjs.org/) is a family of open source packages for **Natural Language Processing**, **Machine Learning**, and **Statistical Analysis** in NodeJS. The code is **thoroughly documented** for easy human comprehension and has a **test coverage of ~100%** for reliability to build production grade solutions.
+## About winkJS
+[WinkJS](https://winkjs.org/) is a family of open source packages for **Natural Language Processing**, **Machine Learning**, and **Statistical Analysis** in NodeJS. The code is **thoroughly documented** for easy human comprehension and has a **test coverage of ~100%** for reliability to build production grade solutions.
 
 ## Copyright & License
 
