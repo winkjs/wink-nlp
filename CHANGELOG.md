@@ -1,3 +1,11 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.12.3)
+## Version 1.12.3 November 18, 2022
+
+### ⚙️ Updates
+- README is now more informative and links to examples and benchmarks 👍
+- Benchmarked on latest machine, browser versions 🖥
+
+
 # [Ready for Node.js version 18](https://github.com/winkjs/wink-nlp/releases/tag/1.12.2)
 ## Version 1.12.2 October 13, 2022
 
