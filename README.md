@@ -19,7 +19,7 @@ WinkNLP with full [Typescript support](https://github.com/winkjs/wink-nlp/blob/m
 Head to  [live examples](https://winkjs.org/examples.html) to explore further.
 
 ## Blazing fast
-WinkNLP can easily process large amount of raw text at speeds over <mark>**650,000 tokens/second**</mark> on a M1 Macbook Pro in both browser and Node.js environments. It even runs smoothly on a low-end smartphone's browser.
+WinkNLP can easily process large amount of raw text at speeds over **650,000 tokens/second**&nbsp; on a M1 Macbook Pro in both browser and Node.js environments. It even runs smoothly on a low-end smartphone's browser.
 
 | Environment | Benchmarking Command |
 |--- | --- |
@@ -30,12 +30,12 @@ WinkNLP can easily process large amount of raw text at speeds over <mark>**650,0
 WinkNLP has a [comprehensive natural language processing (NLP) pipeline](https://winkjs.org/wink-nlp/processing-pipeline.html) covering tokenization, sentence boundary detection (sbd), negation handling, sentiment analysis, part-of-speech (pos) tagging, named entity recognition (ner), custom entities recognition (cer). It offers a rich feature set:
 
 <table>
-<tr><td width="330px;">Fast, lossless & multilingual tokenizer ⚡️</td><td>For example, the multilingual text string <b><code style="font-size: 0.9em">"¡Hola! नमस्कार! Hi! Bonjour chéri"</code></b>  is tokenized as <code style="font-size: 0.9em">["¡", "Hola", "!", "नमस्कार", "!", "Hi", "!", "Bonjour", "chéri"]</code>.  The tokenizer processes text at a speed close to <b>4 million</b> tokens/second on a M1 MBP's browser.</td></tr>
-<tr><td>Developer friendly and intuitive <a href="https://winkjs.org/wink-nlp/getting-started.html">API</a> 💚</td><td>With winkNLP, processing any text is even simpler than DOM manipulation; most <a href="https://observablehq.com/@winkjs/how-to-build-a-naive-wikification-tool?collection=@winkjs/winknlp-recipes">live examples</a> have <b>30-40</b> lines of code.</td></tr>
-<tr><td>Best-in-class <a href="https://winkjs.org/wink-nlp/visualizing-markup.html">text visualization</a> 🖼</td><td>Programmatically <b><a href="https://winkjs.org/wink-nlp/markup.html">mark</a></b> tokens, sentences, entities, etc. using HTML mark or any other tag of your choice.</td></tr>
-<tr><td>Extensive text processing features ♻️</td><td>Remove and/or retain tokens with specific attributes such as part-of-speech, named entity type, token type, stop word, shape and many more; compute Flesch reading ease score; generate n-grams; normalize, lemmatise or stem. Checkout how with the right kind of text preprocessing, even <a href="https://github.com/winkjs/wink-naive-bayes-text-classifier#readme">Naive Bayes classifier</a> achieves <b>impressive (≥90%)</b> accuracy in sentiment analysis and chatbot intent classification tasks.</td></tr>
-<tr><td>Pre-trained <a href="https://winkjs.org/wink-nlp/language-models.html">language models</a> 🔠</td><td>Compact sizes starting from <b>&lt;3MB</b> – reduced model loading time drastically.</td></tr>
-<tr><td>Host of <a href="https://winkjs.org/wink-nlp/its-as-helper.html">utilities & tools</a> 💼</td><td>BM25 vectorizer; Several similarity methods – Cosine, Tversky, Sørensen-Dice, Otsuka-Ochiai; Helpers to get bag of words, frequency table, lemma/stem, stop word removal and many more.</td></tr>
+<tr><td width="330px;">🐎 Fast, lossless & multilingual tokenizer </td><td>For example, the multilingual text string <b><code style="font-size: 0.9em">"¡Hola! नमस्कार! Hi! Bonjour chéri"</code></b>  is tokenized as <code style="font-size: 0.9em">["¡", "Hola", "!", "नमस्कार", "!", "Hi", "!", "Bonjour", "chéri"]</code>.  The tokenizer processes text at a speed close to <b>4 million</b> tokens/second on a M1 MBP's browser.</td></tr>
+<tr><td>✨ Developer friendly and intuitive <a href="https://winkjs.org/wink-nlp/getting-started.html">API</a></td><td>With winkNLP, process any text using a simple, declarative syntax; most <a href="https://observablehq.com/@winkjs/how-to-build-a-naive-wikification-tool?collection=@winkjs/winknlp-recipes">live examples</a> have <b>30-40</b> lines of code.</td></tr>
+<tr><td>🖼 Best-in-class <a href="https://winkjs.org/wink-nlp/visualizing-markup.html">text visualization</a></td><td>Programmatically <b><a href="https://winkjs.org/wink-nlp/markup.html">mark</a></b> tokens, sentences, entities, etc. using HTML mark or any other tag of your choice.</td></tr>
+<tr><td>♻️ Extensive text processing features</td><td>Remove and/or retain tokens with specific attributes such as part-of-speech, named entity type, token type, stop word, shape and many more; compute Flesch reading ease score; generate n-grams; normalize, lemmatise or stem. Checkout how with the right kind of text preprocessing, even <a href="https://github.com/winkjs/wink-naive-bayes-text-classifier#readme">Naive Bayes classifier</a> achieves <b>impressive (≥90%)</b> accuracy in sentiment analysis and chatbot intent classification tasks.</td></tr>
+<tr><td>🔠 Pre-trained <a href="https://winkjs.org/wink-nlp/language-models.html">language models</a></td><td>Compact sizes starting from <b>&lt;3MB</b> – reduced model loading time drastically.</td></tr>
+<tr><td>💼 Host of <a href="https://winkjs.org/wink-nlp/its-as-helper.html">utilities & tools</a></td><td>BM25 vectorizer; Several similarity methods – Cosine, Tversky, Sørensen-Dice, Otsuka-Ochiai; Helpers to get bag of words, frequency table, lemma/stem, stop word removal and many more.</td></tr>
 </table>
 
 
@@ -127,7 +127,7 @@ Please ask at [Stack Overflow](https://stackoverflow.com/) or discuss at [Wink J
 ### Bug report 🐛
 If you spot a bug and the same has not yet been reported, raise a new [issue](https://github.com/winkjs/wink-nlp/issues) or consider fixing it and sending a PR.
 
-### New feature ✨
+### New feature 💡
 Looking for a new feature, request it via the [new features & ideas](https://github.com/winkjs/wink-nlp/discussions/categories/new-features-ideas) discussion forum  or consider becoming a [contributor](https://github.com/winkjs/wink-nlp/blob/master/CONTRIBUTING.md).
 
 
