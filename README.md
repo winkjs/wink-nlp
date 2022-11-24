@@ -127,7 +127,7 @@ Please ask at [Stack Overflow](https://stackoverflow.com/) or discuss at [Wink J
 ### Bug report 🐛
 If you spot a bug and the same has not yet been reported, raise a new [issue](https://github.com/winkjs/wink-nlp/issues) or consider fixing it and sending a PR.
 
-### New feature 💡
+### New feature 🌟
 Looking for a new feature, request it via the [new features & ideas](https://github.com/winkjs/wink-nlp/discussions/categories/new-features-ideas) discussion forum  or consider becoming a [contributor](https://github.com/winkjs/wink-nlp/blob/master/CONTRIBUTING.md).
 
 
