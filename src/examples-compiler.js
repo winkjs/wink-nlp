@@ -57,12 +57,24 @@ var mergeSplitsAndMatches = function ( splts, mtchs ) {
 
 // # compiler
 /**
- * Creates instance of compiler using input arguments.
- * @param  {JSON}     cerModel    meta model used during compilation.
- * @param  {object}   cache       the wink-nlp cache.
- * @param  {function} tokenize    tokenizer function from wink-nlp.
- * @param  {boolean}  matchValue  config.matchValue of learnCustomEntities() API.
- * @return {object}               contains run function.
+ * It transforms the input patterns for custom entity recognition into a model,
+ * which is run by winkNLP's `readDoc()` method. The model is created by
+ * the `learnCustomEntities()` method of core winkNLP using this compiler. Brefore
+ * the compiler can be **run**, its instance must be created using the following
+ * parameters:
+ *
+ * @param  {JSON}     cerModel    custom entity meta model — handles escaping
+ *                                of entity literals. For example `^ADJ` will match
+ *                                with token `ADJ` (or `adj` based on `matchValue` in
+ *                                `cerConfig`), whereas `ADJ` will match with the
+ *                                adjective part-of-speech of a token.
+ * @param  {object}   cache       of lexicon, which is required to deliver performance.
+ * @param  {function} tokenize    is instantiated from core tokenizer, which tokenises the
+ *                                input patterns.
+ * @param  {boolean}  matchValue  match value flag — defines match on either `value` or
+ *                                `normal` of tokens.<br/>
+ * @return {object}               contains **run** function, which can compile the input
+ *                                pattern into a model.
  * @private
  */
 var compiler = function ( cerModel, cache, tokenize, matchValue ) {
