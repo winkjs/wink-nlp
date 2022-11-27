@@ -63,14 +63,15 @@ var mergeSplitsAndMatches = function ( splts, mtchs ) {
  * the compiler can be **run**, its instance must be created using the following
  * parameters:
  *
- * @param  {JSON}     cerModel    custom entity meta model — handles escaping
+ * @param  {JSON}     cerModel    precompiled custom entity meta model — handles escaping
  *                                of entity literals. For example `^ADJ` will match
  *                                with token `ADJ` (or `adj` based on `matchValue` in
  *                                `cerConfig`), whereas `ADJ` will match with the
  *                                adjective part-of-speech of a token.
  * @param  {object}   cache       of lexicon, which is required to deliver performance.
  * @param  {function} tokenize    is instantiated from core tokenizer, which tokenises the
- *                                input patterns.
+ *                                input patterns. It is used in the `tokenizeText()` private
+ *                                method of compiler.
  * @param  {boolean}  matchValue  match value flag — defines match on either `value` or
  *                                `normal` of tokens.<br/>
  * @return {object}               contains **run** function, which can compile the input
@@ -84,6 +85,8 @@ var compiler = function ( cerModel, cache, tokenize, matchValue ) {
   var preserve;
 
   cerAutomata.importJSON( cerModel );
+  // On pattern detection, we need to save the custom property — `preserve`
+  // created by the `cerModel's` execution.
   cerAutomata.setOnPatternDetectionFn( ( match, customProperty ) => ( match.push( customProperty ) ) );
 
   // ## hasOrPattern
