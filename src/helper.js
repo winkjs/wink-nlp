@@ -67,4 +67,27 @@ helper.isFiniteInteger = function ( n ) {
   );
 }; // isFiniteInteger()
 
+/**
+ * Tests if argument `a` contains one or more finite integers.
+ *
+ * @param {*} a       is tested for an array of finite integers.
+ * @returns {boolean} ture if `n` is an array of finite integers, otherwise false.
+ */
+helper.isIntegerArray = function ( a ) {
+  // If it is not an array, return `false`.
+  if ( !helper.isArray( a ) ) return false;
+
+  // Has no element i.e. no finite integer — return `false`.
+  if ( a.length === 0 ) return false;
+
+  // Test every element for a finite integer.
+  for ( let i = 0; i < a.length; i += 1 ) {
+    // Any failure means immediately return `false`.
+    if ( !helper.isFiniteInteger( a[ i ] ) ) return false;
+  }
+
+  // It is an array and contains all finite integers, return `true`.
+  return true;
+}; // isIntegerArray()
+
 module.exports = helper;
