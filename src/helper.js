@@ -52,4 +52,19 @@ helper.isArray = function ( v ) {
   return ( Object.prototype.toString.call( v ) === '[object Array]' );
 }; // isArray()
 
+/**
+ * Tests if argument `n` is a finite integer.
+ *
+ * @param {*} n       is tested for a finite integer.
+ * @returns {boolean} ture if `n` is a finite integer, otherwise false.
+ */
+helper.isFiniteInteger = function ( n ) {
+  return (
+    ( typeof n === 'number' ) &&
+    !isNaN( n ) &&
+    isFinite( n ) &&
+    ( n === Math.round( n ) )
+  );
+}; // isFiniteInteger()
+
 module.exports = helper;
