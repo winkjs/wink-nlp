@@ -32,12 +32,24 @@
 
 var helper = Object.create( null );
 
+/**
+ * Tests if argument `v` is a JS object.
+ *
+ * @param {*} v       is tested for a valid JS object.
+ * @returns {boolean} ture if `v` is a valid JS object, otherwise false.
+ */
 helper.isObject = function ( v ) {
-  return ( v && ( Object.prototype.toString.call( v ) === '[object Object]' ) ) ? true : false; // eslint-disable-line no-unneeded-ternary
+  return ( Object.prototype.toString.call( v ) === '[object Object]' );
 }; // isObject()
 
+/**
+ * Tests if argument `v` is a JS array.
+ *
+ * @param {*} v       is tested for a valid JS array.
+ * @returns {boolean} ture if `v` is a valid JS array, otherwise false.
+ */
 helper.isArray = function ( v ) {
-  return ( ( v !== undefined ) && ( v !== null ) && ( Object.prototype.toString.call( v ) === '[object Array]' ) );
+  return ( Object.prototype.toString.call( v ) === '[object Array]' );
 }; // isArray()
 
 module.exports = helper;
