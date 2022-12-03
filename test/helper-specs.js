@@ -78,3 +78,23 @@ describe( 'isArray', function () {
     } );
   } );
 } );
+
+describe( 'isFiniteInteger', function () {
+  var tests = [
+    { expectedOutputIs: false, whenInputIs: undefined },
+    { expectedOutputIs: false, whenInputIs: null },
+    { expectedOutputIs: false, whenInputIs: Infinity },
+    { expectedOutputIs: false, whenInputIs: -1.1 },
+    { expectedOutputIs: false, whenInputIs: 1.00001 },
+    { expectedOutputIs: false, whenInputIs: {} },
+    { expectedOutputIs: false, whenInputIs: [] },
+    { expectedOutputIs: true, whenInputIs: 1 },
+    { expectedOutputIs: true, whenInputIs: 999999 },
+    { expectedOutputIs: true, whenInputIs: -999999 }
+  ];
+  tests.forEach( function ( t ) {
+    it( 'should return ' + JSON.stringify( t.expectedOutputIs ) + '\n\tif the input is ' + JSON.stringify( t.whenInputIs ), function () {
+      expect( helper.isFiniteInteger( t.whenInputIs ) ).to.equal( t.expectedOutputIs );
+    } );
+  } );
+} );
