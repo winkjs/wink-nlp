@@ -352,6 +352,14 @@ var nlp = function ( theModel, pipe ) {
             // Pattern is not an array.
             throw Error( `wink-nlp: patterns should be an array, instead found "${typeof ex.patterns}":\n\n${JSON.stringify( ex, null, 2 )}` );
           }
+          // If mark is present then it should be an array of integers **and** its length must
+          // be equal to 2 **and** start index <= end index.
+          if ( ( ex.mark !== undefined ) &&
+                ( !helper.isIntegerArray( ex.mark ) ||
+                ( ex.mark.length !== 2 ) ||
+                ( ex.mark.length === 2 && ex.mark[ 0 ] > ex.mark[ 1 ] ) ) ) {
+            throw Error( `wink-nlp: mark should be an array containing start & end indexes, instead found:\n\n${JSON.stringify( ex.mark, null, 2 )}` );
+          }
         } else {
           // Example is not an object.
           throw Error( `wink-nlp: each example should be an object, instead found a "${typeof ex}":\n\n${JSON.stringify( ex, null, 2 )}` );
