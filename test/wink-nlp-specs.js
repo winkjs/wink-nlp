@@ -576,6 +576,22 @@ describe( 'Learn Custom Entities', function () {
     expect( nlp.learnCustomEntities.bind( null, [ { name: 'ok', patterns: [ '[a#]' ] } ] ) ).to.throw( 'wink-nlp: incorrect token "a#" encountered in examples of learnCustomEntities() API.' );
   } );
 
+  it( 'should throw error if mark is empty', function () {
+    expect( nlp.learnCustomEntities.bind( null, [ { name: 'ok', patterns: [ 'a b' ], mark: [] } ] ) ).to.throw( 'wink-nlp: mark should be an array containing start & end indexes, instead found:' );
+  } );
+
+  it( 'should throw error if mark contains real numbers', function () {
+    expect( nlp.learnCustomEntities.bind( null, [ { name: 'ok', patterns: [ 'a b' ], mark: [ 1, 1.2 ] } ] ) ).to.throw( 'wink-nlp: mark should be an array containing start & end indexes, instead found:' );
+  } );
+
+  it( 'should throw error if within mark start index > end index', function () {
+    expect( nlp.learnCustomEntities.bind( null, [ { name: 'ok', patterns: [ 'a b' ], mark: [ 2, 1 ] } ] ) ).to.throw( 'wink-nlp: mark should be an array containing start & end indexes, instead found:' );
+  } );
+
+  it( 'should throw error if mark contains non integer', function () {
+    expect( nlp.learnCustomEntities.bind( null, [ { name: 'ok', patterns: [ 'a b' ], mark: [ 'a' ] } ] ) ).to.throw( 'wink-nlp: mark should be an array containing start & end indexes, instead found:' );
+  } );
+
   it( 'correct examples should return the count of examples learned', function () {
     expect( nlp.learnCustomEntities( [ { name: 'ok', patterns: [ 'a b' ] } ] ) ).to.equal( 1 );
   } );
