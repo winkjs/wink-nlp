@@ -32,7 +32,8 @@
 
 /* eslint-disable no-console */
 /* eslint-disable guard-for-in */
-var composePatterns = require( './compose-patterns.js' );
+const composePatterns = require( './compose-patterns.js' );
+const identifyMarkedArea = require( './identify-marked-area.js' );
 
 const eosTokenN = 2070000;
 const eosTokenX = '$%^EoS^%$';
@@ -172,7 +173,7 @@ var simpleFSM = function ( cache, token2Ignore ) {
     if ( mark ) {
       // Update last element of `mark` to simplifies computations during fsm
       // execution. Update must happen as a deep copy & not directly!
-      markedStates[ state ] = [ mark[ 0 ], ( length - mark[ 1 ] - 1 ) ];
+      markedStates[ state ] = identifyMarkedArea( mark, length );
     }
 
     if ( customProperty !== undefined ) {
@@ -261,8 +262,14 @@ var simpleFSM = function ( cache, token2Ignore ) {
 
     var customProperty = customPropertyAtStates[ m0 ];
     if ( mark ) {
+      // `match[ 1 ]` will now point to the index of the token where
+      // the entity should end because `match[ 0 ]` is pointing to the index
+      // of the token of detected entity's start and by adding `mark[ 1 ]`
+      // i.e. the `lastIndex` to it, we get the required value.
+      match[ 1 ] = match[ 0 ] + mark[ 1 ];
+      // For `match[ 0 ]`, simply adding `mark[ 0 ]` i.e. `firstIndex` yields
+      // the desried value.
       match[ 0 ] += mark[ 0 ];
-      match[ 1 ] -= mark[ 1 ];
     }
 
     // Removed `customProperty !== undefined &&` check while coding pos experiment
