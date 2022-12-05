@@ -12,9 +12,9 @@ It is built ground up with a lean code base that has [no external dependency](ht
 WinkNLP with full [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts), runs on Node.js and browsers.
 
 ## Build amazing apps quickly
-| [Wikipedia article timeline](https://winkjs.org/showcase-timeline/) | [Context aware word cloud](https://observablehq.com/@winkjs/how-to-create-a-context-aware-word-cloud) | [Key sentences detection](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document) |
+| [Wikipedia article timeline](https://observablehq.com/@winkjs/how-to-visualize-timeline-of-a-wiki-article) | [Context aware word cloud](https://observablehq.com/@winkjs/how-to-create-a-context-aware-word-cloud) | [Key sentences detection](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document) |
 | --- | --- | --- |
-| [<img src="https://user-images.githubusercontent.com/29990/202497363-19c30578-8146-4f36-9c4b-4de613610837.png">](https://winkjs.org/showcase-timeline/)| [<img src="https://user-images.githubusercontent.com/29990/202506181-1a926ee0-788f-4aa1-aeac-a097f09fe747.png">](https://observablehq.com/@winkjs/how-to-create-a-context-aware-word-cloud)|[<img src="https://user-images.githubusercontent.com/29990/202506490-7f999d12-8319-4969-b92b-0649559ffbe6.png">](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document)|
+| [<img src="https://user-images.githubusercontent.com/29990/202497363-19c30578-8146-4f36-9c4b-4de613610837.png">](https://observablehq.com/@winkjs/how-to-visualize-timeline-of-a-wiki-article)| [<img src="https://user-images.githubusercontent.com/29990/202506181-1a926ee0-788f-4aa1-aeac-a097f09fe747.png">](https://observablehq.com/@winkjs/how-to-create-a-context-aware-word-cloud)|[<img src="https://user-images.githubusercontent.com/29990/202506490-7f999d12-8319-4969-b92b-0649559ffbe6.png">](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document)|
 
 Head to  [live examples](https://winkjs.org/examples.html) to explore further.
 
