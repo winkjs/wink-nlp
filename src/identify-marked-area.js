@@ -11,6 +11,11 @@ const identifyMarkedArea = function ( mark, length ) {
   lastIndex = Math.min( lastIndex, lm1 );
   if ( lastIndex < firstIndex ) lastIndex = lm1;
 
+  // The `lastIndex` manoeuvre is required to keep identical approach
+  // being followed in `learnSinglePattern()` of automaton.js, where
+  // the `firstIndex` **was** being added and the `lastIndex` **was** being
+  // subtracted from the span of entity.
+  lastIndex = length - lastIndex - 1;
   return [ firstIndex, lastIndex ];
 }; // identifyMarkedArea()
 

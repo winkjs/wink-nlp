@@ -259,17 +259,10 @@ var simpleFSM = function ( cache, token2Ignore ) {
     if ( terminalStates[ m0 ] === '0' ) return;
     // Not to be ignored — process it.
     var mark = markedStates[ m0 ];
-
     var customProperty = customPropertyAtStates[ m0 ];
     if ( mark ) {
-      // `match[ 1 ]` will now point to the index of the token where
-      // the entity should end because `match[ 0 ]` is pointing to the index
-      // of the token of detected entity's start and by adding `mark[ 1 ]`
-      // i.e. the `lastIndex` to it, we get the required value.
-      match[ 1 ] = match[ 0 ] + mark[ 1 ];
-      // For `match[ 0 ]`, simply adding `mark[ 0 ]` i.e. `firstIndex` yields
-      // the desried value.
       match[ 0 ] += mark[ 0 ];
+      match[ 1 ] -= mark[ 1 ];
     }
 
     // Removed `customProperty !== undefined &&` check while coding pos experiment
