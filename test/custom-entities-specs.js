@@ -222,3 +222,53 @@ describe( 'Detect from learned examples', function () {
     expect( d1.tokens().itemAt( 22 ).parentCustomEntity().out( its.detail ) ).to.deep.equal( expectedEntities[ 5 ] );
   } );
 } );
+
+describe( 'Mark forward, backward & out of bound', function () {
+  const text = 'My best friend has a fluffy cat and fat dog.';
+
+  var forwardExample = [
+    { name: 'forward', patterns: [ 'DET ADJ NOUN' ], mark: [ 2, 2 ] }
+  ];
+
+  var backwardExample = [
+    { name: 'forward', patterns: [ '[|DET] [ADJ] [NOUN]' ], mark: [ -2, -1 ] }
+  ];
+
+  var noMarkExample = [
+    { name: 'forward', patterns: [ '[|DET] [ADJ] [NOUN]' ] }
+  ];
+
+  var outOfBoundExample = [
+    { name: 'forward', patterns: [ '[|DET] [ADJ] [NOUN]' ], mark: [ -20, 10 ] }
+  ];
+
+  it( 'forward example must work correctly', function () {
+    const nlp1 = winkNLP( model );
+    nlp1.learnCustomEntities( forwardExample );
+    var d1 = nlp1.readDoc( text );
+    expect( d1.customEntities().out() ).to.deep.equal( [ 'cat' ] );
+  } );
+
+  it( 'backward example must work correctly', function () {
+    const nlp2 = winkNLP( model );
+    nlp2.learnCustomEntities( backwardExample );
+    var d2 = nlp2.readDoc( text );
+    expect( d2.customEntities().out() ).to.deep.equal( [ 'best friend', 'fluffy cat', 'fat dog' ] );
+  } );
+
+  it( '"No mark example" must work correctly', function () {
+    // contrast with the backward example — no mark & out of bound produce same results!
+    const nlp3 = winkNLP( model );
+    nlp3.learnCustomEntities( noMarkExample );
+    var d3 = nlp3.readDoc( text );
+    expect( d3.customEntities().out() ).to.deep.equal( [ 'best friend', 'a fluffy cat', 'fat dog' ] );
+  } );
+
+  it( 'out of bound example must work correctly', function () {
+    // contrast with the backward example  — no mark & out of bound produce same results!
+    const nlp4 = winkNLP( model );
+    nlp4.learnCustomEntities( outOfBoundExample );
+    var d4 = nlp4.readDoc( text );
+    expect( d4.customEntities().out() ).to.deep.equal( [ 'best friend', 'a fluffy cat', 'fat dog' ] );
+  } );
+} );
