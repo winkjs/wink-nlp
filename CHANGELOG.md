@@ -1,5 +1,5 @@
-# [Improving mark's functionality in custom entities](https://github.com/winkjs/wink-nlp/releases/tag/1.12.4)
-## Version 1.12.4 December 09, 2022
+# [Improving mark's functionality in custom entities](https://github.com/winkjs/wink-nlp/releases/tag/1.13.0)
+## Version 1.13.0 December 09, 2022
 
 ### ✨ Features
 - Mark allows marking w.r.t. the last element of the pattern. For example if a pattern matches `a fluffy cat` then `mark: [-2, -1]` will extract `fluffy cat` — especially useful when the match length is unknown. 💃
