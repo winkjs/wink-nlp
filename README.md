@@ -67,6 +67,18 @@ The [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model)
 
 The second command installs the [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), which works with Node.js version 14 or 12. 
 
+### How to config tsconfig.json in TypeScript projects
+
+Enable [esModuleInterop](https://www.typescriptlang.org/tsconfig#esModuleInterop) and [allowSyntheticDefaultImports](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports) in tsconfig.json
+
+```
+"compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    ...
+}
+```
+
 ### How to install for Web Browser
 If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model). Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html). Explore **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** on [Observable](https://observablehq.com/) for live browser based examples.
 
