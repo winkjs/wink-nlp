@@ -67,9 +67,9 @@ The [wink-eng-lite-web-model](https://github.com/winkjs/wink-eng-lite-web-model)
 
 The second command installs the [wink-eng-lite-model](https://github.com/winkjs/wink-eng-lite-model), which works with Node.js version 14 or 12. 
 
-### How to config tsconfig.json in TypeScript projects
+### How to configure TypeScript project
 
-Enable [esModuleInterop](https://www.typescriptlang.org/tsconfig#esModuleInterop) and [allowSyntheticDefaultImports](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports) in tsconfig.json
+Enable [`esModuleInterop`](https://www.typescriptlang.org/tsconfig#esModuleInterop) and [`allowSyntheticDefaultImports`](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports) in the `tsconfig.json` file:
 
 ```
 "compilerOptions": {
