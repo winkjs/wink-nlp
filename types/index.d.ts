@@ -69,6 +69,21 @@ declare module 'wink-nlp' {
     "X" |
     "SPACE";
 
+  export type TypeOfEntity =
+    | "cardinal"
+    | "date"
+    | "duration"
+    | "email"
+    | "emoji"
+    | "emoticon"
+    | "hashtag"
+    | "mention"
+    | "money"
+    | "ordinal"
+    | "percent"
+    | "time"
+    | "url";
+
   // Bag of words
   export interface Bow {
     [index: string]: number;
@@ -113,7 +128,7 @@ declare module 'wink-nlp' {
     stopWordFlag(index: number, token: Token, cache: Cache): boolean;
     abbrevFlag(index: number, token: Token, cache: Cache): boolean;
     suffix(index: number, token: Token, cache: Cache): string;
-    type(index: number, token: Token, cache: Cache): string;
+    type(index: number, token: Token, cache: Cache): TypeOfEntity;
     value(index: number, token: Token, cache: Cache): string;
     stem(index: number, token: Token, cache: Cache, addons: ModelAddons): string;
     lemma(index: number, token: Token, cache: Cache, addons: ModelAddons): string;
