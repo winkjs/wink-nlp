@@ -70,6 +70,9 @@ declare module 'wink-nlp' {
     "SPACE";
 
   export type TypeOfEntity =
+    | "word"
+    | "shortForm"
+    | "number"
     | "cardinal"
     | "date"
     | "duration"
@@ -82,7 +85,13 @@ declare module 'wink-nlp' {
     | "ordinal"
     | "percent"
     | "time"
-    | "url";
+    | "url"
+    | "punctuation"
+    | "symbol"
+    | "tabCRLF"
+    | "apos"
+    | "alpha"
+    | "decade";
 
   // Bag of words
   export interface Bow {
