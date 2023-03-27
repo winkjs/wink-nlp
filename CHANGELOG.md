@@ -1,3 +1,10 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.13.1)
+## Version 1.13.1 March 27, 2023
+
+### ⚙️ Updates
+- Some behind the scene model improvements. 😎 🤓
+- Add clarity on typescript configuration in README. ✅
+
 # [Improving mark's functionality in custom entities](https://github.com/winkjs/wink-nlp/releases/tag/1.13.0)
 ## Version 1.13.0 December 09, 2022
 
