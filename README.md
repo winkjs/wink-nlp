@@ -7,9 +7,9 @@
 
 WinkNLP is a JavaScript library for Natural Language Processing (NLP). Designed specifically to make development of NLP applications **easier** and **faster**, winkNLP is optimized for the right balance of performance and accuracy. 
 
-It is built ground up with a lean code base that has [no external dependency](https://snyk.io/test/github/winkjs/wink-nlp?tab=dependencies). A test coverage of [~100%](https://coveralls.io/github/winkjs/wink-nlp?branch=master) and compliance with the [Open Source Security Foundation best practices](https://bestpractices.coreinfrastructure.org/en/projects/6035) make winkNLP the ideal tool for building production grade systems with confidence.
+It is built ground up with [no external dependency](https://snyk.io/test/github/winkjs/wink-nlp?tab=dependencies) and has a [lean code base of ~10Kb minified & gzipped](https://bundlephobia.com/package/wink-nlp). A test coverage of [~100%](https://coveralls.io/github/winkjs/wink-nlp?branch=master) and compliance with the [Open Source Security Foundation best practices](https://bestpractices.coreinfrastructure.org/en/projects/6035) make winkNLP the ideal tool for building production grade systems with confidence.
 
-WinkNLP with full [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts), runs on Node.js and browsers.
+WinkNLP with full [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts), runs on Node.js and [web browsers](https://github.com/winkjs/wink-nlp#how-to-install-for-web-browser).
 
 ## Build amazing apps quickly
 | [Wikipedia article timeline](https://observablehq.com/@winkjs/how-to-visualize-timeline-of-a-wiki-article) | [Context aware word cloud](https://observablehq.com/@winkjs/how-to-create-a-context-aware-word-cloud) | [Key sentences detection](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document) |
@@ -34,7 +34,7 @@ WinkNLP has a [comprehensive natural language processing (NLP) pipeline](https:/
 <tr><td>✨ Developer friendly and intuitive <a href="https://winkjs.org/wink-nlp/getting-started.html">API</a></td><td>With winkNLP, process any text using a simple, declarative syntax; most <a href="https://observablehq.com/@winkjs/how-to-build-a-naive-wikification-tool?collection=@winkjs/winknlp-recipes">live examples</a> have <b>30-40</b> lines of code.</td></tr>
 <tr><td>🖼 Best-in-class <a href="https://winkjs.org/wink-nlp/visualizing-markup.html">text visualization</a></td><td>Programmatically <b><a href="https://winkjs.org/wink-nlp/markup.html">mark</a></b> tokens, sentences, entities, etc. using HTML mark or any other tag of your choice.</td></tr>
 <tr><td>♻️ Extensive text processing features</td><td>Remove and/or retain tokens with specific attributes such as part-of-speech, named entity type, token type, stop word, shape and many more; compute Flesch reading ease score; generate n-grams; normalize, lemmatise or stem. Checkout how with the right kind of text preprocessing, even <a href="https://github.com/winkjs/wink-naive-bayes-text-classifier#readme">Naive Bayes classifier</a> achieves <b>impressive (≥90%)</b> accuracy in sentiment analysis and chatbot intent classification tasks.</td></tr>
-<tr><td>🔠 Pre-trained <a href="https://winkjs.org/wink-nlp/language-models.html">language models</a></td><td>Compact sizes starting from <b>&lt;3MB</b> – reduced model loading time drastically.</td></tr>
+<tr><td>🔠 Pre-trained <a href="https://winkjs.org/wink-nlp/language-models.html">language models</a></td><td>Compact sizes starting from <a href="https://bundlephobia.com/package/wink-eng-lite-web-model">~1MB (minified & gzipped)</a> – reduce model loading time drastically down to ~1 second on a 4G network.</td></tr>
 <tr><td>💼 Host of <a href="https://winkjs.org/wink-nlp/its-as-helper.html">utilities & tools</a></td><td>BM25 vectorizer; Several similarity methods – Cosine, Tversky, Sørensen-Dice, Otsuka-Ochiai; Helpers to get bag of words, frequency table, lemma/stem, stop word removal and many more.</td></tr>
 </table>
 
