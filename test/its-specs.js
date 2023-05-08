@@ -172,6 +172,58 @@ describe( 'its functions for .out()', function () {
     expect( doc.out( its.readabilityStats ) ).to.deep.equal( rs );
   } );
 
+  it( 'its.sentenceWiseImprotance', function () {
+    const text = `Children living in Japan’s hottest city will be given specially designed umbrellas to protect them
+    from the heat, after a summer that saw record-breaking temperatures in many parts of the country.Local authorities
+    in Kumagaya in Saitama prefecture have devised an umbrella that keeps out the rain and doubles as a parasol, 
+    the Mainichi Shimbun reported. The umbrellas, which bear the city’s logo and weigh just 336 grams, will be distributed
+    to 9,000 primary schoolchildren next week, the newspaper said. Kumagaya, a city of about 195,000 located 60km north of
+    Tokyo, regularly records the highest temperatures in Japan partly as a result of warm downslope winds created by the
+    Foehn Effect. The city’s government has for the past two years advised younger children to shield themselves from the
+    sun with regular umbrellas on their way to and from school to prevent heatstroke, but some questioned their ability to
+    block out sunlight. Alarmed by a rise in the number of days when the mercury rises to at least 35C, the city decided
+    to hand out the yellow fibreglass umbrellas, including to children who live in Kumagaya but attend schools outside the
+    city, the Mainichi said. The heat-busting brollies will also force children to maintain a reasonable distance from
+    each other, eliminating the need for them to wear masks to prevent the spread of the coronavirus, it added. The measure
+    has come a little late in the day, however. Japan battled its worst heatwave since records began in 1875 in late June,
+    after a premature end to the rainy season. The city of Isesaki, north of Tokyo, registered the country’s highest-ever
+    temperature for that month, at 40.2C, beating the previous June record of 39.8C set in 2011. Tokyo experienced several
+    consecutive days of 35C-plus heat, prompting the government to warn people to save energy or face power cuts, while
+    Kumagaya and five other locations marked highs above 40C on 1 July. Kumagaya’s reputation for furnace-like temperatures
+    was sealed in July 2018, when it battled an all-time high temperature of 41.1C – an unenviable record it shares with the
+    city of Hamamatsu in central Japan. On Friday, the maximum temperature for Kumagaya was a far more comfortable 26C,
+    according to the meteorological agency, although it forecast a rerun to the low 30s next week. Officials had hoped to
+    distribute the umbrellas before the school summer holidays began were delayed by the Covid-19 pandemic. Global heating
+    has prompted Japan’s government to take extra measures and issue a slew of advice on how to prevent heatstroke.
+    Almost all classrooms in public primary and middle schools now have air conditioners, according to the Asahi Shimbun,
+    while the education ministry last year urged teachers to instruct children to wear cool clothing and hats, and to
+    keep hydrated when they travel to and from school. The pandemic has frustrated attempts to keep children cool at school,
+    however, with teachers reporting that many are reluctant to remove their masks, even with encouragement from staff.`;
+
+    const rank = [
+      { 'importance': 0.9667, 'index': 0 },
+      { 'importance': 0.2667, 'index': 1 },
+      { 'importance': 0.1333, 'index': 2 },
+      { 'importance': 0.7, 'index': 3 },
+      { 'importance': 0.5, 'index': 4 },
+      { 'importance': 1, 'index': 5 },
+      { 'importance': 1, 'index': 6 },
+      { 'importance': 0, 'index': 7 },
+      { 'importance': 0.3667, 'index': 8 },
+      { 'importance': 0.6333, 'index': 9 },
+      { 'importance': 0.9667, 'index': 10 },
+      { 'importance': 0.4333, 'index': 11 },
+      { 'importance': 0.8667, 'index': 12 },
+      { 'importance': 0.3667, 'index': 13 },
+      { 'importance': 0.1, 'index': 14 },
+      { 'importance': 0.8333, 'index': 15 },
+      { 'importance': 0.3, 'index': 16 }
+    ];
+
+    expect( nlp.readDoc( text ).out( its.sentenceWiseImprotance ) ).to.deep.equal( rank );
+    expect( nlp.readDoc( 'text' ).out( its.sentenceWiseImprotance ) ).to.deep.equal( [] );
+  } );
+
   it( 'selected entity with its.detail, its.span as.?', function () {
     const s = 'Conut downn starts from ten, nine, eight...';
     const se = nlp.readDoc( s ).entities().filter( ( e ) => ( e.out( its.type ) === 'CARDINAL' ) );
