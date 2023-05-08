@@ -6,6 +6,16 @@ const posMask = constants.posMask;
 // Size of a single token.
 const tkSize = constants.tkSize;
 
+/**
+ * This implementation is inspired by the hypothesis that *content salience is proportional
+ * to the frequency of part-of-speech n-grams* as outlined in the paper titled,
+ * [Examining the Content Load of Part of Speech Blocks for Information Retrieval](https://dl.acm.org/doi/10.5555/1273073.1273142).
+ *
+ * @param {object} rdd  Raw Document Data structure containing the document whose
+ *                      sentence wise importance will be determined.
+ * @returns {object[]}  array of objects, in form of `{ index: <integer>, importance: <0–1>}`,
+ *                      where index points to the sentence; 1 means highest importance and 0 indicates lowest.
+ */
 const sentenceWiseImportance = function ( rdd ) {
     // Define open class part-of-speeches; used to compute intitial information content
     const openClassPOS = Object.create(null);
