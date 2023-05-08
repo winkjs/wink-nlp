@@ -33,6 +33,7 @@
 var sort4FT = require( './sort4FT.js' );
 var constants = require( './constants.js' );
 var caseMap = [ 'other', 'lowerCase', 'upperCase', 'titleCase' ];
+var swi = require( './sentence-wise-importance.js' );
 
 // Size of a single token.
 var tkSize = constants.tkSize;
@@ -161,6 +162,10 @@ its.sentiment = function ( spanItem ) {
 its.readabilityStats = function ( rdd, addons ) {
   return addons.readabilityStats( rdd, its );
 }; // readabilityStats()
+
+its.sentenceWiseImprotance = function ( rdd ) {
+  return swi( rdd );
+}; // sentenceWiseImprotance()
 
 /* ------ utilities ------ */
 
