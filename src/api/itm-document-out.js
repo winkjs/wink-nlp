@@ -67,6 +67,10 @@ var itmDocumentOut = function ( rdd, itsf, addons ) {
     return itsfn( rdd, addons );
   }
 
+  if ( itsfn === its.sentenceWiseImprotance ) {
+    return itsfn( rdd, addons );
+  }
+
   // Setup the correct `as.fn` becuase the current markedup text would have
   // returned the `value`. Refer to `its.markedUpText`.
   var asfn = ( itsfn === its.markedUpText ) ? as.markedUpText : as.text;
