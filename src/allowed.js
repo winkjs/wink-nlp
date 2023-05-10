@@ -116,7 +116,7 @@ allowed.its4document = new Set( [
   its.sentiment,
   its.stem,
   its.readabilityStats,
-  its.sentenceWiseImprotance
+  its.sentenceWiseImportance
 ] );
 
 

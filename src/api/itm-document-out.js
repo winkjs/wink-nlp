@@ -67,8 +67,8 @@ var itmDocumentOut = function ( rdd, itsf, addons ) {
     return itsfn( rdd, addons );
   }
 
-  if ( itsfn === its.sentenceWiseImprotance ) {
-    return itsfn( rdd, addons );
+  if ( itsfn === its.sentenceWiseImportance ) {
+    return itsfn( rdd );
   }
 
   // Setup the correct `as.fn` becuase the current markedup text would have

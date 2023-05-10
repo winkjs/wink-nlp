@@ -163,9 +163,9 @@ its.readabilityStats = function ( rdd, addons ) {
   return addons.readabilityStats( rdd, its );
 }; // readabilityStats()
 
-its.sentenceWiseImprotance = function ( rdd ) {
+its.sentenceWiseImportance = function ( rdd ) {
   return swi( rdd );
-}; // sentenceWiseImprotance()
+}; // sentenceWiseImportance()
 
 /* ------ utilities ------ */
 

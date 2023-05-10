@@ -172,7 +172,7 @@ describe( 'its functions for .out()', function () {
     expect( doc.out( its.readabilityStats ) ).to.deep.equal( rs );
   } );
 
-  it( 'its.sentenceWiseImprotance', function () {
+  it( 'its.sentenceWiseImportance', function () {
     const text = `Children living in Japan’s hottest city will be given specially designed umbrellas to protect them
     from the heat, after a summer that saw record-breaking temperatures in many parts of the country.Local authorities
     in Kumagaya in Saitama prefecture have devised an umbrella that keeps out the rain and doubles as a parasol, 
@@ -220,8 +220,8 @@ describe( 'its functions for .out()', function () {
       { 'importance': 0.3, 'index': 16 }
     ];
 
-    expect( nlp.readDoc( text ).out( its.sentenceWiseImprotance ) ).to.deep.equal( rank );
-    expect( nlp.readDoc( 'text' ).out( its.sentenceWiseImprotance ) ).to.deep.equal( [] );
+    expect( nlp.readDoc( text ).out( its.sentenceWiseImportance ) ).to.deep.equal( rank );
+    expect( nlp.readDoc( 'text' ).out( its.sentenceWiseImportance ) ).to.deep.equal( [] );
   } );
 
   it( 'selected entity with its.detail, its.span as.?', function () {
