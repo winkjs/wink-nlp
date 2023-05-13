@@ -221,7 +221,8 @@ describe( 'its functions for .out()', function () {
     ];
 
     expect( nlp.readDoc( text ).out( its.sentenceWiseImportance ) ).to.deep.equal( rank );
-    expect( nlp.readDoc( 'text' ).out( its.sentenceWiseImportance ) ).to.deep.equal( [] );
+    expect( nlp.readDoc( 'text' ).out( its.sentenceWiseImportance ) ).to.deep.equal( [ { index: 0, importance: 0 } ] );
+    expect( nlp.readDoc( '' ).out( its.sentenceWiseImportance ) ).to.deep.equal( [ { index: 0, importance: 0 } ] );
   } );
 
   it( 'selected entity with its.detail, its.span as.?', function () {

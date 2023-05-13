@@ -79,7 +79,7 @@ const sentenceWiseImportance = function ( rdd ) {
       }
 
       // Ignore sentences where we cannot build NGram i.e. sentences shorter than NGram.
-      if ( pos.length < 4 ) return [];
+      if ( pos.length < 4 ) continue; // eslint-disable-line no-continue
       // Determine NGrams;
       for ( let k = 0; k + NGram - 1 < pos.length; k += 1 ) {
         const pos4Gram = pos.slice( k, k + NGram );
@@ -114,7 +114,9 @@ const sentenceWiseImportance = function ( rdd ) {
         } );
     });
     // Normalize weights by dividing them by the max.
-    const max = Math.max( ...sentenceWiseWeights );
+    let max = Math.max( ...sentenceWiseWeights );
+    // Avoid divide by zero situation
+    if ( max === 0 ) max = 1;
 
     return sentenceWiseWeights.map( ( e, i ) => ( { index: i, importance: +( e / max ).toFixed( 4 ) } ) );
   };
