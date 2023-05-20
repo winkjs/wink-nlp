@@ -91,6 +91,11 @@ declare module 'wink-nlp' {
     type: string;
   }
 
+  export interface SentenceImportance {
+    index: number;
+    importance: number;
+  }
+
   export type ModelTermFrequencies = Bow;
   export type ModelInverseDocumentFrequencies = Bow;
 
@@ -121,6 +126,7 @@ declare module 'wink-nlp' {
     detail(): Detail;
     markedUpText(index: number, token: Token, cache: Cache): string;
     span(spanItem: number[]): number[];
+    sentenceWiseImportance(rdd: RawDocumentData): SentenceImportance[];
     sentiment(spanItem: number[]): number;
     readabilityStats(rdd: RawDocumentData, addons: ModelAddons): ReadabilityStats;
     terms(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies, terms: string[]): string[];
