@@ -1,3 +1,9 @@
+# [Introducing helper for extracting important sentences from a document](https://github.com/winkjs/wink-nlp/releases/tag/1.14.0)
+## Version 1.14.0 May 20, 2023
+
+### ✨ Features
+- You can now use `its.sentenceWiseImprotance` helper to obtain sentence wise importance (on a scale of 0 to 1) of a document, if it is supported by language model. 📚📊🤓
+
 # [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.13.1)
 ## Version 1.13.1 March 27, 2023
 
