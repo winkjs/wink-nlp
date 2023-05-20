@@ -3,7 +3,7 @@ With winkNLP's production ready release in late 2020, the core is already in pla
 
 |S. No.| Feature | Complexity |Status|
 |---|---|---|---|
-|01.|**Extractive Summarization**:<br/> Add `its.summary` helper to produce extractive summary of text via `doc.out( its.summary )`. While it should be language agnostic, but it should leverage loaded language model's capability to improve summarization.| Simple | [WIP](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document) |
+|01.|**Extractive Summarization**:<br/> Add `its.sentenceWiseImprotance` helper to extract sentence wise impotance from a document. This may be used for extractive summarization apart from other usage. While it should be language agnostic, but it should leverage loaded language model's capability to improve summarization.| Simple | [Completed](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document) |
 |02.|**Text Pre-processor**:<br/>Add a text preprocessing utility that provides options to (a) filter specific tokens based on their properties such as `pos`, `isStopWordFlag`, and `type`; (b) map entity type with a definable keyword; (c) add bigrams & trigrams and (d) inject sentiment. The API should follow winkNLP style and standards.|Medium|YTS|
 |03.|**Word Vectors Integration**:<br/>Add integration with various word vectors starting with GloVe. This should include compression/decompression for fast loading, helpers for token, sentence and document vector computation. |High|WIP|
 |04.|**Sub-word Tokenizer**:<br/>Add sub-word tokenization feature using techniques like Byte Pair Encoding (BPE) and/or WordPiece. The processing pipeline should allow choice of tokenizer.|Very High|YTS|
