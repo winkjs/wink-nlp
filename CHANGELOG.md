@@ -3,6 +3,7 @@
 
 ### ✨ Features
 - You can now use `its.sentenceWiseImprotance` helper to obtain sentence wise importance (on a scale of 0 to 1) of a document, if it is supported by language model. 📚📊🤓
+- Checkout live example [How to visualize key sentences in a document?](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document) 👀
 
 # [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/1.13.1)
 ## Version 1.13.1 March 27, 2023
