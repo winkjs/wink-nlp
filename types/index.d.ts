@@ -135,7 +135,7 @@ declare module 'wink-nlp' {
     bow(tf: ModelTermFrequencies): Bow;
     idf(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies): Array<[term: string, frequency: number]>;
     tf(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies): Array<[term: string, frequency: number]>;
-    modelJson(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies): string;
+    modelJSON(tf: ModelTermFrequencies, idf: ModelInverseDocumentFrequencies): string;
   }
 
   // As
