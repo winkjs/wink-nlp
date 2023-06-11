@@ -1,3 +1,9 @@
+# [Squashed a bug](https://github.com/winkjs/wink-nlp/releases/tag/1.14.1)
+## Version 1.14.1 June 11, 2023
+
+### 🐛 Fixes
+- Fixed a [typescript declaration](https://github.com/winkjs/wink-nlp/commit/0ad0690e93f59397dbdde7b876f60c2e5875215b). ✅
+
 # [Introducing helper for extracting important sentences from a document](https://github.com/winkjs/wink-nlp/releases/tag/1.14.0)
 ## Version 1.14.0 May 20, 2023
 
