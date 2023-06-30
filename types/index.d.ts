@@ -160,7 +160,7 @@ declare module 'wink-nlp' {
     parentDocument(): Document;
     parentEntity(): ItemEntity | undefined;
     parentCustomEntity(): ItemCustomEntity | undefined;
-    markup(beginMarker: string, endMarker: string): void;
+    markup(beginMarker?: string, endMarker?: string): void;
     out(): string;
     out<T>(itsf: ItsFunction<T>): T | string;
     parentSentence(): ItemSentence;
