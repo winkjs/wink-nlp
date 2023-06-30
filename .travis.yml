@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "18.16.1"
+  - "lts/*"
   - "16"
 
 cache:
