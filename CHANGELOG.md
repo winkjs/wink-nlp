@@ -1,3 +1,9 @@
+# [Fixed a bug](https://github.com/winkjs/wink-nlp/releases/tag/1.14.2)
+## Version 1.14.2 July 1, 2023
+
+### 🐛 Fixes
+- Paramteters in `markup()` are optional now in TS code — squashed a [typescript declaration bug](https://github.com/winkjs/wink-nlp/commit/e6314658766cfa4d40f96b89c211d2d98358cfae). 🙌
+
 # [Squashed a bug](https://github.com/winkjs/wink-nlp/releases/tag/1.14.1)
 ## Version 1.14.1 June 11, 2023
 
