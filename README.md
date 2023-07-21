@@ -9,7 +9,7 @@ WinkNLP is a JavaScript library for Natural Language Processing (NLP). Designed 
 
 It is built ground up with [no external dependency](https://snyk.io/test/github/winkjs/wink-nlp?tab=dependencies) and has a [lean code base of ~10Kb minified & gzipped](https://bundlephobia.com/package/wink-nlp). A test coverage of [~100%](https://coveralls.io/github/winkjs/wink-nlp?branch=master) and compliance with the [Open Source Security Foundation best practices](https://bestpractices.coreinfrastructure.org/en/projects/6035) make winkNLP the ideal tool for building production grade systems with confidence.
 
-WinkNLP with full [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts), runs on Node.js and [web browsers](https://github.com/winkjs/wink-nlp#how-to-install-for-web-browser).
+WinkNLP with full [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts), runs on Node.js, [web browsers](https://github.com/winkjs/wink-nlp#how-to-install-for-web-browser) and [Deno](https://github.com/winkjs/wink-nlp#how-to-run-on-deno).
 
 ## Build amazing apps quickly
 | [Wikipedia article timeline](https://observablehq.com/@winkjs/how-to-visualize-timeline-of-a-wiki-article) | [Context aware word cloud](https://observablehq.com/@winkjs/how-to-create-a-context-aware-word-cloud) | [Key sentences detection](https://observablehq.com/@winkjs/how-to-visualize-key-sentences-in-a-document) |
@@ -81,6 +81,9 @@ Enable [`esModuleInterop`](https://www.typescriptlang.org/tsconfig#esModuleInter
 
 ### How to install for Web Browser
 If you’re using winkNLP in the browser use the [wink-eng-lite-web-model](https://www.npmjs.com/package/wink-eng-lite-web-model). Learn about its installation and usage in our [guide to using winkNLP in the browser](https://winkjs.org/wink-nlp/wink-nlp-in-browsers.html). Explore **[winkNLP recipes](https://observablehq.com/collection/@winkjs/winknlp-recipes)** on [Observable](https://observablehq.com/) for live browser based examples.
+
+### How to run on [Deno](https://deno.land/)
+Follow the [example on replit](https://replit.com/@sanjayaksaxena/wink-nlp-deno-example#index.ts).
 
 ### Get started
 Here is the "Hello World!" of winkNLP:
