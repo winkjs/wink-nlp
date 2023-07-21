@@ -1,3 +1,9 @@
+# [Added Deno example](https://github.com/winkjs/wink-nlp/releases/tag/1.14.3)
+## Version 1.14.3 July 21, 2023
+
+### ✨ Features
+- Added a live example for how to run winkNLP on Deno. 👍
+
 # [Fixed a bug](https://github.com/winkjs/wink-nlp/releases/tag/1.14.2)
 ## Version 1.14.2 July 1, 2023
 
