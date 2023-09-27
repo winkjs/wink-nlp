@@ -61,12 +61,13 @@ var tkSize = constants.tkSize;
  *
  * @param {object} theModel language model.
  * @param {string[]} pipe of nlp annotations.
+ * @param {string} wordVectorsJSON JSON read using node require.
  * @returns {object} conatining set of API methods for natural language processing.
  * @example
  * const nlp = require( 'wink-nlp' );
  * var myNLP = nlp();
 */
-var nlp = function ( theModel, pipe ) {
+var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
 
   var methods = Object.create( null );
   // Token Regex; compiled from `model`
@@ -211,6 +212,8 @@ var nlp = function ( theModel, pipe ) {
     var rdd = Object.create( null );
     // The `cache` is also part of document data structure.
     rdd.cache = cache;
+    // Each document gets a pointer to the word vectors.
+    rdd.wordVectors = wordVectorsJSON;
     // Document's tokens; each token is represented as an array of numbers:
     // ```
     // [
