@@ -53,15 +53,15 @@ var psMask = constants.psMask;
  * @private
  */
 var colTokensOut = function ( start, end, rdd, itsf, asf, addons ) {
-  // Vectors require completely different handling.
-  if ( itsf === its.vector ) {
-    return its.vector( start, end, rdd.tokens, addons );
-  }
-
   // Not a vector request, perform map-reduce.
   var mappedTkns = [];
   var itsfn = ( itsf && allowed.its4tokens.has( itsf ) ) ? itsf : its.value;
   var asfn = ( asf && allowed.as4tokens.has( asf ) ) ? asf : as.array;
+
+  if ( itsfn !== its.value && itsfn !== its.normal && itsfn !== its.lemma && asfn === as.vector ) {
+    throw Error( 'winkNLP: as.vector is allowed only with its value or normal or lemma.' );
+  }
+
   // Note, `as.text/markedUpText` needs special attention to include preceeding spaces.
   if ( asfn === as.text || asfn === as.markedUpText ) {
     for ( let i = start; i <= end; i += 1 ) {
@@ -73,7 +73,7 @@ var colTokensOut = function ( start, end, rdd, itsf, asf, addons ) {
     }
   }
 
-  return asfn( mappedTkns, rdd.markings, start, end );
+  return asfn( mappedTkns, rdd, start, end );
 }; // colTokensOut()
 
 module.exports = colTokensOut;

@@ -236,11 +236,11 @@ describe( 'its functions for .out()', function () {
   it( 'stubs test', function () {
     const v = ( new Array( 100 ) ).fill( 0 );
     expect( its.vector( ) ).to.deep.equal( v );
-    expect( nlp.readDoc( 'there are no vectors' ).out( its.vector ) ).to.deep.equal( v );
-    expect( nlp.readDoc( 'there are no vectors' ).tokens().out( its.vector ) ).to.deep.equal( v );
-    expect( nlp.readDoc( 'there are no vectors' ).tokens().itemAt( 0 ).out( its.vector ) ).to.deep.equal( v );
-    expect( nlp.readDoc( 'there are 3 vectors' ).tokens().filter( ( t ) => ( t.out( its.type ) === 'word' ) ).out( its.vector ) ).to.deep.equal( v );
-    expect( nlp.readDoc( 'there are no vectors' ).sentences().out( its.vector ) ).to.deep.equal( [ v ] );
+    // expect( nlp.readDoc( 'there are no vectors' ).out( its.vector ) ).to.deep.equal( v );
+    // expect( nlp.readDoc( 'there are no vectors' ).tokens().out( its.vector ) ).to.deep.equal( v );
+    // expect( nlp.readDoc( 'there are no vectors' ).tokens().itemAt( 0 ).out( its.vector ) ).to.deep.equal( v );
+    // expect( nlp.readDoc( 'there are 3 vectors' ).tokens().filter( ( t ) => ( t.out( its.type ) === 'word' ) ).out( its.vector ) ).to.deep.equal( v );
+    // expect( nlp.readDoc( 'there are no vectors' ).sentences().out( its.vector ) ).to.deep.equal( [ v ] );
     expect( its.detail() ).to.deep.equal( true );
   } );
 } );

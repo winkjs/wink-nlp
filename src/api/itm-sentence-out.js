@@ -48,10 +48,6 @@ var colTokensOut = require( './col-tokens-out.js' );
  */
 var itmSentenceOut = function ( index, rdd, itsf, addons ) {
   var sentence = rdd.sentences[ index ];
-  // Vectors require completely different handling.
-  if ( itsf === its.vector ) {
-    return its.vector( sentence, rdd, addons );
-  }
 
   var itsfn = ( itsf && allowed.its4sentence.has( itsf ) ) ? itsf : its.value;
 

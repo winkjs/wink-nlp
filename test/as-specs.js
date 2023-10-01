@@ -71,4 +71,11 @@ describe( 'its functions for .out()', function () {
     doc.entities().each( ( e ) => ( e.markup() ) );
     expect( doc.sentences().itemAt( 1 ).out( its.markedUpText ) ).to.deep.equal( 'next product.' );
   } );
+
+  it( 'as.vector', function () {
+    var doc = nlp.readDoc( 'the dog ran away' );
+
+    expect( doc.tokens().out.bind( null, its.negationFlag, as.vector ) ).to.throw( 'winkNLP: as.vector is allowed only with its value or normal or lemma.' );
+    expect( doc.tokens().filter( ( t ) => t.out().length > 0 ).out.bind( null, its.negationFlag, as.vector ) ).to.throw( 'winkNLP: as.vector is allowed only with its value or normal or lemma.' );
+  } );
 } );

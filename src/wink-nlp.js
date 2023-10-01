@@ -437,3 +437,20 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
 }; // wink
 
 module.exports = nlp;
+
+//* This is a test code, will eventually move to tests.
+const model = require( '../test/test-model/model.js' );
+const vectors = require( '../../../glove/pre-trained-vectors/wink-glove-6b-100.json' );
+const winkNLP = require( '../src/wink-nlp.js' );
+const myNLP = winkNLP( model, undefined, vectors );
+const its = myNLP.its;
+const as = myNLP.as;
+
+const text = 'Dogs are eating bananas and zxcv!';
+
+const doc = myNLP.readDoc( text );
+
+console.log( doc.tokens().out(its.lemma, as.vector) );
+
+console.log( doc.tokens().filter( ( t ) => t.out().length > 0 ).out(its.lemma, as.vector) );
+// */
