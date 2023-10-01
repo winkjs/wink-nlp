@@ -45,10 +45,6 @@ var allowed = require( '../allowed.js' );
  * @private
  */
 var itmTokenOut = function ( index, rdd, itsf, addons ) {
-  // Vectors require completely different handling.
-  if ( itsf === its.vector ) {
-    return its.vector( index, rdd, addons );
-  }
   // Not a vector request, map using `itsf`.
   var f = ( allowed.its4token.has( itsf ) ) ? itsf : its.value;
   return f( index, rdd.tokens, rdd.cache, addons );

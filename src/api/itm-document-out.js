@@ -47,10 +47,6 @@ var colTokensOut = require( './col-tokens-out.js' );
  */
 var itmDocumentOut = function ( rdd, itsf, addons ) {
   var document = rdd.document;
-  // Vectors require completely different handling.
-  if ( itsf === its.vector ) {
-    return its.vector( document, rdd, addons );
-  }
 
   var itsfn = ( itsf && allowed.its4document.has( itsf ) ) ? itsf : its.value;
 

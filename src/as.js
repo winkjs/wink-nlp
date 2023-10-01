@@ -152,13 +152,15 @@ as.text = function ( twps ) {
  * `twps` and `markings`.
  *
  * @param  {array}  twps     Array containing tokens with preceding spaces.
- * @param  {array}  markings Array containing span of markings & marking specs.
+ * @param  {object}  rdd     Raw Document Data structure.
  * @param  {number} start    The start index of the tokens.
  * @param  {number} end      The end index of the tokens.
  * @return {string}          the markedup text.
  * @private
 */
-as.markedUpText = function ( twps, markings, start, end ) {
+as.markedUpText = function ( twps, rdd, start, end ) {
+  // Extract markings.
+  const markings = rdd.markings;
   // Offset to be added while computing `first` and `last` indexes of `twps`.
   var offset = start * 2;
   // Compute the `range` of `markings` to consider on the basis `start` and `end`.
@@ -182,5 +184,26 @@ as.markedUpText = function ( twps, markings, start, end ) {
   // Join all the elements and return the `markedUpText`.
   return twps.join( '' ).trim();
 }; // markedUpText()
+
+as.vector = function ( tokens, rdd ) {
+  // Get size of a vector from word vectors
+  const size = 100;
+  // Set up a new initialized vector of `size`
+  const v = new Array( size );
+  v.fill( 0 );
+  // Compute average.
+  // We will count the number of tokens as some of them may not have a vector.
+  let numOfTokens = 0;
+  for ( let i = 0; i < tokens.length; i += 1 ) {
+    // Extract token vector for the current token.
+    const tv = rdd.wordVectors[ tokens[ i ].toLowerCase() ];
+    // Increment `numOfTokens` if the above operation was successful.
+    if ( tv !== undefined ) numOfTokens += 1;
+    for ( let j = 0; j < size; j += 1 ) {
+      v[ j ] += ( tv === undefined ) ? 0 : tv[ j ];
+    }
+  }
+  return v.map( ( e ) => +( e / numOfTokens ).toFixed( 6 ));
+}; // vector()
 
 module.exports = as;
