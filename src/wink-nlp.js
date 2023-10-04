@@ -432,6 +432,13 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
   // Expose `its` and `as` helpers.
   methods.its = itsHelpers;
   methods.as = asHelpers;
+  // Vector of a token method.
+  const dummyRDD = Object.create( null );
+  dummyRDD.wordVectors = wordVectorsJSON;
+  methods.vectorOf = function ( word )  {
+    if ( typeof word !== 'string' ) throw Error( 'winkNLP: input word must be of type string.' );
+    return asHelpers.vector( [ word ], dummyRDD );
+  }; // vectorOf()
 
   return methods;
 }; // wink
@@ -446,11 +453,13 @@ const myNLP = winkNLP( model, undefined, vectors );
 const its = myNLP.its;
 const as = myNLP.as;
 
-const text = 'Dogs are eating bananas and zxcv!';
+const text = 'DogsX'; //  are eating bananas and zxcv!
 
 const doc = myNLP.readDoc( text );
 
 console.log( doc.tokens().out(its.lemma, as.vector) );
 
 console.log( doc.tokens().filter( ( t ) => t.out().length > 0 ).out(its.lemma, as.vector) );
+
+console.log( myNLP.vectorOf( 'DOgX' ) );
 // */
