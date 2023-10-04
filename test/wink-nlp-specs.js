@@ -36,7 +36,9 @@ var chai = require( 'chai' );
 var mocha = require( 'mocha' );
 var winkNLP = require( '../src/wink-nlp.js' );
 var model = require( './test-model/model.js' );
+var wordVectors = require( './test-model/languages/cur/models/test-vectors.json' );
 var its = require( '../src/its.js' );
+var as = require( '../src/as.js' );
 var findEmptyTokens = require( './utilities/find-empty-tokens.js' );
 var findOutOfSeqTokens = require( './utilities/find-out-of-seq-tokens.js' );
 var findPotentialAbbrevs = require( './utilities/find-potential-abbrevs.js' );
@@ -607,5 +609,25 @@ describe( 'Learn Custom Entities', function () {
 describe( 'Throttle pops membership in cache', function () {
   it( 'should throttle', function () {
     expect( nlp.readDoc( 'would like to show!' ).tokens().out( its.pos ) ).to.deep.equal( [ 'AUX', 'VERB', 'PART', 'VERB', 'PUNCT' ] );
+  } );
+} );
+
+describe( 'vectorOf method', function () {
+  const myNLP = winkNLP( model, undefined, wordVectors );
+  const doc1 = myNLP.readDoc( 'this' );
+  const doc2 = myNLP.readDoc( 'zxcv asdf' );
+  it( 'should throw error when datatype is passed', function () {
+    expect( myNLP.vectorOf.bind( null, 3 ) ).to.throw( /^winkNLP: input word must be of type s/ );
+  } );
+
+  it( 'single token doc\'s vector must match with vectorOf of that word', function () {
+    expect( myNLP.vectorOf( 'this' ) ).to.deep.equal( doc1.tokens().out( its.value, as.vector ) );
+  } );
+
+  it( 'unk should return a 0-vector', function () {
+    const zeroVector = new Array( 100 );
+    zeroVector.fill( 0 );
+    expect( myNLP.vectorOf( 'UNK$$$' ) ).to.deep.equal( zeroVector );
+    expect( doc2.tokens().out( its.value, as.vector) ).to.deep.equal( zeroVector );
   } );
 } );
