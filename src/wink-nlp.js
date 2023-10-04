@@ -440,7 +440,7 @@ module.exports = nlp;
 
 //* This is a test code, will eventually move to tests.
 const model = require( '../test/test-model/model.js' );
-const vectors = require( '../../../glove/pre-trained-vectors/wink-glove-6b-100.json' );
+const vectors = require( '../test/test-model/languages/cur/models/test-vectors.json' );
 const winkNLP = require( '../src/wink-nlp.js' );
 const myNLP = winkNLP( model, undefined, vectors );
 const its = myNLP.its;

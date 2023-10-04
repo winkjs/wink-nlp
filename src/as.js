@@ -187,7 +187,8 @@ as.markedUpText = function ( twps, rdd, start, end ) {
 
 as.vector = function ( tokens, rdd ) {
   // Get size of a vector from word vectors
-  const size = 100;
+  const size = rdd.wordVectors.dimensions;
+  const precision = rdd.wordVectors.precision;
   // Set up a new initialized vector of `size`
   const v = new Array( size );
   v.fill( 0 );
@@ -196,14 +197,14 @@ as.vector = function ( tokens, rdd ) {
   let numOfTokens = 0;
   for ( let i = 0; i < tokens.length; i += 1 ) {
     // Extract token vector for the current token.
-    const tv = rdd.wordVectors[ tokens[ i ].toLowerCase() ];
+    const tv = rdd.wordVectors.vectors[ tokens[ i ].toLowerCase() ];
     // Increment `numOfTokens` if the above operation was successful.
     if ( tv !== undefined ) numOfTokens += 1;
     for ( let j = 0; j < size; j += 1 ) {
       v[ j ] += ( tv === undefined ) ? 0 : tv[ j ];
     }
   }
-  return v.map( ( e ) => +( e / numOfTokens ).toFixed( 6 ));
+  return v.map( ( e ) => +( e / numOfTokens ).toFixed( precision ));
 }; // vector()
 
 module.exports = as;
