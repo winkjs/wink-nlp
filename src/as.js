@@ -205,7 +205,8 @@ as.vector = function ( tokens, rdd ) {
       v[ j ] += ( tv === undefined ) ? 0 : tv[ j ];
     }
   }
-  return v.map( ( e ) => +( e / numOfTokens ).toFixed( precision ));
+  // if no token's vector is found, return a 0-vector!
+  return ( numOfTokens === 0 ) ? v :  v.map( ( e ) => +( e / numOfTokens ).toFixed( precision ));
 }; // vector()
 
 module.exports = as;
