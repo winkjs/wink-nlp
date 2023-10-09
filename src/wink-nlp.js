@@ -453,11 +453,11 @@ const myNLP = winkNLP( model, undefined, vectors );
 const its = myNLP.its;
 const as = myNLP.as;
 
-const text = 'DogsX'; //  are eating bananas and zxcv!
+const text = 'Dogs'; //  are eating bananas and zxcv!
 
 const doc = myNLP.readDoc( text );
 
-console.log( doc.tokens().out(its.lemma, as.vector) );
+console.log( doc.tokens().out(its.lemma, as.vector).join( ', ') );
 
 console.log( doc.tokens().filter( ( t ) => t.out().length > 0 ).out(its.lemma, as.vector) );
 
