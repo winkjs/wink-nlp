@@ -616,7 +616,7 @@ describe( 'vectorOf method', function () {
   const myNLP = winkNLP( model, undefined, wordVectors );
   const doc1 = myNLP.readDoc( 'this' );
   const doc2 = myNLP.readDoc( 'zxcv asdf' );
-  it( 'should throw error when datatype is passed', function () {
+  it( 'should throw error when incorrect datatype is passed', function () {
     expect( myNLP.vectorOf.bind( null, 3 ) ).to.throw( /^winkNLP: input word must be of type s/ );
   } );
 
@@ -625,7 +625,7 @@ describe( 'vectorOf method', function () {
   } );
 
   it( 'unk should return a 0-vector', function () {
-    const zeroVector = new Array( 100 );
+    const zeroVector = new Array( 101 );
     zeroVector.fill( 0 );
     expect( myNLP.vectorOf( 'UNK$$$' ) ).to.deep.equal( zeroVector );
     expect( doc2.tokens().out( its.value, as.vector) ).to.deep.equal( zeroVector );

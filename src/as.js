@@ -202,11 +202,29 @@ as.vector = function ( tokens, rdd ) {
     // Increment `numOfTokens` if the above operation was successful.
     if ( tv !== undefined ) numOfTokens += 1;
     for ( let j = 0; j < size; j += 1 ) {
+      // Keep summing, eventually it will be divided by `numOfTokens` to obtain avareage.
       v[ j ] += ( tv === undefined ) ? 0 : tv[ j ];
     }
   }
+
   // if no token's vector is found, return a 0-vector!
-  return ( numOfTokens === 0 ) ? v :  v.map( ( e ) => +( e / numOfTokens ).toFixed( precision ));
+  if ( numOfTokens === 0 ) {
+    // Push l2Norm, which is 0 in this case.
+    v.push( 0 );
+    return v;
+  }
+
+  // Non-0 vector, find average by dividing the sum by numOfTokens
+  // also compute l2Norm.
+  let l2Norm = 0;
+  for ( let i = 0; i < size; i += 1 ) {
+    v[ i ] = +( v[ i ] / numOfTokens ).toFixed( precision );
+    l2Norm += v[ i ] * v[ i ];
+  }
+  // `l2Norm` becomes the 101th element for faster cosine similarity/normalization.
+  v.push( +( Math.sqrt( l2Norm ).toFixed( precision ) ) );
+
+  return v;
 }; // vector()
 
 module.exports = as;
