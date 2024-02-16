@@ -445,7 +445,7 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
 
 module.exports = nlp;
 
-//* This is a test code, will eventually move to tests.
+/* This is a test code, will eventually move to tests.
 const model = require( '../test/test-model/model.js' );
 const vectors = require( '../test/test-model/languages/cur/models/test-vectors.json' );
 const winkNLP = require( '../src/wink-nlp.js' );
