@@ -27,7 +27,7 @@
   "main": "src/wink-nlp.js",
   "scripts": {
     "pretest": "npm run lint",
-    "test": "nyc --reporter=html --reporter=text mocha ./test/",
+    "test": "nyc --reporter=html --reporter=lcov --reporter=text mocha ./test/",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "sourcedocs": "docker -i src -o ./sourcedocs --sidebar yes",
     "lint": "eslint ./src/*.js ./test/*.js",
