@@ -433,11 +433,21 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
   methods.its = itsHelpers;
   methods.as = asHelpers;
   // Vector of a token method.
-  const dummyRDD = Object.create( null );
-  dummyRDD.wordVectors = wordVectorsJSON;
-  methods.vectorOf = function ( word )  {
-    if ( typeof word !== 'string' ) throw Error( 'winkNLP: input word must be of type string.' );
-    return asHelpers.vector( [ word ], dummyRDD );
+  methods.vectorOf = function ( word, safe = true )  {
+    const vectors = wordVectorsJSON.vectors;
+    const unkVector = wordVectorsJSON.unkVector;
+    const sliceUpTo = wordVectorsJSON.l2NormIndex + 1;
+
+    if ( typeof word !== 'string' ) {
+      throw Error( 'winkNLP: input word must be of type string.' );
+    }
+
+    const tv = vectors[ word.toLowerCase() ];
+    if ( tv === undefined ) {
+      // If unsafe, return the entire array.
+      return ( safe ) ? unkVector.slice( 0, sliceUpTo ) : unkVector.slice();
+    }
+    return ( safe ) ? tv.slice( 0, sliceUpTo ) : tv.slice();
   }; // vectorOf()
 
   return methods;
