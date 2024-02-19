@@ -630,4 +630,20 @@ describe( 'vectorOf method', function () {
     expect( myNLP.vectorOf( 'UNK$$$' ) ).to.deep.equal( zeroVector );
     expect( doc2.tokens().out( its.value, as.vector) ).to.deep.equal( zeroVector );
   } );
+
+  it( 'with safe=false and UNK$$$, array\'s length === 102 & last element === -1', function () {
+    const zeroVector = new Array( 102 );
+    zeroVector.fill( 0 );
+    zeroVector[ 101 ] = -1;
+    expect( myNLP.vectorOf( 'UNK$$$', false ) ).to.deep.equal( zeroVector );
+    expect( myNLP.vectorOf( 'UNK$$$', false ).length ).to.deep.equal( 102 );
+  } );
+
+  it( 'with safe=false and "the" word, array\'s length === 102 & last element === 0', function () {
+    // because the is the first word in the word vectors i.e. most often used word!
+    const theVector = myNLP.vectorOf( 'the' );
+    theVector.push( 0 );
+    expect( myNLP.vectorOf( 'the', false ) ).to.deep.equal( theVector );
+    expect( myNLP.vectorOf( 'the', false ).length ).to.deep.equal( 102 );
+  } );
 } );
