@@ -70,6 +70,8 @@ var itmDocumentOut = require( './api/itm-document-out.js' );
 // Print tokens, it is primarily for command line output.
 var printTokens = require( './api/print-tokens.js' );
 
+var its = require( './its.js' );
+
 // <hr/>
 
 // # Doc
@@ -128,6 +130,9 @@ var doc = function ( docData, addons ) {
   var itemEntity;
   var itemCustomEntity;
   var itemSentence;
+
+  // Vectors API
+  var contextualVectors;
 
   // Others.
   var isLexeme = cache.lookup;
@@ -444,6 +449,106 @@ var doc = function ( docData, addons ) {
 
   // <hr/>
 
+  // ### contextualVectors
+  /**
+   *
+   * Makes a JSON of contextually relevant words in the winkNLP format.
+   *
+   * @return {string} containing the JSON.
+  */
+  // eslint-disable-next-line complexity
+  contextualVectors = function ( { lemma = true, specificWordVectors = [], similarWordVectors = false, wordVectorsLimit = 0 } = {} ) {
+    // Initialize contextual vectors.
+    const cv = Object.create( null );
+    // Following properties are constants, therefore can be directly copied.
+    cv.precision = docData.wordVectors.precision;
+    cv.l2NormIndex = docData.wordVectors.l2NormIndex;
+    cv.wordIndex = docData.wordVectors.wordIndex;
+    cv.dimensions = docData.wordVectors.dimensions;
+    cv.unkVector = docData.wordVectors.unkVector;
+    // Following properties will be determined on the basis of the context.
+    cv.size = 0;
+    cv.words = [];
+    cv.vectors = Object.create( null );
+    // Shortcut all word vectors.
+    const awvs = docData.wordVectors.vectors;
+
+    // Extract all document's tokens.
+    const docTokens = colTokens( 0, docData.numOfTokens - 1 )()
+                      .out()
+                      .map( ( t ) => t.toLowerCase() );
+    let docTokensLemma = [];
+    if ( lemma === true ) docTokensLemma = colTokens( 0, docData.numOfTokens - 1 )()
+                                           .out( its.lemma )
+                                           .map( ( t ) => t.toLowerCase() );
+
+    for ( let i = 0; i < docTokens.length; i += 1 ) cv.vectors[ docTokens[ i ] ] = awvs[ docTokens[ i ] ] || cv.unkVector;
+    for ( let i = 0; i < docTokensLemma.length; i += 1 ) cv.vectors[ docTokensLemma[ i ] ] = awvs[ docTokensLemma[ i ] ] || cv.unkVector;
+    for ( let i = 0; i < specificWordVectors.length; i += 1 ) cv.vectors[ specificWordVectors[ i ] ] = awvs[ specificWordVectors[ i ] ] || cv.unkVector;
+
+    if ( similarWordVectors ) {
+      // Extract similar words on the basis of shortest Manhattan distance.
+      const allUniqueTokens = Object.keys( cv.vectors );
+      // Set up similar words array, with the size of all unique tokens.
+      const similarWords = new Array( allUniqueTokens.length );
+      // Placeholder for maintaining the similarity score based on Manhattan distance.
+      const similarWordsScore = new Array( allUniqueTokens.length );
+      // Initialize to a large distance!
+      similarWordsScore.fill( 1000000 );
+
+      // Initialize contextual vectors size i.e. vocab.
+      cv.size = allUniqueTokens.length;
+
+      // Now search each one of them in the entire word vectors space.
+      // Keep updating the smallest distance.
+      for ( let i = 0; i < allUniqueTokens.length; i += 1 ) {
+        const cwv = cv.vectors[ allUniqueTokens[ i ] ];
+
+        for ( const word in awvs ) { // eslint-disable-line guard-for-in
+          if ( word === allUniqueTokens[ i ] ) continue; // eslint-disable-line no-continue
+          const wv = awvs[ word ];
+          let distance = 0;
+
+          for ( let k = 0; k < cv.dimensions && distance < similarWordsScore[ i ]; k += 1 ) {
+            distance += Math.abs( cwv[ k ] - wv[ k ] );
+          } // Mahattan distance computation loop.
+
+          if ( distance < similarWordsScore[ i ] ) {
+            similarWordsScore[ i ] = distance;
+            similarWords[ i ] = word;
+          }
+        } // Traversing all the word vectors.
+      } // Traversing all the tokens in the corpus.
+
+      // Update contextual vectors using the list of similar words; also update their size.
+      for ( let i = 0; i < similarWords.length; i += 1 ) {
+        if ( cv.vectors[ similarWords[ i ] ] === undefined ) {
+          cv.vectors[ similarWords[ i ] ] = awvs[ similarWords[ i ] ] || cv.unkVector;
+          cv.size += 1;
+        }
+      }
+
+    }
+
+    // Fill the balance space, if any, on the basis of wordVectorsLimit.
+    for ( let i = 0; cv.size < wordVectorsLimit; i += 1 ) {
+      const word = docData.wordVectors.words[ i ];
+      if ( !cv.vectors[ word ] ) {
+        cv.vectors[ word ] = awvs[ word ];
+        cv.size += 1;
+      }
+    }
+
+    // Sort words on the basis of their usage frequency.
+    cv.words = Object.keys( cv.vectors )
+                        .map( ( w ) => ( { w: w, i: (cv.vectors[ w ][ cv.wordIndex ] < 0 ) ? Infinity : cv.vectors[ w ][ cv.wordIndex ] } ) )
+                        .sort( (a, b) => a.i - b.i )
+                        .map( ( o ) => o.w );
+
+    // Update the word index entry inside every vector.
+    for ( let i = 0; i < cv.size; i += 1 ) cv.vectors[ cv.words[ i ] ][ cv.wordIndex ] = i;
+    return JSON.stringify( cv, null, 2 );
+  }; // contextualVectors()
 
   // Published chainable methods.
   methods.entities = colEntities;
@@ -458,6 +563,8 @@ var doc = function ( docData, addons ) {
 
   // Enusre that we make a deep copy of config before returning to avoid corruption!
   methods.pipeConfig = () => JSON.parse( JSON.stringify( docData.currPipe ) );
+
+  methods.contextualVectors = contextualVectors;
 
   return methods;
 };
