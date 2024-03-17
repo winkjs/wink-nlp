@@ -458,6 +458,11 @@ var doc = function ( docData, addons ) {
   */
   // eslint-disable-next-line complexity
   contextualVectors = function ( { lemma = true, specificWordVectors = [], similarWordVectors = false, wordVectorsLimit = 0 } = {} ) {
+    // Error handling!
+    if ( !Array.isArray( specificWordVectors ) )
+      throw Error( `wink-nlp: expecting a valid Javascript array for similarWordVectos, instead found "${typeof specificWordVectors}".`);
+    if ( !Number.isInteger( wordVectorsLimit ) || wordVectorsLimit >= docData.wordVectors.size )
+      throw Error( 'wink-nlp: invalid value or type encountered for wordVectorsLimit.' );
     // Initialize contextual vectors.
     const cv = Object.create( null );
     // Following properties are constants, therefore can be directly copied.
@@ -478,13 +483,17 @@ var doc = function ( docData, addons ) {
                       .out()
                       .map( ( t ) => t.toLowerCase() );
     let docTokensLemma = [];
-    if ( lemma === true ) docTokensLemma = colTokens( 0, docData.numOfTokens - 1 )()
+    if ( lemma ) docTokensLemma = colTokens( 0, docData.numOfTokens - 1 )()
                                            .out( its.lemma )
                                            .map( ( t ) => t.toLowerCase() );
 
     for ( let i = 0; i < docTokens.length; i += 1 ) cv.vectors[ docTokens[ i ] ] = awvs[ docTokens[ i ] ] || cv.unkVector;
     for ( let i = 0; i < docTokensLemma.length; i += 1 ) cv.vectors[ docTokensLemma[ i ] ] = awvs[ docTokensLemma[ i ] ] || cv.unkVector;
-    for ( let i = 0; i < specificWordVectors.length; i += 1 ) cv.vectors[ specificWordVectors[ i ] ] = awvs[ specificWordVectors[ i ] ] || cv.unkVector;
+    for ( let i = 0; i < specificWordVectors.length; i += 1 ) {
+      const spWord = specificWordVectors[ i ].toString().trim();
+      if ( spWord )
+        cv.vectors[ specificWordVectors[ i ] ] = awvs[ specificWordVectors[ i ] ] || cv.unkVector;
+    }
 
     if ( similarWordVectors ) {
       // Extract similar words on the basis of shortest Manhattan distance.
