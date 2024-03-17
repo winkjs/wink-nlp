@@ -537,7 +537,7 @@ var doc = function ( docData, addons ) {
         }
       }
 
-    }
+    } else cv.size = Object.keys( cv.vectors ).length;
 
     // Fill the balance space, if any, on the basis of wordVectorsLimit.
     for ( let i = 0; cv.size < wordVectorsLimit; i += 1 ) {
@@ -556,7 +556,7 @@ var doc = function ( docData, addons ) {
 
     // Update the word index entry inside every vector.
     for ( let i = 0; i < cv.size; i += 1 ) cv.vectors[ cv.words[ i ] ][ cv.wordIndex ] = i;
-    return JSON.stringify( cv, null, 2 );
+    return JSON.stringify( cv );
   }; // contextualVectors()
 
   // Published chainable methods.
