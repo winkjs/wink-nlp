@@ -454,33 +454,3 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
 }; // wink
 
 module.exports = nlp;
-
-/* This is a test code, will eventually move to tests.
-const model = require( '../test/test-model/model.js' );
-const vectors = require( '../test/test-model/languages/cur/models/test-vectors.json' );
-const winkNLP = require( '../src/wink-nlp.js' );
-const myNLP = winkNLP( model, undefined, vectors );
-const its = myNLP.its;
-const as = myNLP.as;
-
-const text = 'Obama'; //  are eating bananas and zxcv!
-
-const doc = myNLP.readDoc( text );
-
-console.log( doc.tokens().out(its.lemma, as.vector).join( ', ') );
-
-console.log( doc.tokens().filter( ( t ) => t.out().length > 0 ).out(its.lemma, as.vector) );
-
-console.log( myNLP.vectorOf( 'president' ) );
-
-// .filter( (t) => !t.out( its.stopWordFlag ) )
-const v1 = myNLP.readDoc( 'The president greets the press in Chicago' ).tokens().out( its.lemma, as.vector );
-const v2 = myNLP.readDoc( 'Obama speaks to the media in Illinois' ).tokens().out( its.lemma, as.vector );
-
-let r = 0;
-for ( let k = 0; k < 100; k += 1 ) {
-  r += v1[ k ] * v2[ k ];
-}
-
-console.log( +( r / ( v1[ 100 ] * v2[ 100 ]) ).toFixed( 1 ) );
-// */
