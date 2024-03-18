@@ -470,7 +470,7 @@ var doc = function ( docData, addons ) {
     cv.l2NormIndex = docData.wordVectors.l2NormIndex;
     cv.wordIndex = docData.wordVectors.wordIndex;
     cv.dimensions = docData.wordVectors.dimensions;
-    cv.unkVector = docData.wordVectors.unkVector;
+    cv.unkVector = docData.wordVectors.unkVector.slice( 0 );
     // Following properties will be determined on the basis of the context.
     cv.size = 0;
     cv.words = [];
@@ -487,12 +487,12 @@ var doc = function ( docData, addons ) {
                                            .out( its.lemma )
                                            .map( ( t ) => t.toLowerCase() );
 
-    for ( let i = 0; i < docTokens.length; i += 1 ) cv.vectors[ docTokens[ i ] ] = awvs[ docTokens[ i ] ] || cv.unkVector;
-    for ( let i = 0; i < docTokensLemma.length; i += 1 ) cv.vectors[ docTokensLemma[ i ] ] = awvs[ docTokensLemma[ i ] ] || cv.unkVector;
+    for ( let i = 0; i < docTokens.length; i += 1 ) cv.vectors[ docTokens[ i ] ] = ( awvs[ docTokens[ i ] ] || cv.unkVector ).slice( 0 );
+    for ( let i = 0; i < docTokensLemma.length; i += 1 ) cv.vectors[ docTokensLemma[ i ] ] = ( awvs[ docTokensLemma[ i ] ] || cv.unkVector ).slice( 0 );
     for ( let i = 0; i < specificWordVectors.length; i += 1 ) {
-      const spWord = specificWordVectors[ i ].toString().trim();
+      const spWord = ( specificWordVectors[ i ] ) ? specificWordVectors[ i ].toString().trim() : false;
       if ( spWord )
-        cv.vectors[ specificWordVectors[ i ] ] = awvs[ specificWordVectors[ i ] ] || cv.unkVector;
+        cv.vectors[ specificWordVectors[ i ] ] = ( awvs[ specificWordVectors[ i ] ] || cv.unkVector ).slice( 0 );
     }
 
     if ( similarWordVectors ) {
@@ -532,7 +532,8 @@ var doc = function ( docData, addons ) {
       // Update contextual vectors using the list of similar words; also update their size.
       for ( let i = 0; i < similarWords.length; i += 1 ) {
         if ( cv.vectors[ similarWords[ i ] ] === undefined ) {
-          cv.vectors[ similarWords[ i ] ] = awvs[ similarWords[ i ] ] || cv.unkVector;
+          // Similar word must exist in `awvs`.
+          cv.vectors[ similarWords[ i ] ] = awvs[ similarWords[ i ] ].slice( 0 );
           cv.size += 1;
         }
       }
@@ -543,7 +544,7 @@ var doc = function ( docData, addons ) {
     for ( let i = 0; cv.size < wordVectorsLimit; i += 1 ) {
       const word = docData.wordVectors.words[ i ];
       if ( !cv.vectors[ word ] ) {
-        cv.vectors[ word ] = awvs[ word ];
+        cv.vectors[ word ] = awvs[ word ].slice( 0 );
         cv.size += 1;
       }
     }
@@ -556,6 +557,7 @@ var doc = function ( docData, addons ) {
 
     // Update the word index entry inside every vector.
     for ( let i = 0; i < cv.size; i += 1 ) cv.vectors[ cv.words[ i ] ][ cv.wordIndex ] = i;
+
     return JSON.stringify( cv );
   }; // contextualVectors()
 
