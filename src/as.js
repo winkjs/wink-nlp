@@ -193,6 +193,7 @@ as.vector = function ( tokens, rdd ) {
   const size = rdd.wordVectors.dimensions;
   const precision = rdd.wordVectors.precision;
   const vectors = rdd.wordVectors.vectors;
+  const l2NormIndex = rdd.wordVectors.l2NormIndex;
 
   // Set up a new initialized vector of `size`
   const v = new Array( size );
@@ -203,8 +204,11 @@ as.vector = function ( tokens, rdd ) {
   for ( let i = 0; i < tokens.length; i += 1 ) {
     // Extract token vector for the current token.
     const tv = vectors[ tokens[ i ].toLowerCase() ];
-    // Increment `numOfTokens` if the above operation was successful.
-    if ( tv !== undefined ) numOfTokens += 1;
+    // Increment `numOfTokens` if the above operation was successful
+    // AND l2Norm is non-zero, because for UNK vectors it is set to 0.
+    // The later is applicable for the contextual vectors, where in event
+    // of UNK, an all zero vectors is set for UNK word.
+    if ( tv !== undefined && tv[ l2NormIndex ] !== 0 ) numOfTokens += 1;
     for ( let j = 0; j < size; j += 1 ) {
       // Keep summing, eventually it will be divided by `numOfTokens` to obtain avareage.
       v[ j ] += ( tv === undefined ) ? 0 : tv[ j ];

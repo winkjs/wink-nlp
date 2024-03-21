@@ -487,6 +487,8 @@ var doc = function ( docData, addons ) {
                                            .out( its.lemma )
                                            .map( ( t ) => t.toLowerCase() );
 
+    // NOTE: For UNK words an all zero vector is set up, with `l2Norm = 0`, which may be used in as.vector helper
+    // to detect an UNK word.
     for ( let i = 0; i < docTokens.length; i += 1 ) cv.vectors[ docTokens[ i ] ] = ( awvs[ docTokens[ i ] ] || cv.unkVector ).slice( 0 );
     for ( let i = 0; i < docTokensLemma.length; i += 1 ) cv.vectors[ docTokensLemma[ i ] ] = ( awvs[ docTokensLemma[ i ] ] || cv.unkVector ).slice( 0 );
     for ( let i = 0; i < specificWordVectors.length; i += 1 ) {
