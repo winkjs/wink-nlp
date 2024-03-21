@@ -647,3 +647,17 @@ describe( 'vectorOf method', function () {
     expect( myNLP.vectorOf( 'the', false ).length ).to.deep.equal( 102 );
   } );
 } );
+
+describe( 'Incorrect word vector loading', function () {
+  it( 'wrong data type should throw error', function () {
+    expect( winkNLP.bind( null, model, undefined, 3 ) ).to.throw( /^wink-nlp: invalid word vectors, it must/ );
+  } );
+
+  it( 'empty model should throw error', function () {
+    expect( winkNLP.bind( null, model, undefined, {} ) ).to.throw( /^wink-nlp: empty word vectors found/ );
+  } );
+
+  it( 'incorrect model format should throw error', function () {
+    expect( winkNLP.bind( null, model, undefined, { hello: 'world' } ) ).to.throw( /^wink-nlp: invalid word vectors format/ );
+  } );
+} );

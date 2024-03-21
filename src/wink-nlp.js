@@ -413,6 +413,29 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
   validAnnotations.ner = typeof theModel.ner === 'function';
   validAnnotations.cer = typeof theModel.metaCER === 'function';
 
+  if ( wordVectorsJSON !== null ) {
+    if ( !helper.isObject( wordVectorsJSON ) )
+      throw Error( `wink-nlp: invalid word vectors, it must be an object instead found a "${typeof wordVectorsJSON}".` );
+
+    let numOfKeys = 0;
+    const wordVectorKeys = Object.create( null );
+    wordVectorKeys.precision = true;
+    wordVectorKeys.l2NormIndex = true;
+    wordVectorKeys.wordIndex = true;
+    wordVectorKeys.dimensions = true;
+    wordVectorKeys.unkVector = true;
+    wordVectorKeys.size = true;
+    wordVectorKeys.words = true;
+    wordVectorKeys.vectors = true;
+    for ( const key in wordVectorsJSON ) { // eslint-disable-line guard-for-in
+      numOfKeys += 1;
+      if ( !wordVectorKeys[ key ] )
+        throw Error( 'wink-nlp: invalid word vectors format.' );
+    }
+
+    if ( numOfKeys === 0 ) throw Error( 'wink-nlp: empty word vectors found.' );
+  }
+
   const tempPipe = ( pipe === undefined ) ? Object.keys( validAnnotations ) : pipe;
   if ( helper.isArray( tempPipe ) ) {
     tempPipe.forEach( ( at ) => {
