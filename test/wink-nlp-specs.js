@@ -661,3 +661,15 @@ describe( 'Incorrect word vector loading', function () {
     expect( winkNLP.bind( null, model, undefined, { hello: 'world' } ) ).to.throw( /^wink-nlp: invalid word vectors format/ );
   } );
 } );
+
+describe( 'word vector methods should throw error if the vectors are not loaded', function () {
+  const myNLP = winkNLP( model );
+  const doc = myNLP.readDoc( 'this' );
+  it( 'should throw error when vectorOf() is called', function () {
+    expect( myNLP.vectorOf.bind( null, 'the' ) ).to.throw( /^wink-nlp: word vectors are not loaded/ );
+  } );
+
+  it( 'should throw error when as.vector is used', function () {
+    expect( doc.tokens().out.bind( null, its.value, as.vector ) ).to.throw( /^wink-nlp: word vectors are not loaded/ );
+  } );
+} );

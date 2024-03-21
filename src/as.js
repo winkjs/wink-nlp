@@ -186,10 +186,14 @@ as.markedUpText = function ( twps, rdd, start, end ) {
 }; // markedUpText()
 
 as.vector = function ( tokens, rdd ) {
+  if ( !rdd.wordVectors )
+    throw Error( 'wink-nlp: word vectors are not loaded, use const nlp = winkNLP( model, pipe, wordVectors ) to load.' );
+
   // Get size of a vector from word vectors
   const size = rdd.wordVectors.dimensions;
   const precision = rdd.wordVectors.precision;
   const vectors = rdd.wordVectors.vectors;
+
   // Set up a new initialized vector of `size`
   const v = new Array( size );
   v.fill( 0 );

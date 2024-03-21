@@ -457,6 +457,9 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
   methods.as = asHelpers;
   // Vector of a token method.
   methods.vectorOf = function ( word, safe = true )  {
+    if ( !wordVectorsJSON )
+    throw Error( 'wink-nlp: word vectors are not loaded, use const nlp = winkNLP( model, pipe, wordVectors ) to load.' );
+
     const vectors = wordVectorsJSON.vectors;
     const unkVector = wordVectorsJSON.unkVector;
     const sliceUpTo = wordVectorsJSON.l2NormIndex + 1;
