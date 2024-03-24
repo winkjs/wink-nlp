@@ -137,3 +137,5 @@ describe( 'set-oo normal behaviour', function () {
     } );
   } );
 } );
+
+// vector-cosine behaviour is tested in the as-specs.js

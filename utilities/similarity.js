@@ -199,7 +199,7 @@ similarity.vector.cosine = function ( vectorA, vectorB ) {
   }
 
   // Use `l2Norm` directly from each vector.
-  return +( sumOfProducts / ( vectorA[ length ] * vectorB[ length ] ) ).toFixed( 4 );
+  return +( sumOfProducts / ( vectorA[ length ] * vectorB[ length ] ) ).toFixed( 6 );
 }; // similarity.vector.cosine()
 
 // Export similarity
