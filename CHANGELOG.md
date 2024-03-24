@@ -1,3 +1,10 @@
+# [Introducing cosine similarity for word vectors](https://github.com/winkjs/wink-nlp/releases/tag/2.1.0)
+## Version 2.1.0 March 24, 2024
+
+### ✨ Features
+- You can now use `similarity.vector.cosine( vectorA, vectorB )` to compute similarity between two vectors on a scale of 0 to 1. 🤓
+
+
 # [Word embeddings have arrived!](https://github.com/winkjs/wink-nlp/releases/tag/2.0.0)
 ## Version 2.0.0 March 24, 2024
 
