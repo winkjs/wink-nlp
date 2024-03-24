@@ -1,6 +1,6 @@
 {
   "name": "wink-nlp",
-  "version": "1.14.3",
+  "version": "2.0.0",
   "description": "Developer friendly Natural Language Processing ✨",
   "keywords": [
     "NLP",
@@ -20,6 +20,8 @@
     "stemmer",
     "bm25",
     "vectorizer",
+    "Embeddings",
+    "Word Vectors",
     "winkNLP",
     "winkjs",
     "wink"
