@@ -7,6 +7,8 @@
 
 WinkNLP is a JavaScript library for Natural Language Processing (NLP). Designed specifically to make development of NLP applications **easier** and **faster**, winkNLP is optimized for the right balance of performance and accuracy. 
 
+Its word embedding support unlocks deeper text analysis. Represent words and text as numerical vectors with ease, bringing higher accuracy in tasks like semantic similarity, text classification, and beyond – even within a browser.
+
 It is built ground up with [no external dependency](https://snyk.io/test/github/winkjs/wink-nlp?tab=dependencies) and has a [lean code base of ~10Kb minified & gzipped](https://bundlephobia.com/package/wink-nlp). A test coverage of [~100%](https://coveralls.io/github/winkjs/wink-nlp?branch=master) and compliance with the [Open Source Security Foundation best practices](https://bestpractices.coreinfrastructure.org/en/projects/6035) make winkNLP the ideal tool for building production grade systems with confidence.
 
 WinkNLP with full [Typescript support](https://github.com/winkjs/wink-nlp/blob/master/types/index.d.ts), runs on Node.js, [web browsers](https://github.com/winkjs/wink-nlp#how-to-install-for-web-browser) and [Deno](https://github.com/winkjs/wink-nlp#how-to-run-on-deno).
@@ -35,11 +37,13 @@ WinkNLP has a [comprehensive natural language processing (NLP) pipeline](https:/
 <tr><td>🖼 Best-in-class <a href="https://winkjs.org/wink-nlp/visualizing-markup.html">text visualization</a></td><td>Programmatically <b><a href="https://winkjs.org/wink-nlp/markup.html">mark</a></b> tokens, sentences, entities, etc. using HTML mark or any other tag of your choice.</td></tr>
 <tr><td>♻️ Extensive text processing features</td><td>Remove and/or retain tokens with specific attributes such as part-of-speech, named entity type, token type, stop word, shape and many more; compute Flesch reading ease score; generate n-grams; normalize, lemmatise or stem. Checkout how with the right kind of text preprocessing, even <a href="https://github.com/winkjs/wink-naive-bayes-text-classifier#readme">Naive Bayes classifier</a> achieves <b>impressive (≥90%)</b> accuracy in sentiment analysis and chatbot intent classification tasks.</td></tr>
 <tr><td>🔠 Pre-trained <a href="https://winkjs.org/wink-nlp/language-models.html">language models</a></td><td>Compact sizes starting from <a href="https://bundlephobia.com/package/wink-eng-lite-web-model">~1MB (minified & gzipped)</a> – reduce model loading time drastically down to ~1 second on a 4G network.</td></tr>
-<tr><td>💼 Host of <a href="https://winkjs.org/wink-nlp/its-as-helper.html">utilities & tools</a></td><td>BM25 vectorizer; Several similarity methods – Cosine, Tversky, Sørensen-Dice, Otsuka-Ochiai; Helpers to get bag of words, frequency table, lemma/stem, stop word removal and many more.</td></tr>
+<tr><td>↗️ <a href="https://github.com/winkjs/wink-embeddings-sg-100d?tab=readme-ov-file#wink-embeddings-sg-100d">Word vectors</a></td><td>100-dimensional English word embeddings for over 350K English words, which are optimized for winkNLP. Allows easy computation of sentence or document embeddings.</td></tr>
 </table>
 
-
-> WinkJS also has packages like [Naive Bayes classifier](https://github.com/winkjs/wink-naive-bayes-text-classifier), [multi-class averaged perceptron](https://github.com/winkjs/wink-perceptron) and [popular token and string distance methods](https://github.com/winkjs/wink-distance), which complement winkNLP.
+### Utilities & Tools 💼
+- [BM25 Vectorizer](https://winkjs.org/wink-nlp/bm25-vectorizer.html)
+- [Similarity methods](https://winkjs.org/wink-nlp/similarity.html) – Cosine, Tversky, Sørensen-Dice, Otsuka-Ochiai
+- [its & as helpers](https://winkjs.org/wink-nlp/its-as-helper.html) to get Bag of Words, Frequency table, Lemma, Stem, Stop word removal, Negation handling and many more.
 
 
 ## Documentation
