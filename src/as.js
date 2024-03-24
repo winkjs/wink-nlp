@@ -229,7 +229,7 @@ as.vector = function ( tokens, rdd ) {
     v[ i ] = +( v[ i ] / numOfTokens ).toFixed( precision );
     l2Norm += v[ i ] * v[ i ];
   }
-  // `l2Norm` becomes the 101th element for faster cosine similarity/normalization.
+  // `l2Norm` becomes the `size+1th` element for faster cosine similarity/normalization.
   v.push( +( Math.sqrt( l2Norm ).toFixed( precision ) ) );
 
   return v;
