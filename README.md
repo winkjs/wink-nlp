@@ -7,7 +7,7 @@
 
 WinkNLP is a JavaScript library for Natural Language Processing (NLP). Designed specifically to make development of NLP applications **easier** and **faster**, winkNLP is optimized for the right balance of performance and accuracy. 
 
-Its word embedding support unlocks deeper text analysis. Represent words and text as numerical vectors with ease, bringing higher accuracy in tasks like semantic similarity, text classification, and beyond – even within a browser.
+Its [word embedding](https://github.com/winkjs/wink-embeddings-sg-100d?tab=readme-ov-file#wink-embeddings-sg-100d) support unlocks deeper text analysis. Represent words and text as numerical vectors with ease, bringing higher accuracy in tasks like semantic similarity, text classification, and beyond – even within a browser.
 
 It is built ground up with [no external dependency](https://snyk.io/test/github/winkjs/wink-nlp?tab=dependencies) and has a [lean code base of ~10Kb minified & gzipped](https://bundlephobia.com/package/wink-nlp). A test coverage of [~100%](https://coveralls.io/github/winkjs/wink-nlp?branch=master) and compliance with the [Open Source Security Foundation best practices](https://bestpractices.coreinfrastructure.org/en/projects/6035) make winkNLP the ideal tool for building production grade systems with confidence.
 
