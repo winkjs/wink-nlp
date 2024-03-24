@@ -33,6 +33,7 @@
 var similarity = Object.create( null );
 similarity.bow = Object.create( null );
 similarity.set = Object.create( null );
+similarity.vector = Object.create( null );
 
 /**
  *
@@ -176,6 +177,30 @@ similarity.set.oo = function ( setA, setB ) {
   return +( intersectSize / ( Math.sqrt( setA.size * setB.size ) ) ).toFixed( 6 );
 
 }; // similarity.set.oo()
+
+/**
+ *
+ * Computes the cosine similarity between the input vectors
+ * `vectorA` and `vectorB` and returns a value between 0 and 1.
+ * Note, in winkNLP all vectors contain the `l2Norm` as the last
+ * element of the array.
+ *
+ * @param {object} vectorA the first vector
+ * @param {object} vectorB the second vector.
+ * @return {number} cosine similarity between `vectorA` and `vectorB`.
+ */
+similarity.vector.cosine = function ( vectorA, vectorB ) {
+  let sumOfProducts = 0;
+  // Recall, the last element is always the `l2Norm`.
+  const length = vectorA.length - 1;
+
+  for ( let i = 0; i < length; i += 1 ) {
+    sumOfProducts += vectorA[ i ] * vectorB[ i ];
+  }
+
+  // Use `l2Norm` directly from each vector.
+  return +( sumOfProducts / ( vectorA[ length ] * vectorB[ length ] ) ).toFixed( 4 );
+}; // similarity.vector.cosine()
 
 // Export similarity
 module.exports = similarity;
