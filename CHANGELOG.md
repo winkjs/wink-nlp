@@ -1,3 +1,16 @@
+# [Word embeddings have arrived!](https://github.com/winkjs/wink-nlp/releases/tag/2.0.0)
+## Version 2.0.0 March 24, 2024
+
+### ✨ Features
+- Seamless word embedding integration enhances winkNLP's semantic capabilities. 🎉 👏 🙌
+- Pre-trained 100-dimensional word embeddings for over 350,000 English words released: [wink-embeddings-sg-100d](https://github.com/winkjs/wink-embeddings-sg-100d). 💯
+- API remains unchanged — no code updates needed for existing projects. The new APIs include: 🤩
+	- **Obtain vector for a token:** Use the `.vectorOf( token )` API.
+	- **Compute sentence/document embeddings:** Employ the `as.vector` helper: use `.out( its.lemma, as.vector )` on tokens of a sentence or document. You can also use `its.value` or `its.normal`. Tokens can be pre-processed to remove stop words etc using the `.filter()` API. Note, the `as.vector` helper uses averaging technique.
+	- **Generate contextual vectors:** Leverage the `.contextualVectors()` method on a document. Useful for pure browser-side applications! Generate custom vectors contextually relevant to your corpus and use them in place of larger pre-trained wink embeddings.
+- Comprehensive documentation along with interesting examples is coming up shortly. Stay tuned for updates! 😎
+
+
 # [Added Deno example](https://github.com/winkjs/wink-nlp/releases/tag/1.14.3)
 ## Version 1.14.3 July 21, 2023
 
