@@ -61,13 +61,13 @@ var tkSize = constants.tkSize;
  *
  * @param {object} theModel language model.
  * @param {string[]} pipe of nlp annotations.
- * @param {string} wordVectorsJSON JSON read using node require.
+ * @param {object} wordEmbeddings object read using node require.
  * @returns {object} conatining set of API methods for natural language processing.
  * @example
  * const nlp = require( 'wink-nlp' );
  * var myNLP = nlp();
 */
-var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
+var nlp = function ( theModel, pipe = null, wordEmbeddings = null ) {
 
   var methods = Object.create( null );
   // Token Regex; compiled from `model`
@@ -213,7 +213,7 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
     // The `cache` is also part of document data structure.
     rdd.cache = cache;
     // Each document gets a pointer to the word vectors.
-    rdd.wordVectors = wordVectorsJSON;
+    rdd.wordVectors = wordEmbeddings;
     // Document's tokens; each token is represented as an array of numbers:
     // ```
     // [
@@ -413,9 +413,9 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
   validAnnotations.ner = typeof theModel.ner === 'function';
   validAnnotations.cer = typeof theModel.metaCER === 'function';
 
-  if ( wordVectorsJSON !== null ) {
-    if ( !helper.isObject( wordVectorsJSON ) )
-      throw Error( `wink-nlp: invalid word vectors, it must be an object instead found a "${typeof wordVectorsJSON}".` );
+  if ( wordEmbeddings !== null ) {
+    if ( !helper.isObject( wordEmbeddings ) )
+      throw Error( `wink-nlp: invalid word vectors, it must be an object instead found a "${typeof wordEmbeddings}".` );
 
     let numOfKeys = 0;
     const wordVectorKeys = Object.create( null );
@@ -427,7 +427,7 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
     wordVectorKeys.size = true;
     wordVectorKeys.words = true;
     wordVectorKeys.vectors = true;
-    for ( const key in wordVectorsJSON ) { // eslint-disable-line guard-for-in
+    for ( const key in wordEmbeddings ) { // eslint-disable-line guard-for-in
       numOfKeys += 1;
       if ( !wordVectorKeys[ key ] )
         throw Error( 'wink-nlp: invalid word vectors format.' );
@@ -436,7 +436,7 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
     if ( numOfKeys === 0 ) throw Error( 'wink-nlp: empty word vectors found.' );
   }
 
-  const tempPipe = ( pipe === undefined ) ? Object.keys( validAnnotations ) : pipe;
+  const tempPipe = ( pipe === null || pipe === undefined ) ? Object.keys( validAnnotations ) : pipe;
   if ( helper.isArray( tempPipe ) ) {
     tempPipe.forEach( ( at ) => {
       if ( !validAnnotations[ at ] ) throw Error( `wink-nlp: invalid pipe annotation "${at}" found.` );
@@ -457,12 +457,12 @@ var nlp = function ( theModel, pipe, wordVectorsJSON = null ) {
   methods.as = asHelpers;
   // Vector of a token method.
   methods.vectorOf = function ( word, safe = true )  {
-    if ( !wordVectorsJSON )
+    if ( !wordEmbeddings )
     throw Error( 'wink-nlp: word vectors are not loaded, use const nlp = winkNLP( model, pipe, wordVectors ) to load.' );
 
-    const vectors = wordVectorsJSON.vectors;
-    const unkVector = wordVectorsJSON.unkVector;
-    const sliceUpTo = wordVectorsJSON.l2NormIndex + 1;
+    const vectors = wordEmbeddings.vectors;
+    const unkVector = wordEmbeddings.unkVector;
+    const sliceUpTo = wordEmbeddings.l2NormIndex + 1;
 
     if ( typeof word !== 'string' ) {
       throw Error( 'winkNLP: input word must be of type string.' );
