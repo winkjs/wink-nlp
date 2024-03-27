@@ -33,11 +33,7 @@
 var its = require( '../its.js' );
 var as = require( '../as.js' );
 var allowed = require( '../allowed.js' );
-var constants = require( '../constants.js' );
-// Size of a single token.
-var tkSize = constants.tkSize;
-// Mask for preceding spaces.
-var psMask = constants.psMask;
+var reconstructSpaces = require( '../reconstruct-spaces.js' );
 
 // ## colTokensOut
 /**
@@ -65,11 +61,11 @@ var colTokensOut = function ( start, end, rdd, itsf, asf, addons ) {
   // Note, `as.text/markedUpText` needs special attention to include preceeding spaces.
   if ( asfn === as.text || asfn === as.markedUpText ) {
     for ( let i = start; i <= end; i += 1 ) {
-      mappedTkns.push( ''.padEnd( rdd.tokens[ ( i * tkSize ) + 1 ] & psMask ), itsf( i, rdd.tokens, rdd.cache, addons ) );  // eslint-disable-line no-bitwise
+      mappedTkns.push( reconstructSpaces( i, rdd ), itsf( i, rdd, addons ) );
     }
   } else {
     for ( let i = start; i <= end; i += 1 ) {
-      mappedTkns.push( itsfn( i, rdd.tokens, rdd.cache, addons ) );
+      mappedTkns.push( itsfn( i, rdd, addons ) );
     }
   }
 

@@ -30,24 +30,17 @@
 
 //
 
-var its = require( '../its.js' );
-var allowed = require( '../allowed.js' );
+var constants = require( './constants.js' );
 
-// ## itmTokenOut
-/**
- * Out method for a token. Note: the out always returns a Javascript
- * data type or data structure.
- * @param  {number}   index       The index of desired token.
- * @param  {Object}   rdd         Raw Document Data-structure.
- * @param  {function} itsf        Desired `its` mapper.
- * @param  {object}   addons      The model's addons.
- * @return {*}                    Mapped value.
- * @private
- */
-var itmTokenOut = function ( index, rdd, itsf, addons ) {
-  // Not a vector request, map using `itsf`.
-  var f = ( allowed.its4token.has( itsf ) ) ? itsf : its.value;
-  return f( index, rdd, addons );
-}; // itmTokenOut()
+// Size of a single token.
+var tkSize = constants.tkSize;
+// Mask for preceding spaces.
+var psMask = constants.psMask;
 
-module.exports = itmTokenOut;
+var reconstructSpaces = function ( index, rdd ) {
+    var token = rdd.tokens[ ( index * tkSize ) + 1 ];
+    var count = token & psMask;  // eslint-disable-line no-bitwise
+    return ( count < 0xFFFF ) ? ( ''.padEnd( count ) ) : rdd.nonBreakingSpaces[ index ];
+}; // reconstructSpaces()
+
+module.exports = reconstructSpaces;

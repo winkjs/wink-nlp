@@ -42,6 +42,8 @@ var xpSize = constants.xpSize;
 var bits4lemma = constants.bits4lemma;
 // The UNK!
 var UNK = constants.UNK;
+// Size of a single token.
+var tkSize = constants.tkSize;
 
 var docDataWrapper = function ( data ) {
   // Extract frequently referred data elements:
@@ -63,12 +65,16 @@ var docDataWrapper = function ( data ) {
    * @param {string} text to be added as token.
    * @param {string} category of the token.
    * @param {number} precedingSpaces to the `text` as parsed by tokenizer.
-   * @param {number[]} tokens, where the token is added.
+   * @param {array} nbsp, containing details of nbsp.
    * @returns {boolean} always `true`.
    * @private
   */
-  var addToken = function ( text, category, precedingSpaces ) {
-    tokens.push( cache.add( text, category ), precedingSpaces, 0, 0 );
+  var addToken = function ( text, category, precedingSpaces, nbsp ) {
+    // Non-normalized index of the token being pushed.
+    var idx;
+    idx = tokens.push( cache.add( text, category ), precedingSpaces, 0, 0 );
+    // See comments in `addTokenIfInCache()`
+    if ( nbsp !== null && precedingSpaces > 0 ) data.nonBreakingSpaces[ ( idx / tkSize ) - 1 ] = nbsp;
     return true;
   }; // addToken()
 
@@ -84,10 +90,11 @@ var docDataWrapper = function ( data ) {
    *
    * @param {string} text to be added as token.
    * @param {number} precedingSpaces to the `text` as parsed by tokenizer.
+   * @param {string} nbsp non breaking spaces
    * @returns {boolean} `truthy` if `text` is found in cache otherwise `falsy`.
    * @private
   */
-  var addTokenIfInCache = function ( text, precedingSpaces ) {
+  var addTokenIfInCache = function ( text, precedingSpaces, nbsp ) {
     // The array `tokenIndex` will contain 1-element if `text` is not a predefined
     // contraction; otherwise it will contain `n x 4` elements, where `n` is the
     // number of expansions.
@@ -96,12 +103,20 @@ var docDataWrapper = function ( data ) {
     var ps;
     // Temp for lemma & pos.
     var lemma, pos;
+    // Non-normalized index of the token being pushed.
+    var idx;
 
     // `UNK` means 0 or `falsy`; it flags that token has not been added.
     if ( tokenIndex === null ) return UNK;
 
     if ( tokenIndex.length === 1 ) {
-      tokens.push( tokenIndex[ 0 ], precedingSpaces, 0, 0 );
+      idx = tokens.push( tokenIndex[ 0 ], precedingSpaces, 0, 0 );
+      // Store non breaking spaces preceding this token. Do it only if `precedingSpaces > 0` (Note:
+      // it is zero in case of expansion of a contraction) AND `nbsp` is defined (Note: in this case
+      // precedingSpaces would be set to max i.e. 0xFFFF with only exception when the token is being
+      // expanded: the first one will have nbsp but the subsequent ones with have 0 preceding spaces).
+      // The storage index should be the normalaized token index.
+      if ( nbsp !== null && precedingSpaces > 0 ) data.nonBreakingSpaces[ ( idx / tkSize ) - 1 ] = nbsp;
     } else {
       // Contraction, itereate through each expansion.
       for ( let k = 0; k < tokenIndex.length; k += xpSize ) {
@@ -114,7 +129,9 @@ var docDataWrapper = function ( data ) {
         lemma = tokenIndex[ k + 2 ];
         pos   = tokenIndex[ k + 3 ];
         // Add token; annotations may be filled later in the pipeline.
-        tokens.push( tokenIndex[ k ], ps, ( lemma | ( pos << bits4lemma ) ), 0 ); // eslint-disable-line no-bitwise
+        idx = tokens.push( tokenIndex[ k ], ps, ( lemma | ( pos << bits4lemma ) ), 0 ); // eslint-disable-line no-bitwise
+        // See comment above in the then block of this if-statement.
+        if ( nbsp !== null && precedingSpaces > 0 ) data.nonBreakingSpaces[ ( idx / tkSize ) - 1 ] = nbsp;
       }
     }
     // Return `truthy`, indicating that token(s) has been added successfully.

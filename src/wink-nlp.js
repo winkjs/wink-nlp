@@ -232,6 +232,8 @@ var nlp = function ( theModel, pipe = null, wordEmbeddings = null ) {
     // Publish the current annotation pipeline so that code can inquire about
     // active annotations!
     rdd.currPipe = currPipe;
+    // Set storage for non braking spaces
+    rdd.nonBreakingSpaces = Object.create( null );
 
     var wrappedDocData = DocDataWrapper( rdd );  // eslint-disable-line new-cap
 

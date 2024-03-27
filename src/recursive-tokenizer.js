@@ -62,6 +62,8 @@ var tokenizer = function ( categories, preserve ) {
   var isLexeme;
   // Preceding Spaces — special need for recursive tokenizer.
   var ps = 0;
+  // Will only be needed for the first token, after that it si all zero (ps)!
+  var nonBreakingSpaces = null;
 
   // ### pushHyphenatedToken
   /**
@@ -293,7 +295,7 @@ var tokenizer = function ( categories, preserve ) {
       // No regex left, this is the true **unk**.
       // Becuase it is `UNK`, we can use `addToken` instead of attempting
       // `addTokenIfInCache`.
-      addToken( text, categories.unk, ps );
+      addToken( text, categories.unk, ps, nonBreakingSpaces );
       ps = 0;
       return;
     }
@@ -309,8 +311,8 @@ var tokenizer = function ( categories, preserve ) {
         // Use the passed value of preceding spaces only once!
         // First try cache, otherwise make a direct addition. This ensures
         // processing of expansions.
-        cat = addTokenIfInCache( tokens[ i ][ 0 ], ps );
-        if ( cat === categories.unk ) addToken( tokens[ i ][ 0 ], tokens[ i ][ 1 ], ps );
+        cat = addTokenIfInCache( tokens[ i ][ 0 ], ps, nonBreakingSpaces );
+        if ( cat === categories.unk ) addToken( tokens[ i ][ 0 ], tokens[ i ][ 1 ], ps, nonBreakingSpaces );
         // Reset `ps` to **0** as there can never be spaces in a text passed to
         // this tokenizer.
         ps = 0;
@@ -329,11 +331,12 @@ var tokenizer = function ( categories, preserve ) {
    * @param {string} text the input sentence.
    * @param {number} precedingSpaces to the text
    * @param {object} doc contains the document; used here for adding tokens.
+   * @param {array}  nbsp contains non breaking spaces details.
    * @return {void} nothing!
    * `value` and its `tag` identifying the type of the token.
    * @private
   */
-  var tokenize = function ( rgxs, text, precedingSpaces, doc ) {
+  var tokenize = function ( rgxs, text, precedingSpaces, doc, nbsp ) {
     // Cache frequently used doc methods.
     addToken = doc._addToken;
     addTokenIfInCache = doc._addTokenIfInCache;
@@ -341,6 +344,7 @@ var tokenizer = function ( categories, preserve ) {
     // Set `ps` to the passed value of preceding spaces, it will be reset to **0**
     // after first use during recursion.
     ps = precedingSpaces;
+    nonBreakingSpaces = nbsp;
     tokenizeTextRecursively( text, rgxs, precedingSpaces );
   }; // tokenize()
 

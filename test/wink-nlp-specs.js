@@ -52,7 +52,7 @@ var nlp = winkNLP( model );
 
 describe( 'wink-nlp test-coverage and basic behavior', function () {
   // Tokens to throttle maximum part of the code.
-  var sentence = [
+  var tokensArray = [
     // Emoji with complex combo of abbreviation with `-` and emoticon.
     '🎭Mr.-:) 🎉🎉 ',
     // Newline and email.
@@ -108,17 +108,23 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     'aaa.-bbb ',
     // To text buggy regex for numerals
     '138375720109463900845220131105025504431resources094639008452'
-  ].join( '' );
+  ];
+
+  var sentence = tokensArray.join('');
+  var nbspTokensArray = tokensArray.slice();
+  // Include contractions where the preceeding space is zero between expnasions.
+  nbspTokensArray.push( ' don\'t' );
+  nbspTokensArray.push( ' you\'dn\'t\'ve' );
 
   var moreThanMaxSpaces = [
     'hello',
-    ''.padEnd( 0x10003 ),
+    ''.padEnd( 0xFFFF ),
     'world'
   ].join( '' );
 
   var maxSpaces = [
     'hello',
-    ''.padEnd( 0xFFFF ),
+    ''.padEnd( 0xFFFE ),
     'world'
   ].join( '' );
 
@@ -126,6 +132,16 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     var doc = nlp.readDoc( sentence  );
     // Reconstruction.
     expect( doc.out() ).to.equal( sentence );
+  } );
+
+  it( 'should tokenize/detokenize the following sentence with non-breaking spaces', function () {
+    // Reconstruction.
+    expect( nlp.readDoc( nbspTokensArray.join('\u00a0') ).out() ).to.equal( nbspTokensArray.join('\u00a0') );
+    expect( nlp.readDoc( nbspTokensArray.join(' \u00a0') ).out() ).to.equal( nbspTokensArray.join(' \u00a0') );
+    expect( nlp.readDoc( nbspTokensArray.join('  \u00a0') ).out() ).to.equal( nbspTokensArray.join('  \u00a0') );
+    expect( nlp.readDoc( nbspTokensArray.join('\u00a0\u00a0') ).out() ).to.equal( nbspTokensArray.join('\u00a0\u00a0') );
+    expect( nlp.readDoc( nbspTokensArray.join(' \u00a0\u00a0') ).out() ).to.equal( nbspTokensArray.join(' \u00a0\u00a0') );
+    expect( nlp.readDoc( nbspTokensArray.join('  \u00a0\u00a0') ).out() ).to.equal( nbspTokensArray.join('  \u00a0\u00a0') );
   } );
 
   it( 'should not contain empty tokens', function () {

@@ -34,6 +34,7 @@ var sort4FT = require( './sort4FT.js' );
 var constants = require( './constants.js' );
 var caseMap = [ 'other', 'lowerCase', 'upperCase', 'titleCase' ];
 var swi = require( './sentence-wise-importance.js' );
+var reconstructSpaces = require( './reconstruct-spaces.js' );
 
 // Size of a single token.
 var tkSize = constants.tkSize;
@@ -41,26 +42,26 @@ var tkSize = constants.tkSize;
 var bits4lemma = constants.bits4lemma;
 // Mask for extracting pos
 var posMask = constants.posMask;
-// Mask for preceding spaces.
-var psMask = constants.psMask;
 // Mask for lemma in case of contraction.
 var lemmaMask = constants.lemmaMask;
 
 var its = Object.create( null );
 
-its.case = function ( index, tokens, cache ) {
-  return caseMap[ cache.property( tokens[ index * tkSize ], 'lutCase' ) ];
+its.case = function ( index, rdd ) {
+  return caseMap[ rdd.cache.property( rdd.tokens[ index * tkSize ], 'lutCase' ) ];
 }; // case()
 
-its.uniqueId = function ( index, tokens ) {
-  return tokens[ index * tkSize ];
+its.uniqueId = function ( index, rdd ) {
+  return rdd.tokens[ index * tkSize ];
 }; // uniqueId()
 
-its.negationFlag = function ( index, tokens ) {
-  return tokens[ ( index * tkSize ) + 3 ] >= constants.negationFlag;
+its.negationFlag = function ( index, rdd ) {
+  return rdd.tokens[ ( index * tkSize ) + 3 ] >= constants.negationFlag;
 }; // negationFlag()
 
-its.normal = function ( index, tokens, cache ) {
+its.normal = function ( index, rdd ) {
+  var tokens = rdd.tokens;
+  var cache = rdd.cache;
   return (
     ( tokens[ ( index * tkSize ) + 1 ] > 65535 ) ?
       cache.value( cache.nox( tokens[ ( index * tkSize ) + 1 ] ) ) :
@@ -68,29 +69,29 @@ its.normal = function ( index, tokens, cache ) {
   );
 }; // normal()
 
-its.contractionFlag = function ( index, tokens ) {
-  return ( tokens[ ( index * tkSize ) + 1 ] > 65535 );
+its.contractionFlag = function ( index, rdd ) {
+  return ( rdd.tokens[ ( index * tkSize ) + 1 ] > 65535 );
 }; // contractionFlag()
 
-its.pos = function ( index, tokens, cache ) {
-  return cache.valueOf( 'pos', ( tokens[ ( index * tkSize ) + 2 ] & posMask ) >>> bits4lemma );  // eslint-disable-line no-bitwise
+its.pos = function ( index, rdd ) {
+  return rdd.cache.valueOf( 'pos', ( rdd.tokens[ ( index * tkSize ) + 2 ] & posMask ) >>> bits4lemma );  // eslint-disable-line no-bitwise
 }; // pos()
 
-its.precedingSpaces = function ( index, tokens ) {
-  var token = tokens[ ( index * tkSize ) + 1 ];
-  var count = token & psMask;  // eslint-disable-line no-bitwise
-  return ( ''.padEnd( count ) );
+its.precedingSpaces = function ( index, rdd ) {
+  return reconstructSpaces( index, rdd );
 }; // precedingSpaces()
 
-its.prefix = function ( index, tokens, cache ) {
-  return cache.property( tokens[ index * tkSize ], 'prefix' );
+its.prefix = function ( index, rdd ) {
+  return rdd.cache.property( rdd.tokens[ index * tkSize ], 'prefix' );
 }; // prefix()
 
-its.shape = function ( index, tokens, cache ) {
-  return cache.property( tokens[ index * tkSize ], 'shape' );
+its.shape = function ( index, rdd ) {
+  return rdd.cache.property( rdd.tokens[ index * tkSize ], 'shape' );
 }; // shape()
 
-its.stopWordFlag = function ( index, tokens, cache ) {
+its.stopWordFlag = function ( index, rdd ) {
+  var tokens = rdd.tokens;
+  var cache = rdd.cache;
   // Apply check on normalized token and not the original value, because
   // stop words are always defined in the lowercase.
   var normal = ( tokens[ ( index * tkSize ) + 1 ] > 65535 ) ?
@@ -99,27 +100,29 @@ its.stopWordFlag = function ( index, tokens, cache ) {
   return ( cache.property( normal, 'isStopWord' ) === 1 );
 }; // stopWordFlag()
 
-its.abbrevFlag = function ( index, tokens, cache ) {
-  return ( cache.property( tokens[ index * tkSize ], 'isAbbrev' ) === 1 );
+its.abbrevFlag = function ( index, rdd ) {
+  return ( rdd.cache.property( rdd.tokens[ index * tkSize ], 'isAbbrev' ) === 1 );
 }; // abbrevFlag()
 
-its.suffix = function ( index, tokens, cache ) {
-  return cache.property( tokens[ index * tkSize ], 'suffix' );
+its.suffix = function ( index, rdd ) {
+  return rdd.cache.property( rdd.tokens[ index * tkSize ], 'suffix' );
 }; // suffix()
 
-its.type = function ( index, tokens, cache ) {
-  return cache.property( tokens[ index * tkSize ], 'tokenType' );
+its.type = function ( index, rdd ) {
+  return rdd.cache.property( rdd.tokens[ index * tkSize ], 'tokenType' );
 }; // type()
 
-its.value = function ( index, tokens, cache ) {
-  return cache.value( tokens[ index * tkSize ] );
+its.value = function ( index, rdd ) {
+  return rdd.cache.value( rdd.tokens[ index * tkSize ] );
 }; // value()
 
-its.stem = function ( index, tokens, cache, addons ) {
-  return addons.stem( cache.value( tokens[ index * tkSize ] ) );
+its.stem = function ( index, rdd, addons ) {
+  return addons.stem( rdd.cache.value( rdd.tokens[ index * tkSize ] ) );
 }; // stem()
 
-its.lemma = function ( index, tokens, cache, addons ) {
+its.lemma = function ( index, rdd, addons ) {
+  var tokens = rdd.tokens;
+  var cache = rdd.cache;
   // If it is a contraction that lemma is already available in the token's data structure.
   if ( tokens[ ( index * tkSize ) + 1 ] > 65535 ) {
     return cache.value( tokens[ ( index * tkSize ) + 2 ] & lemmaMask ); // eslint-disable-line no-bitwise
@@ -131,7 +134,7 @@ its.lemma = function ( index, tokens, cache, addons ) {
     return cache.value( cache.property( mappedIdx, 'lemma' ) );
   }
   // Exhausted all possibilities to avoid processing! Now lemmatize!
-  const pos = its.pos( index, tokens, cache );
+  const pos = its.pos( index, rdd );
   const value = cache.value( cache.normal( tokens[ index * tkSize ] ) );
   return addons.lemmatize( value, pos, cache );
 }; // lemmas()
@@ -144,11 +147,11 @@ its.detail = function ( ) {
   return true;
 }; // detail()
 
-its.markedUpText = function ( index, tokens, cache ) {
+its.markedUpText = function ( index, rdd ) {
   // This is a special case because `tokens.out()` allows `as.markedUpText`.
   // Therefore simply return the value and rest is handled by `colTokensOut` with
   // `as.markedUpText()`` or `as.text()` as one of the arugments.
-  return its.value( index, tokens, cache );
+  return its.value( index, rdd );
 }; // markedUpText()
 
 its.span = function ( spanItem ) {

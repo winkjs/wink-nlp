@@ -33,6 +33,7 @@
 var its = require( '../its.js' );
 var as = require( '../as.js' );
 var allowed = require( '../allowed.js' );
+var reconstructSpaces = require( '../reconstruct-spaces.js' );
 var constants = require( '../constants.js' );
 // Size of a single token.
 var tkSize = constants.tkSize;
@@ -65,11 +66,11 @@ var selTokensOut = function ( selTokens, rdd, itsf, asf, addons ) {
   // No `markedUpText` allowed here.
   if ( asfn === as.text ) {
     for ( let i = 0; i < selTokens.length; i += 1 ) {
-      mappedTkns.push( ''.padEnd( rdd.tokens[ ( selTokens[ i ] * tkSize ) + 1 ] & psMask ), itsf( selTokens[ i ], rdd.tokens, rdd.cache, addons ) );  // eslint-disable-line no-bitwise
+      mappedTkns.push( reconstructSpaces( selTokens[ i ], rdd ), itsf( selTokens[ i ], rdd, addons ) );
     }
   } else {
     for ( let i = 0; i < selTokens.length; i += 1 ) {
-      mappedTkns.push( itsfn( selTokens[ i ], rdd.tokens, rdd.cache, addons ) );
+      mappedTkns.push( itsfn( selTokens[ i ], rdd, addons ) );
     }
   }
 
