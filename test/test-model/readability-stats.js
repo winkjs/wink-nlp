@@ -35,8 +35,6 @@ const consts = require( './constants.js' );
 const tkSize = consts.tkSize;
 
 var readabilityStats = function ( rdd, its ) {
-  // The cache.
-  var cache = rdd.cache;
   // wink NLP native tokens.
   var tokens = rdd.tokens;
   // Number of sentences.
