@@ -165,6 +165,15 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     } );
   } );
 
+  it( 'should preserve non-breaking spaces with mark up', function () {
+    var textWith2S = 'I purchased mangoes on March\u00a010th for US$\u00a099.00.';
+    var doc4mark = nlp.readDoc( textWith2S );
+    doc4mark.entities().each((e) => e.markup());
+    var markedText = 'I purchased mangoes on <mark>March\u00a010th</mark> for <mark>US$\u00a099.00</mark>.';
+    // Reconstruction.
+    expect( doc4mark.out(its.markedUpText) ).to.equal( markedText );
+  } );
+
   it( 'should not contain empty tokens', function () {
     var doc = nlp.readDoc( sentence  );
     expect( findEmptyTokens( doc ) ).deep.equal( [] );
