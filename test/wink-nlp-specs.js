@@ -174,6 +174,14 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     expect( doc4mark.out(its.markedUpText) ).to.equal( markedText );
   } );
 
+  it( 'should correctly reconstruct non-breaking spaces with its.precedingSpaces', function () {
+    var text = 'U.S.A is my birth place.  \u00a0 I was born\u00a0on 06.12.1924.';
+    var reconstructed = [];
+    nlp.readDoc( text ).sentences().itemAt(1).tokens().each( ( t ) => reconstructed.push( t.out(its.precedingSpaces), t.out() ));
+    // Reconstruction.
+    expect( reconstructed.join( '' ) ).to.equal( '  \u00a0 I was born\u00a0on 06.12.1924.' );
+  } );
+
   it( 'should not contain empty tokens', function () {
     var doc = nlp.readDoc( sentence  );
     expect( findEmptyTokens( doc ) ).deep.equal( [] );
