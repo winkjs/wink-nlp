@@ -155,6 +155,6 @@ Looking for a new feature, request it via the [new features & ideas](https://git
 
 ## Copyright & License
 
-**Wink NLP** is copyright 2017-23 [GRAYPE Systems Private Limited](https://graype.in/).
+**Wink NLP** is copyright 2017-24 [GRAYPE Systems Private Limited](https://graype.in/).
 
 It is licensed under the terms of the MIT License.
