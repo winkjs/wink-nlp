@@ -1,3 +1,9 @@
+# [Added non-breaking space handling capabilities](https://github.com/winkjs/wink-nlp/releases/tag/2.2.0)
+## Version 2.2.0 April 03, 2024
+
+### ✨ Features
+- Detokenization restores both regular and non-breaking spaces to their original positions. 🤓
+
 # [Introducing cosine similarity for word vectors](https://github.com/winkjs/wink-nlp/releases/tag/2.1.0)
 ## Version 2.1.0 March 24, 2024
 
