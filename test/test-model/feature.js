@@ -96,6 +96,7 @@ var feature = function ( config, lang, featuresData, isLexicographer ) {
   const rgxLC = /^[a-z][a-z\-\–\—\.]*$/;
   const rgxUC = /^[A-Z][A-Z\-\–\—\.]*$/;
   const rgxTC = /^[A-Z][a-z\-\–\—\.]*$/;
+  var rgxDiacriticalWordJoiner = /[\u0300-\u036f\u2060]/g;
 
   // The Regex, Category  pair goes in to this array for category detection &
   // assignment.
@@ -114,6 +115,7 @@ var feature = function ( config, lang, featuresData, isLexicographer ) {
   var shape = function ( word ) {
     return (
       word
+      .normalize( 'NFD' ).replace( rgxDiacriticalWordJoiner, '' )
         .replace( /[A-Z]{4,}/g, 'XXXX' )
         // Handle <4 Caps
         .replace( /[A-Z]/g, 'X' )

@@ -85,8 +85,19 @@ describe( 'its functions for .out()', function () {
   it( 'its.shape', function () {
     expect( nlp.readDoc( 'The' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xxx' );
     expect( nlp.readDoc( 'TheOne' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'XxxXxx' );
+    expect( nlp.readDoc( 'The\u2060One' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'XxxXxx' );
     expect( nlp.readDoc( 'A1' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xd' );
     expect( nlp.readDoc( 'Abcdef123456' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xxxxxdddd' );
+    expect( nlp.readDoc( 'Poincar\u00e9' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xxxxx' );
+    expect( nlp.readDoc( 'Poin\u2060car\u00e9' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xxxxx' );
+    expect( nlp.readDoc( 'Poincare\u0301' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xxxxx' );
+  } );
+
+  it( 'its.shape special cases', function () {
+    expect( nlp.readDoc( 'The\u2060One' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'XxxXxx' );
+    expect( nlp.readDoc( 'Poincar\u00e9' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xxxxx' );
+    expect( nlp.readDoc( 'Poin\u2060car\u00e9' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xxxxx' );
+    expect( nlp.readDoc( 'Poincare\u0301' ).tokens().itemAt( 0 ).out( its.shape ) ).to.equal( 'Xxxxx' );
   } );
 
   it( 'its.type', function () {
