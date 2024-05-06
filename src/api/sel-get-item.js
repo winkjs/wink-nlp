@@ -41,7 +41,9 @@
  * @private
  */
 var selGetItemAt = function ( k, selection, itemFn ) {
-  return ( ( k < 0 || k >= selection.length ) ? undefined : itemFn( selection[ k ] ) );
+  if ( k < 0 || k >= selection.length ) {
+    throw Error( `wink-nlp: wink-nlp: ${k} is an invalid or out of bounds index.`);
+  } else return itemFn( selection[ k ] );
 }; // selGetItemAt()
 
 module.exports = selGetItemAt;

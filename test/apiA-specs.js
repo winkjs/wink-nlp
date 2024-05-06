@@ -124,20 +124,20 @@ describe( 'APIs — A', function () {
     // ItemAt boundary tests.
     // Will need a revamp once SBD is in place (TODO):
     describe( 'doc API out of range access test', function () {
-      it( '.sentences() should return undefined for out of range index', function () {
-        expect( doc1.sentences().itemAt( -1 ) ).to.equal( undefined );
-        expect( doc1.sentences().itemAt( doc1.sentences().length() ) ).to.equal( undefined );
+      it( '.sentences() should throw  out of range index error', function () {
+        expect( () => doc1.sentences().itemAt(-1) ).to.throw( /^wink-nlp: -1 is an invalid or out of bounds index./ );
+        expect( () => doc1.sentences().itemAt( doc1.sentences().length() ) ).to.throw( /^wink-nlp: 3 is an invalid or out of bounds index./ );
       } );
 
-      it( '.tokens().itemAt() should return undefined for out of range index', function () {
-        expect( doc1.tokens().itemAt( -1 ) ).to.equal( undefined );
-        expect( doc1.tokens().itemAt( doc1.tokens().length() ) ).to.equal( undefined );
+      it( '.tokens().itemAt() should throw out of range index error', function () {
+        expect( () => doc1.tokens().itemAt( -1 ) ).to.throw( /^wink-nlp: -1 is an invalid or out of bounds index./ );
+        expect( () => doc1.tokens().itemAt( doc1.tokens().length() ) ).to.throw( /^wink-nlp: 37 is an invalid or out of bounds index./ );
       } );
 
-      it( '.tokens().filter().itemAt() should return undefined for out of range index', function () {
+      it( '.tokens().filter().itemAt() should throw out of range index error', function () {
         const ftk1 = doc1.tokens().filter( ( t ) => ( t.out( its.type ) === 'word' ) );
-        expect( ftk1.itemAt( -1 ) ).to.equal( undefined );
-        expect( ftk1.itemAt( ftk1.length() ) ).to.equal( undefined );
+        expect( () => ftk1.itemAt( -1 ) ).to.throw( /^wink-nlp: wink-nlp: -1 is an invalid or out of bounds index./ );
+        expect( () => ftk1.itemAt( ftk1.length() ) ).to.throw( /^wink-nlp: wink-nlp: 14 is an invalid or out of bounds index./ );
       } );
     } );
 
@@ -232,7 +232,7 @@ describe( 'APIs — A', function () {
         const i22 = doc2.entities().itemAt( 5 );
         expect( i22.out( its.detail ) ).to.deep.equal( ae2[ 5 ] );
 
-        expect( doc2.entities().itemAt( 12 ) ).to.deep.equal( undefined );
+        expect( () => doc2.entities().itemAt( 12 ) ).to.throw( /^wink-nlp: 12 is an invalid or out of bounds index./ );
       } );
 
       it( '.filter() should return correctly filter entities', function () {
@@ -247,7 +247,7 @@ describe( 'APIs — A', function () {
         // Also check the parent document!
         expect( fe1.itemAt( 1 ).parentDocument() ).to.deep.equal( doc1 );
         // Out of range item test
-        expect( fe1.itemAt( 2 ) ).to.deep.equal( undefined );
+        expect( () => fe1.itemAt( 2 ) ).to.throw( /^wink-nlp: wink-nlp: 2 is an invalid or out of bounds index./ );
         // itemAt() api.
         fe1.each( ( e, k ) => {
           expect( e.out() ).to.deep.equal( fe1.itemAt( k ).out() );
@@ -260,7 +260,7 @@ describe( 'APIs — A', function () {
         expect( fe2.out( its.detail ) ).to.deep.equal( fae2 );
         expect( fe2.itemAt( 1 ).out( its.detail ) ).to.deep.equal( fae2[ 1 ] );
         expect( fe2.itemAt( 1 ).parentDocument() ).to.deep.equal( doc2 );
-        expect( fe2.itemAt( 3 ) ).to.deep.equal( undefined );
+        expect( () => fe2.itemAt( 3 ) ).to.throw( /^wink-nlp: wink-nlp: 3 is an invalid or out of bounds index./ );
         fe2.each( ( e, k ) => {
           expect( e.out() ).to.deep.equal( fe2.itemAt( k ).out() );
         } );

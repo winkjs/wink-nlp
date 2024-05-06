@@ -44,7 +44,9 @@
 var colGetItemAt = function ( k, start, end, itemFn ) {
   // To handle relative indexing, compute actual `k` by adding `start`.
   var ak = k + start;
-  return ( ( ak < start || ak > end ) ? undefined : itemFn( ak ) );
+  if ( ak < start || ak > end ) {
+    throw Error( `wink-nlp: ${k} is an invalid or out of bounds index.`);
+  } else return itemFn( ak );
 }; // colGetItemAt()
 
 module.exports = colGetItemAt;
