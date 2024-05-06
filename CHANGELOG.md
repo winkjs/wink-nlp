@@ -1,5 +1,12 @@
+# [Added missing typescript definitions](https://github.com/winkjs/wink-nlp/releases/tag/2.2.1)
+## Version 2.2.1 May 06, 2024
+
+### 🐛 Fixes
+- Added missing typescript definitions for word embeddings besides few other typescript fixes. ✅
+
 # [Added non-breaking space handling capabilities](https://github.com/winkjs/wink-nlp/releases/tag/2.2.0)
 ## Version 2.2.0 April 03, 2024
+
 
 ### ✨ Features
 - Detokenization restores both regular and non-breaking spaces to their original positions. 🤓
