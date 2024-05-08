@@ -1,3 +1,13 @@
+# [Improved error handling in contextual vectors](https://github.com/winkjs/wink-nlp/releases/tag/2.2.2)
+## Version 2.2.2 May 08, 2024
+
+### ✨ Features
+- `.contextualVectors()` now throws error if (a) word vectors are not loaded and (b) with `lemma: true`, "pos" is missing in the NLP pipe. 🤓
+
+### 🐛 Fixes
+- Refined typescript definitions further. ✅
+
+
 # [Added missing typescript definitions](https://github.com/winkjs/wink-nlp/releases/tag/2.2.1)
 ## Version 2.2.1 May 06, 2024
 
