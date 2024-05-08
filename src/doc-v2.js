@@ -459,10 +459,14 @@ var doc = function ( docData, addons ) {
   // eslint-disable-next-line complexity
   contextualVectors = function ( { lemma = true, specificWordVectors = [], similarWordVectors = false, wordVectorsLimit = 0 } = {} ) {
     // Error handling!
+    if ( docData.wordVectors === null )
+      throw Error( 'wink-nlp: word vectors are not loaded: load them winkNLP\'s instantiation time.' );
     if ( !Array.isArray( specificWordVectors ) )
       throw Error( `wink-nlp: expecting a valid Javascript array for similarWordVectos, instead found "${typeof specificWordVectors}".`);
     if ( !Number.isInteger( wordVectorsLimit ) || wordVectorsLimit >= docData.wordVectors.size )
       throw Error( 'wink-nlp: invalid value or type encountered for wordVectorsLimit.' );
+    if ( lemma && !docData.currPipe.pos )
+      throw Error( 'wink-nlp: Can\'t create lemma vectors without pos: add a "pos" to NLP pipe.' );
     // Initialize contextual vectors.
     const cv = Object.create( null );
     // Following properties are constants, therefore can be directly copied.

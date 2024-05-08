@@ -271,6 +271,13 @@ declare module 'wink-nlp' {
     out<T, U>(itsf: ItsFunction<T>, asf: AsFunction<T, U>): U | T[] | string[];
   }
 
+  export interface Include {
+    lemma?: boolean;
+    specificWordVectors?: string[];
+    similarWordVectors?: boolean;
+    wordVectorsLimit?: number;
+  }
+
   export interface Document {
     entities(): Entities;
     customEntities(): CustomEntities;
@@ -282,7 +289,7 @@ declare module 'wink-nlp' {
     tokens(): Tokens;
     printTokens(): void;
     pipeConfig(): string[];
-    contextualVectors(lemma: boolean, specifcWordVectors: string[], similarWordVectors: boolean, wordVectorsLimit: number): string;
+    contextualVectors(include: Include): string;
   }
 
   export interface CerExample {
@@ -317,6 +324,7 @@ declare module 'wink-nlp' {
     readDoc(text: string): Document;
     // returns number of learned entities
     learnCustomEntities(examples: CustomEntityExample[], config?: CerConfig): number;
+    vectorOf(word: string): number[];
     its: ItsHelpers;
     as: AsHelpers;
   }

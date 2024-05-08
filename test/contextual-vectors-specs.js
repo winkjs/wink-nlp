@@ -161,4 +161,18 @@ describe( 'contextual vectors', function () {
     expect( doc1.contextualVectors.bind( null, { specificWordVectors: {} } ) ).to.throw( /^wink-nlp: expecting a valid Javascript/ );
     expect( doc1.contextualVectors.bind( null, { specificWordVectors: 'a' } ) ).to.throw( /^wink-nlp: expecting a valid Javascript/ );
   } );
+
+  it( 'missing word vectors should throw error', function () {
+    const nlpWithNoVW = winkNLP( model );
+    const textNoVW = 'It is';
+    const docNoVW = nlpWithNoVW.readDoc( textNoVW );
+    expect( () => docNoVW.contextualVectors() ).to.throw( /^wink-nlp: word vectors are not loaded/ );
+  } );
+
+  it( 'lemma: true and missing pos in pipe should throw error', function () {
+    const nlpMissingPOS = winkNLP( model, [ 'sbd' ], vectors );
+    const textMissingPOS = 'It is';
+    const docMissingPOS = nlpMissingPOS.readDoc( textMissingPOS );
+    expect( () => docMissingPOS.contextualVectors() ).to.throw( /^wink-nlp: Can\'t create lemma vectors/ );
+  } );
 } );
