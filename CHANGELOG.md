@@ -1,3 +1,9 @@
+# [Enabled more special space characters handling](https://github.com/winkjs/wink-nlp/releases/tag/2.2.3)
+## Version 2.2.3 May 19, 2024
+
+### ✨ Features
+- Detokenization now restores em/en, third/quarter, thin/hair, medium math space characters & narrow non breaking space characters besides the regular nbsp. 👏 🙌 🛰️
+
 # [Improved error handling in contextual vectors](https://github.com/winkjs/wink-nlp/releases/tag/2.2.2)
 ## Version 2.2.2 May 08, 2024
 
