@@ -144,10 +144,30 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     expect( nlp.readDoc( nbspTokensArray.join('  \u00a0\u00a0') ).out() ).to.equal( nbspTokensArray.join('  \u00a0\u00a0') );
   } );
 
+  it( 'should tokenize/detokenize the text with non-regular spaces', function () {
+    // Reconstruction.
+    expect( nlp.readDoc( nbspTokensArray.join('\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') ).out() ).to.equal( nbspTokensArray.join('\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') );
+    expect( nlp.readDoc( nbspTokensArray.join(' \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') ).out() ).to.equal( nbspTokensArray.join(' \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') );
+    expect( nlp.readDoc( nbspTokensArray.join('  \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') ).out() ).to.equal( nbspTokensArray.join('  \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') );
+    expect( nlp.readDoc( nbspTokensArray.join('\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') ).out() ).to.equal( nbspTokensArray.join('\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') );
+    expect( nlp.readDoc( nbspTokensArray.join(' \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') ).out() ).to.equal( nbspTokensArray.join(' \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') );
+    expect( nlp.readDoc( nbspTokensArray.join('  \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') ).out() ).to.equal( nbspTokensArray.join('  \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f') );
+  } );
+
   it( 'should tokenize/detokenize a sentence with non-breaking spaces', function () {
     var textWith2S = 'I met Mr.\u00a0Gandhi. Mr.\u00a0Gandhi is a nice person.';
     var sentences = nlp.readDoc( textWith2S ).sentences();
     var sentencesText = [ 'I met Mr.\u00a0Gandhi.',  'Mr.\u00a0Gandhi is a nice person.' ];
+        // Reconstruction.
+    sentences.each( ( s, k ) => {
+      expect( s.out() ).to.equal( sentencesText[ k ] );
+    } );
+  } );
+
+  it( 'should tokenize/detokenize a sentence with non-regular spaces', function () {
+    var textWith2S = 'I met Mr.\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205fGandhi. Mr.\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205fGandhi is a nice person.';
+    var sentences = nlp.readDoc( textWith2S ).sentences();
+    var sentencesText = [ 'I met Mr.\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205fGandhi.',  'Mr.\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205fGandhi is a nice person.' ];
         // Reconstruction.
     sentences.each( ( s, k ) => {
       expect( s.out() ).to.equal( sentencesText[ k ] );
@@ -165,11 +185,32 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     } );
   } );
 
+  it( 'should tokenize/detokenize the entities\' value as text with non-regular spaces', function () {
+    var textWith2S = 'I purchased 10 mangoes on March\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f10th for US$\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f99.00.';
+    var entities = nlp.readDoc( textWith2S ).entities();
+    var entitiesText = [ '10',  'March\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f10th', 'US$\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f99.00' ];
+    console.log(666666, entities.out(),nlp.readDoc( textWith2S ).tokens().out());
+    // Reconstruction.
+    entities.each( ( e, k ) => {
+      expect( e.out( ) ).to.equal( entitiesText[ k ] );
+      expect( e.out( its.value, as.text ) ).to.equal( entitiesText[ k ] );
+    } );
+  } );
+
   it( 'should preserve non-breaking spaces with mark up', function () {
     var textWith2S = 'I purchased mangoes on March\u00a010th for US$\u00a099.00.';
     var doc4mark = nlp.readDoc( textWith2S );
     doc4mark.entities().each((e) => e.markup());
     var markedText = 'I purchased mangoes on <mark>March\u00a010th</mark> for <mark>US$\u00a099.00</mark>.';
+    // Reconstruction.
+    expect( doc4mark.out(its.markedUpText) ).to.equal( markedText );
+  } );
+
+  it( 'should preserve non-regular spaces with mark up', function () {
+    var textWith2S = 'I purchased mangoes on March\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f10th for US$\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f99.00.';
+    var doc4mark = nlp.readDoc( textWith2S );
+    doc4mark.entities().each((e) => e.markup());
+    var markedText = 'I purchased mangoes on <mark>March\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f10th</mark> for <mark>US$\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f99.00</mark>.';
     // Reconstruction.
     expect( doc4mark.out(its.markedUpText) ).to.equal( markedText );
   } );
@@ -180,6 +221,14 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     nlp.readDoc( text ).sentences().itemAt(1).tokens().each( ( t ) => reconstructed.push( t.out(its.precedingSpaces), t.out() ));
     // Reconstruction.
     expect( reconstructed.join( '' ) ).to.equal( '  \u00a0 I was born\u00a0on 06.12.1924.' );
+  } );
+
+  it( 'should correctly reconstruct non-regular spaces with its.precedingSpaces', function () {
+    var text = 'U.S.A is my birth place.  \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f I was born\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205fon 06.12.1924.';
+    var reconstructed = [];
+    nlp.readDoc( text ).sentences().itemAt(1).tokens().each( ( t ) => reconstructed.push( t.out(its.precedingSpaces), t.out() ));
+    // Reconstruction.
+    expect( reconstructed.join( '' ) ).to.equal( '  \u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f I was born\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205fon 06.12.1924.' );
   } );
 
   it( 'should not contain empty tokens', function () {

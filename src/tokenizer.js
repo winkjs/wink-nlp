@@ -197,7 +197,7 @@ var tokenizer = function ( trex, categories, preserve ) {
       // Skip empty (`''`) token.
       if ( !t ) continue; // eslint-disable-line no-continue
       // Non-empty token:
-      const hasNBSP = ( /\u00a0/ ).test( t );
+      const hasNBSP = ( /[\u00a0\u2002-\u2005\u2009\u200a\u202f\u205f]/ ).test( t );
       if ( t[ 0 ] === ' ' || hasNBSP ) {
         // This indicates spaces: count them.
         precedingSpaces = t.length;
