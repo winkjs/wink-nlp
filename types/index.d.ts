@@ -348,11 +348,11 @@ declare module 'wink-nlp/utilities/bm25-vectorizer' {
   }
 
   export interface BM25Vectorizer {
-    learn(tokens: Tokens): void;
+    learn(tokens: string[]): void;
     out<T>(f: ItsFunction<T>): T;
     doc(n: number): Document;
-    vectorOf(tokens: Tokens): number[];
-    bowOf(tokens: Tokens): Bow;
+    vectorOf(tokens: string[]): number[];
+    bowOf(tokens: string[]): Bow;
     config(): BM25VectorizerConfig;
     loadModel(json: string): void;
   }
