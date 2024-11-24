@@ -1,3 +1,9 @@
+# [Fixed some type definitions](https://github.com/winkjs/wink-nlp/releases/tag/2.3.1)
+## Version 2.3.1 Nov 24, 2024
+
+### 🐛 Fixes
+- Updated some BM25Vectorizer methods types according to implementation — thanks to @pavloDeshko ✅
+
 # [Enabled more special space characters handling](https://github.com/winkjs/wink-nlp/releases/tag/2.3.0)
 ## Version 2.3.0 May 19, 2024
 
