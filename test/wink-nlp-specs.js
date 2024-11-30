@@ -189,7 +189,6 @@ describe( 'wink-nlp test-coverage and basic behavior', function () {
     var textWith2S = 'I purchased 10 mangoes on March\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f10th for US$\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f99.00.';
     var entities = nlp.readDoc( textWith2S ).entities();
     var entitiesText = [ '10',  'March\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f10th', 'US$\u2002\u2003\u2004\u2005\u2009\u200a\u202f\u205f99.00' ];
-    console.log(666666, entities.out(),nlp.readDoc( textWith2S ).tokens().out());
     // Reconstruction.
     entities.each( ( e, k ) => {
       expect( e.out( ) ).to.equal( entitiesText[ k ] );

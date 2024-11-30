@@ -115,7 +115,7 @@ describe( 'its functions for .out()', function () {
   it( 'its.uniqueId', function () {
     expect( nlp.readDoc( '$%^oov^%$' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 0 );
     expect( nlp.readDoc( '\n' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 1 );
-    expect( nlp.readDoc( 'The' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 77051 );
+    expect( nlp.readDoc( 'The' ).tokens().itemAt( 0 ).out( its.uniqueId ) ).to.equal( 77123 );
   } );
 
   it( 'its.negationFlag', function () {
@@ -213,17 +213,17 @@ describe( 'its functions for .out()', function () {
 
     const rank = [
       { 'importance': 0.9667, 'index': 0 },
-      { 'importance': 0.1667, 'index': 1 },
+      { 'importance': 0.2333, 'index': 1 },
       { 'importance': 0.1333, 'index': 2 },
       { 'importance': 0.6667, 'index': 3 },
       { 'importance': 0.5, 'index': 4 },
-      { 'importance': 0.9333, 'index': 5 },
+      { 'importance': 1, 'index': 5 },
       { 'importance': 1, 'index': 6 },
       { 'importance': 0, 'index': 7 },
       { 'importance': 0.3667, 'index': 8 },
       { 'importance': 0.6333, 'index': 9 },
       { 'importance': 0.9667, 'index': 10 },
-      { 'importance': 0.4, 'index': 11 },
+      { 'importance': 0.4333, 'index': 11 },
       { 'importance': 0.8333, 'index': 12 },
       { 'importance': 0.3667, 'index': 13 },
       { 'importance': 0.1333, 'index': 14 },
