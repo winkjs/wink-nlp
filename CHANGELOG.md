@@ -1,3 +1,10 @@
+# [Operational update](https://github.com/winkjs/wink-nlp/releases/tag/2.3.2)
+## Version 2.3.2 November 30, 2024
+
+### ⚙️ Updates
+- Updated test cases for new model release 🤓
+- Add word vector example link in README. ✅
+
 # [Fixed some type definitions](https://github.com/winkjs/wink-nlp/releases/tag/2.3.1)
 ## Version 2.3.1 Nov 24, 2024
 
